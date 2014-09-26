@@ -16,6 +16,8 @@ module id(
     output	wire[31:0]	valC
 );
 
+	initial		icode	<=	4'b0000;
+	initial		ifun	<=	4'b0000;
 	icode	<=	inst_i[`ICODE];
 	ifun	<=	inst_i[`IFUN];
     case (icode)

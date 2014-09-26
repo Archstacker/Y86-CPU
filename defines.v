@@ -20,7 +20,7 @@
 `define     POPL        4'HB
 
 //Size
-`define		PCLEN		7:0
+`define		PCLEN		15:0
 `define		INSTBUS		47:0
 `define		ICODE		47:44
 `define		IFUN		43:40
@@ -28,6 +28,8 @@
 `define		RB			35:32
 `define		IMME		31:0
 `define		DEST		35:4
+`define		INSTMEMNUM	131071
+`define		PCLENNUM	16
 
 //Constant valus used HCL descriptions
 `define     INOP		4'H0
