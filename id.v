@@ -1,18 +1,18 @@
 `include "defines.v"
 
 module id(
-    input   wire        rst,
-    input   wire[`PCLEN]     pc_i,
-    input   wire[`INSTBUS]    inst_i,
+    input   wire			rst,
+    input   wire[`PCLEN]	pc_i,
+    input   wire[`INSTBUS]	inst_i,
 
-    output  reg         instr_valid,
-    output  reg         need_regids,
-    output  reg         need_valC,
+    //output  reg         instr_valid,
+    //output  reg         need_regids,
+    //output  reg         need_valC,
 
-    output	wire[4:0]   icode,   =   inst_i[`ICODE];
-    output	wire[4:0]   ifun,    =   inst_i[`IFUN];
-    output	wire[4:0]   rA,
-    output	wire[4:0]   rB,
+    output	wire[3:0]   icode,
+    output	wire[3:0]   ifun,
+    output	wire[3:0]   rA,
+    output	wire[3:0]   rB,
     output	wire[31:0]	valC
 );
 

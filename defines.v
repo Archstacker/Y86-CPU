@@ -1,3 +1,9 @@
+//Global
+`define		RSTENABLE	1'b1
+`define		RSTDISABLE	1'b0
+`define		CHIPENABLE	1'b1
+`define		CHIPDISABLE	1'b0
+
 //Y86 instruction set
 `define     HALT        4'H0
 `define     NOP         4'H1
