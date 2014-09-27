@@ -12,8 +12,8 @@ module y86_min_sopc_tb();
 	end
 	initial begin
 		rst = `RSTENABLE;
-		#195 rst = `RSTDISABLE;
-		#1000 $stop;
+		#55 rst = `RSTDISABLE;
+		#100 $stop;
 	end
 
 	y86_min_sopc y86_min_sopc0(
