@@ -1,3 +1,4 @@
+`include "defines.v"
 `timescale 1ns/1ps
 
 module y86_min_sopc_tb();
@@ -6,7 +7,7 @@ module y86_min_sopc_tb();
 	reg		rst;
 
 	initial begin
-		clock_50 = 1'b0
+		clock_50 = 1'b0;
 		forever #10 clock_50 = ~clock_50;
 	end
 	initial begin

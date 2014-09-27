@@ -3,7 +3,7 @@ module pc_reg(
 	input	wire			clk,
 	input	wire			rst,
 	//input	wire[`PCLEN]	newPC,
-	output	reg[`PCLEN]		pc,
+	output	reg[`PCLEN]		pc
 	//output	reg				ce
 );
 
@@ -15,5 +15,6 @@ module pc_reg(
 	//	end
 	//end
 
-	pc_i <= 48`h000000000000;
+	initial pc <= 48'h000000000000;
+endmodule
 
