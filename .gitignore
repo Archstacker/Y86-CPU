@@ -3,5 +3,5 @@ work/
 *.mpf
 *.wlf
 *.swp
-*.data
+inst_rom.data
 transcript

@@ -16,7 +16,7 @@ module pc_reg(
 	//end
 
 	initial pc <= 48'h000000000000;
-	always @ (posedge clk) begin
+	always @ (*) begin
 		if (rst == `RSTDISABLE) begin
 			pc <= newPC;
 		end
