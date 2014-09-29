@@ -32,6 +32,7 @@ add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/inst_rom0/inst_mem
 
 add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/pc_reg0/clk
 add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/pc_reg0/rst
+add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/pc_reg0/newPC
 add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/pc_reg0/pc
 
 add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/if_id0/clk

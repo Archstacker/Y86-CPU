@@ -19,7 +19,8 @@ module y86cpu(
 	wire[`PCLEN]			id_valP;
 
 	pc_reg pc_reg0(
-		.clk(clk),	.rst(rst),	.pc(pc)
+		.clk(clk),	.rst(rst),	.newPC(id_valP),
+		.pc(pc)
 	);
 
 	assign rom_addr_o = pc;
