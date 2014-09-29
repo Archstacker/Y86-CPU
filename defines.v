@@ -20,6 +20,7 @@
 `define     POPL        4'HB
 
 //Size
+`define		BYTE		3:0
 `define		PCLEN		15:0
 `define		INSTBUS		47:0
 `define		ICODE		47:44

@@ -24,6 +24,7 @@ add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_ifun
 add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_rA
 add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_rB
 add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_valC
+add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_valP
 
 add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/inst_rom0/addr
 add wave -position end  sim:/y86_min_sopc_tb/y86_min_sopc0/inst_rom0/inst

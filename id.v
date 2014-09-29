@@ -9,11 +9,12 @@ module id(
     //output  reg         need_regids,
     //output  reg         need_valC,
 
-    output	reg[3:0]   icode,
-    output	reg[3:0]   ifun,
-    output	reg[3:0]   rA,
-    output	reg[3:0]   rB,
-    output	reg[31:0]	valC
+    output	reg[`BYTE]   icode,
+    output	reg[`BYTE]   ifun,
+    output	reg[`BYTE]   rA,
+    output	reg[`BYTE]   rB,
+    output	reg[`IMME]	 valC,
+    output	reg[`PCLEN]  valP
 );
 
 	initial		icode	<=	4'b0000;
@@ -22,41 +23,63 @@ module id(
 		icode	<=	inst_i[`ICODE];
 		ifun	<=	inst_i[`IFUN];
 		case (icode)
+			`HALT:		begin
+				valP	<=	pc_i+4'h1;
+			end
+			`NOP:		begin
+				valP	<=	pc_i+4'h1;
+			end
 			`RRMOVL:	begin
 				rA		<=	inst_i[`RA];
 				rB		<=	inst_i[`RB];
+				valP	<=	pc_i+4'h2;
 			end
 			`IRMOVL:	begin
 				rA		<=	inst_i[`RA];
 				rB		<=	inst_i[`RB];
 				valC	<=	inst_i[`IMME];
+				valP	<=	pc_i+4'h6;
+			end
+			`RMMOVL:	begin
+				rA		<=	inst_i[`RA];
+				rB		<=	inst_i[`RB];
+				valC	<=	inst_i[`IMME];
+				valP	<=	pc_i+4'h6;
 			end
 			`MRMOVL:	begin
 				rA		<=	inst_i[`RA];
 				rB		<=	inst_i[`RB];
 				valC	<=	inst_i[`IMME];
+				valP	<=	pc_i+4'h6;
 			end
 			`OPL:		begin
 				rA		<=	inst_i[`RA];
 				rB		<=	inst_i[`RB];
+				valP	<=	pc_i+4'h2;
 			end
 			`JXX:		begin
 				valC	<=	inst_i[`DEST];
+				valP	<=	pc_i+4'h4;
 			end
 			`CMOVXX:	begin
 				rA		<=	inst_i[`RA];
 				rB		<=	inst_i[`RB];
+				valP	<=	pc_i+4'h2;
 			end
 			`CALL:		begin
 				valC	<=	inst_i[`DEST];
+				valP	<=	pc_i+4'h4;
 			end
 			`RET:		begin
+				valP	<=	pc_i+4'h1;
 			end
 			`PUSHL:		begin
 				rA		<=	inst_i[`RA];
+				valP	<=	pc_i+4'h2;
 			end
 			`POPL:		begin
 				rA		<=	inst_i[`RA];
+				valP	<=	pc_i+4'h2;
 			end
 		endcase
 	end
