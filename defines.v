@@ -27,10 +27,11 @@
 `define		IFUN		43:40
 `define		RA			39:36
 `define		RB			35:32
-`define		IMME		31:0
+`define		WORD		31:0
 `define		DEST		35:4
 `define		INSTMEMNUM	131071
 `define		PCLENNUM	16
+`define		REGNUM		8
 
 //Constant valus used HCL descriptions
 `define     INOP		4'H0
@@ -53,3 +54,6 @@
 `define     SADR        4'H2
 `define     SINS        4'H3
 `define     SHLT        4'H4
+
+//Registers
+`define		NOREG		4'HF

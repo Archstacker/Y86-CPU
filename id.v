@@ -13,7 +13,7 @@ module id(
     output	reg[`BYTE]   ifun,
     output	reg[`BYTE]   rA,
     output	reg[`BYTE]   rB,
-    output	reg[`IMME]	 valC,
+    output	reg[`WORD]	 valC,
     output	reg[`PCLEN]  valP
 );
 
@@ -43,19 +43,19 @@ module id(
 				`IRMOVL:	begin
 					rA		<=	inst_i[`RA];
 					rB		<=	inst_i[`RB];
-					valC	<=	inst_i[`IMME];
+					valC	<=	inst_i[`WORD];
 					valP	<=	pc_i+4'h6;
 				end
 				`RMMOVL:	begin
 					rA		<=	inst_i[`RA];
 					rB		<=	inst_i[`RB];
-					valC	<=	inst_i[`IMME];
+					valC	<=	inst_i[`WORD];
 					valP	<=	pc_i+4'h6;
 				end
 				`MRMOVL:	begin
 					rA		<=	inst_i[`RA];
 					rB		<=	inst_i[`RB];
-					valC	<=	inst_i[`IMME];
+					valC	<=	inst_i[`WORD];
 					valP	<=	pc_i+4'h6;
 				end
 				`OPL:		begin

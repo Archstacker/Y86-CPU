@@ -21,8 +21,8 @@ add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_inst_i
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_icode
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_ifun
-add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_rA
-add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_rB
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/rA_addr
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/rB_addr
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_valC
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_valP
 
@@ -51,5 +51,13 @@ add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id0/rB
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id0/valC
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id0/valP
+
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/regfile0/clk
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/regfile0/rst
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/regfile0/srcA
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/regfile0/srcB
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/regfile0/valA
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/regfile0/valB
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/regfile0/regs
 
 config wave -signalnamewidth 2

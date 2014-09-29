@@ -13,10 +13,13 @@ module y86cpu(
 
 	wire[`BYTE]			id_icode;
 	wire[`BYTE]			id_ifun;
-	wire[`BYTE]			id_rA;
-	wire[`BYTE]			id_rB;
-	wire[`PCLEN]			id_valC;
-	wire[`PCLEN]			id_valP;
+	wire[`BYTE]			rA_addr;
+	wire[`BYTE]			rB_addr;
+	wire[`WORD]			id_valC;
+	wire[`PCLEN]		id_valP;
+
+	wire[`WORD]			rA_data;
+	wire[`WORD]			rB_data;
 
 	pc_reg pc_reg0(
 		.clk(clk),	.rst(rst),	.newPC(id_valP),
@@ -34,8 +37,14 @@ module y86cpu(
 	id id0(
 		.rst(rst),	.pc_i(id_pc_i),	.inst_i(id_inst_i),
 		.icode(id_icode),	.ifun(id_ifun),
-		.rA(id_rA),			.rB(id_rB),
+		.rA(rA_addr),		.rB(rB_addr),
 		.valC(id_valC),		.valP(id_valP)
+	);
+
+	regfile regfile0(
+		.clk(clk),			.rst(rst),
+		.srcA(rA_addr),		.srcB(rB_addr),
+		.valA(rA_data),		.valB(rB_data)
 	);
 
 endmodule
