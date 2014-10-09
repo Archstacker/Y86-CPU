@@ -36,7 +36,8 @@ add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/ins
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_valB_i
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_valC_i
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_valP_i
-#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_valP
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_valE_o
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_ifun_i
 
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/inst_rom0/addr
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/inst_rom0/inst
@@ -90,5 +91,14 @@ add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_ex0/ex_valB
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_ex0/ex_valC
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_ex0/ex_valP
+
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/rst
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/icode_i
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/ifun_i
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/valA_i
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/valB_i
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/valC_i
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/valP_i
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/valE_o
 
 config wave -signalnamewidth 2

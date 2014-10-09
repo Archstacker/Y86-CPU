@@ -23,11 +23,13 @@ module y86cpu(
 	wire[`WORD]			id_valB_o;
 
 	wire[`BYTE]			ex_icode_i;
-	wire[`BYTE]			ex_ifun;
+	wire[`BYTE]			ex_ifun_i;
 	wire[`WORD]			ex_valA_i;
 	wire[`WORD]			ex_valB_i;
 	wire[`WORD]			ex_valC_i;
 	wire[`PCLEN]		ex_valP_i;
+
+	wire[`WORD]			ex_valE_o;
 
 	pc_reg pc_reg0(
 		.clk(clk),	.rst(rst),	.newPC(id_valP_o),
@@ -62,8 +64,16 @@ module y86cpu(
 		.id_icode(id_icode_o),	.id_ifun(id_ifun_o),
 		.id_valA(id_valA_o),	.id_valB(id_valB_o),
 		.id_valC(id_valC_o),	.id_valP(id_valP_o),
-		.ex_icode(ex_icode_i),	.ex_ifun(ex_icode_i),
+		.ex_icode(ex_icode_i),	.ex_ifun(ex_ifun_i),
 		.ex_valA(ex_valA_i),	.ex_valB(ex_valB_i),
 		.ex_valC(ex_valC_i),	.ex_valP(ex_valP_i)
+	);
+
+	ex ex0(
+		.rst(rst),
+		.icode_i(ex_icode_i),	.ifun_i(ex_ifun_i),
+		.valA_i(ex_valA_i),		.valB_i(ex_valB_i),
+		.valC_i(ex_valC_i),		.valP_i(ex_valP_i),
+		.valE_o(ex_valE_o)
 	);
 endmodule

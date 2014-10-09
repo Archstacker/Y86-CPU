@@ -7,17 +7,36 @@
 //Y86 instruction set
 `define     HALT        4'H0
 `define     NOP         4'H1
-`define     RRMOVL      4'H2
+`define     CMOVXX      4'H2
 `define     IRMOVL      4'H3
 `define     RMMOVL      4'H4
 `define     MRMOVL      4'H5
 `define     OPL         4'H6
 `define     JXX         4'H7
-`define     CMOVXX      4'H2
 `define     CALL        4'H8
 `define     RET         4'H9
 `define     PUSHL       4'HA
 `define     POPL        4'HB
+
+//Function codes
+`define		ADDL		4'H0
+`define		SUBL		4'H1
+`define		ANDL		4'H2
+`define		XORL		4'H3
+`define		JMP			4'H0
+`define		JLE			4'H1
+`define		JL			4'H2
+`define		JE			4'H3
+`define		JNE			4'H4
+`define		JGE			4'H5
+`define		JG			4'H6
+`define		RRMOVL		4'H0
+`define		CMOVLE		4'H1
+`define		CMOVL		4'H2
+`define		CMOVE		4'H3
+`define		CMOVNE		4'H4
+`define		CMOVGE		4'H5
+`define		CMOVG		4'H6
 
 //Size
 `define		BYTE		3:0
