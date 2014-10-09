@@ -8,6 +8,8 @@ module ex(
 	input	wire[`WORD]		valB_i,
 	input	wire[`WORD]		valC_i,
 	input	wire[`PCLEN]	valP_i,
+	output	reg	[`BYTE]		icode_o,
+	output	reg	[`WORD]		valA_o,
 	output	reg	[`WORD]		valE_o
 );
 
@@ -31,6 +33,10 @@ module ex(
 				endcase
 			end
 		endcase
+	end
+	always @ (*) begin
+		icode_o	<=	icode_i;
+		valA_o	<=	valA_i;
 	end
 
 endmodule

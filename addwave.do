@@ -22,22 +22,26 @@ add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/ins
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_inst_i
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_icode_o
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_ifun_o
-#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/rA_addr
-#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/rB_addr
-#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/rA_data
-#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/rB_data
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/reg_rA_addr
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/reg_rB_addr
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/reg_rA_data
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/reg_rB_data
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_valC_o
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_valP_o
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_valA_o
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/id_valB_o
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_icode_i
-#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_ifun
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_ifun_i
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_valA_i
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_valB_i
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_valC_i
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_valP_i
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_icode_o
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_valA_o
 #add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_valE_o
-#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_ifun_i
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/mem_icode_i
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/mem_valA_i
+#add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/mem_valE_i
 
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/inst_rom0/addr
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/inst_rom0/inst
@@ -99,6 +103,17 @@ add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/valB_i
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/valC_i
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/valP_i
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/icode_o
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/valA_o
 add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex0/valE_o
+
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_mem0/clk
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_mem0/rst
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_mem0/ex_icode
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_mem0/ex_valA
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_mem0/ex_valE
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_mem0/mem_icode
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_mem0/mem_valA
+add wave -position end -radix hexadecimal sim:/y86_min_sopc_tb/y86_min_sopc0/y86cpu0/ex_mem0/mem_valE
 
 config wave -signalnamewidth 2
