@@ -37,6 +37,9 @@ module y86cpu(
 	wire[`WORD]			mem_valE_i;
 	wire[`BYTE]			mem_dstW_i;
 
+	wire[`WORD]			mem_valE_o;
+	wire[`BYTE]			mem_dstW_o;
+
 	pc_reg pc_reg0(
 		.clk(clk),	.rst(rst),	.newPC(id_valP_o),
 		.pc(pc)
@@ -91,6 +94,12 @@ module y86cpu(
 		.clk(clk),				.rst(rst),
 		.ex_valE(ex_valE_o),	.ex_dstW(ex_dstW_o),
 		.mem_valE(mem_valE_i),	.mem_dstW(mem_dstW_i)
+	);
+
+	mem mem0(
+		.rst(rst),
+		.valE_i(mem_valE_i),	.dstW_i(mem_dstW_i),
+		.valE_o(mem_valE_o),	.dstW_o(mem_dstW_o)
 	);
 
 endmodule
