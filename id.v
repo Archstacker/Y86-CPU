@@ -13,22 +13,24 @@ module id(
 
     output	reg[`BYTE]		icode_o,
     output	reg[`BYTE]		ifun_o,
-    output	reg[`BYTE]		rA,
-    output	reg[`BYTE]		rB,
+    output	reg[`BYTE]		rA_o,
+    output	reg[`BYTE]		rB_o,
+	output	reg[`WORD]		valA_o,
+	output	reg[`WORD]		valB_o,
     output	reg[`WORD]		valC_o,
     output	reg[`PCLEN]		valP_o,
-	output	reg[`WORD]		valA_o,
-	output	reg[`WORD]		valB_o
+    output	reg[`BYTE]		dstW_o
 );
 
 	always @ (*) begin
 		//if (rst == `RSTENABLE) begin
 			icode_o	<=	4'h0;
 			ifun_o	<=	4'h0;
-			rA		<=	4'h0;
-			rB		<=	4'h0;
+			rA_o	<=	4'hf;
+			rB_o	<=	4'hf;
 			valC_o	<=	32'h00000000;
 			valP_o	<=	16'h0000;
+			dstW_o	<=	4'hf;
 		if (rst == `RSTDISABLE) begin
 			icode_o	<=	inst_i[`ICODE];
 			ifun_o	<=	inst_i[`IFUN];
@@ -40,40 +42,43 @@ module id(
 					valP_o	<=	pc_i+4'h1;
 				end
 				`RRMOVL:	begin
-					rA		<=	inst_i[`RA];
-					rB		<=	inst_i[`RB];
+					rA_o	<=	inst_i[`RA];
+					rB_o	<=	inst_i[`RB];
 					valP_o	<=	pc_i+4'h2;
+					dstW_o	<=	inst_i[`RB];
 				end
 				`IRMOVL:	begin
-					rA		<=	inst_i[`RA];
-					rB		<=	inst_i[`RB];
+					rA_o	<=	inst_i[`RA];
+					rB_o	<=	inst_i[`RB];
 					valC_o	<=	inst_i[`WORD];
 					valP_o	<=	pc_i+4'h6;
+					dstW_o	<=	inst_i[`RB];
 				end
 				`RMMOVL:	begin
-					rA		<=	inst_i[`RA];
-					rB		<=	inst_i[`RB];
+					rA_o	<=	inst_i[`RA];
+					rB_o	<=	inst_i[`RB];
 					valC_o	<=	inst_i[`WORD];
 					valP_o	<=	pc_i+4'h6;
 				end
 				`MRMOVL:	begin
-					rA		<=	inst_i[`RA];
-					rB		<=	inst_i[`RB];
+					rB_o	<=	inst_i[`RB];
 					valC_o	<=	inst_i[`WORD];
 					valP_o	<=	pc_i+4'h6;
+					dstW_o	<=	inst_i[`RA];
 				end
 				`OPL:		begin
-					rA		<=	inst_i[`RA];
-					rB		<=	inst_i[`RB];
+					rA_o	<=	inst_i[`RA];
+					rB_o	<=	inst_i[`RB];
 					valP_o	<=	pc_i+4'h2;
+					dstW_o	<=	inst_i[`RB];
 				end
 				`JXX:		begin
 					valC_o	<=	inst_i[`DEST];
 					valP_o	<=	pc_i+4'h4;
 				end
 				`CMOVXX:	begin
-					rA		<=	inst_i[`RA];
-					rB		<=	inst_i[`RB];
+					rA_o	<=	inst_i[`RA];
+					rB_o	<=	inst_i[`RB];
 					valP_o	<=	pc_i+4'h2;
 				end
 				`CALL:		begin
@@ -84,12 +89,13 @@ module id(
 					valP_o	<=	pc_i+4'h1;
 				end
 				`PUSHL:		begin
-					rA		<=	inst_i[`RA];
+					rA_o	<=	inst_i[`RA];
 					valP_o	<=	pc_i+4'h2;
 				end
 				`POPL:		begin
-					rA		<=	inst_i[`RA];
+					rA_o	<=	inst_i[`RA];
 					valP_o	<=	pc_i+4'h2;
+					dstW_o	<=	inst_i[`RA];
 				end
 			endcase
 		end
