@@ -5,6 +5,10 @@ module regfile(
 	input	wire			rst,
 	input	wire[`BYTE]		srcA,
 	input	wire[`BYTE]		srcB,
+	input	wire[`BYTE]		dstE,
+	input	wire[`BYTE]		dstM,
+	input	wire[`WORD]		valE,
+	input	wire[`WORD]		valM,
 	output	reg[`WORD]		valA,
 	output	reg[`WORD]		valB
 );
@@ -19,6 +23,15 @@ reg[`WORD]	regs[0:`REGNUM-1];
 	initial regs[5] <= 32'H6789ABCD;
 	initial regs[6] <= 32'H789ABCDE;
 	initial regs[7] <= 32'H89ABCDEF;
+
+	always @ (posedge clk) begin
+		if(dstE != `NOREG) begin
+			regs[dstE] <= valE;
+		end
+		if(dstM != `NOREG) begin
+			regs[dstM] <= valM;
+		end
+	end
 
 	always @ (*) begin
 		if(srcA != `NOREG) begin
