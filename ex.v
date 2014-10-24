@@ -18,6 +18,12 @@ module ex(
 	initial valE_o <= 32'H00000000;
 	always @ (*) begin
 		case ( icode_i )
+			`RRMOVL:	begin
+				valE_o	<=	valA_i;
+			end
+			`IRMOVL:	begin
+				valE_o	<=	valC_i;
+			end
 			`OPL:		begin
 				case ( ifun_i )
 					`ADDL:		begin
