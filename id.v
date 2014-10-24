@@ -43,7 +43,7 @@ module id(
 				`NOP:		begin
 					valP_o	<=	pc_i+4'h1;
 				end
-				`RRMOVL:	begin
+				`CMOVXX:	begin
 					rA_o	<=	inst_i[`RA];
 					rB_o	<=	inst_i[`RB];
 					valP_o	<=	pc_i+4'h2;
@@ -77,11 +77,6 @@ module id(
 				`JXX:		begin
 					valC_o	<=	inst_i[`DEST];
 					valP_o	<=	pc_i+4'h4;
-				end
-				`CMOVXX:	begin
-					rA_o	<=	inst_i[`RA];
-					rB_o	<=	inst_i[`RB];
-					valP_o	<=	pc_i+4'h2;
 				end
 				`CALL:		begin
 					valC_o	<=	inst_i[`DEST];
