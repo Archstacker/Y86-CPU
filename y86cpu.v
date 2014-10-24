@@ -96,18 +96,15 @@ module y86cpu(
 		.rst(rst),
 		.icode_i(ex_icode_i),	.ifun_i(ex_ifun_i),
 		.valA_i(ex_valA_i),		.valB_i(ex_valB_i),
-		.valC_i(ex_valC_i),		.valP_i(ex_valP_i),
-		.dstE_i(ex_dstE_i),		.dstM_i(ex_dstM_i),
-		.valE_o(ex_valE_o),		.dstE_o(ex_dstE_o),
-		.dstM_o(ex_dstM_o)
+		.valC_i(ex_valC_i),		.valE_o(ex_valE_o)
 	);
 
 	ex_mem ex_mem0(
 		.clk(clk),				.rst(rst),
-		.ex_valE(ex_valE_o),	.ex_dstE(ex_dstE_o),
-		.ex_dstM(ex_dstM_o),
-		.mem_valE(mem_valE_i),	.mem_dstE(mem_dstE_i),
-		.mem_dstM(mem_dstM_i)
+		.ex_valE(ex_valE_o),
+		.ex_dstE(ex_dstE_i),	.ex_dstM(ex_dstM_i),
+		.mem_valE(mem_valE_i),
+		.mem_dstE(mem_dstE_i),	.mem_dstM(mem_dstM_i)
 	);
 
 	mem mem0(
