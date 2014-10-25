@@ -19,8 +19,30 @@ module mem_wb(
 		wb_dstM		<=	4'hf;
 		wb_valE		<=	mem_valE;
 		case (mem_icode)
+			`CMOVXX:	begin
+				wb_dstE	<=	mem_rB;
+			end
 			`IRMOVL:	begin
 				wb_dstE	<=	mem_rB;
+			end
+			`MRMOVL:	begin
+				wb_dstM	<=	mem_rA;
+			end
+			`OPL:		begin
+				wb_dstE	<=	mem_rB;
+			end
+			`CALL:		begin
+				wb_dstE	<=	`RESP;
+			end
+			`RET:		begin
+				wb_dstE	<=	`RESP;
+			end
+			`PUSHL:		begin
+				wb_dstE	<=	`RESP;
+			end
+			`POPL:		begin
+				wb_dstE	<=	`RESP;
+				wb_dstM	<=	mem_rA;
 			end
 		endcase
 	end
