@@ -4,6 +4,11 @@ module y86cpu(
 	input	wire			clk,
 	input	wire			rst,
 	input	wire[`INSTBUS]	rom_data_i,
+	input	wire[`WORD]		mem_data_i,
+	output	wire			mem_read_o,
+	output	wire			mem_write_o,
+	output	wire[`BYTE]		mem_addr_o,
+	output	wire[`WORD]		mem_data_o,
 	output	wire[`PCLEN]	rom_addr_o
 );
 
@@ -36,8 +41,8 @@ module y86cpu(
 	wire[`BYTE]			mem_rA_i;
 	wire[`BYTE]			mem_rB_i;
 	wire[`WORD]			mem_valA_i;
+	wire[`PCLEN]		mem_valP_i;
 	wire[`WORD]			mem_valE_i;
-	wire[`WORD]			mem_valE_o;
 	wire[`WORD]			mem_valM_o;
 
 	wire[`WORD]			wb_valE_i;
@@ -98,25 +103,30 @@ module y86cpu(
 		.clk(clk),				.rst(rst),
 		.ex_icode(ex_icode_i),
 		.ex_rA(ex_rA_i),		.ex_rB(ex_rB_i),
-		.ex_valA(ex_valA_i),
+		.ex_valA(ex_valA_i),	.ex_valP(ex_valP_i),
 		.ex_valE(ex_valE_o),
 		.mem_icode(mem_icode_i),
 		.mem_rA(mem_rA_i),		.mem_rB(mem_rB_i),
-		.mem_valA(mem_valA_i),
+		.mem_valA(mem_valA_i),	.mem_valP(mem_valP_i),
 		.mem_valE(mem_valE_i)
 	);
 
 	mem mem0(
 		.rst(rst),
+		.icode_i(mem_icode_i),
+		.valA_i(mem_valA_i),	.valP_i(mem_valP_i),
 		.valE_i(mem_valE_i),
-		.valE_o(mem_valE_o),	.valM_o(mem_valM_o)
+		.valM_i(mem_data_i),
+		.mem_read(mem_read_o),	.mem_write(mem_write_o),
+		.mem_addr(mem_addr_o),	.mem_data(mem_data_o),
+		.valM_o(mem_valM_o)
 	);
 
 	mem_wb mem_wb0(
 		.clk(clk),				.rst(rst),
 		.mem_icode(mem_icode_i),
 		.mem_rA(mem_rA_i),		.mem_rB(mem_rB_i),
-		.mem_valE(mem_valE_o),	.mem_valM(mem_valM_o),
+		.mem_valE(mem_valE_i),	.mem_valM(mem_valM_o),
 		.wb_valE(wb_valE_i),	.wb_valM(wb_valM_i),
 		.wb_dstE(wb_dstE_i),	.wb_dstM(wb_dstM_i)
 	);

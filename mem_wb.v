@@ -15,9 +15,10 @@ module mem_wb(
 );
 
 	always @ (*) begin
+		wb_valE		<=	mem_valE;
+		wb_valM		<=	mem_valM;
 		wb_dstE		<=	4'hf;
 		wb_dstM		<=	4'hf;
-		wb_valE		<=	mem_valE;
 		case (mem_icode)
 			`CMOVXX:	begin
 				wb_dstE	<=	mem_rB;

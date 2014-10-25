@@ -57,6 +57,7 @@ module id(
 					valP_o	<=	pc_i+4'h6;
 				end
 				`MRMOVL:	begin
+					rA_o	<=	inst_i[`RA];
 					rB_o	<=	inst_i[`RB];
 					valC_o	<=	inst_i[`WORD];
 					valP_o	<=	pc_i+4'h6;
@@ -83,6 +84,7 @@ module id(
 				end
 				`POPL:		begin
 					rA_o	<=	inst_i[`RA];
+					rB_o	<=	inst_i[`RB];
 					valP_o	<=	pc_i+4'h2;
 				end
 			endcase

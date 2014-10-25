@@ -1,8 +1,12 @@
 //Global
-`define		RSTENABLE	1'b1
-`define		RSTDISABLE	1'b0
-`define		CHIPENABLE	1'b1
-`define		CHIPDISABLE	1'b0
+`define		RSTENABLE		1'b1
+`define		RSTDISABLE		1'b0
+`define		CHIPENABLE		1'b1
+`define		CHIPDISABLE		1'b0
+`define		READENABLE		1'b1
+`define		READDISABLE		1'b0
+`define		WRITEENABLE		1'b1
+`define		WRITEDISABLE	1'b0
 
 //Y86 instruction set
 `define     HALT        4'H0
@@ -40,7 +44,7 @@
 
 //Size
 `define		BYTE		3:0
-`define		PCLEN		15:0
+`define		PCLEN		31:0
 `define		INSTBUS		47:0
 `define		ICODE		47:44
 `define		IFUN		43:40
@@ -49,7 +53,7 @@
 `define		WORD		31:0
 `define		DEST		35:4
 `define		INSTMEMNUM	131071
-`define		PCLENNUM	16
+`define		PCLENNUM	32
 `define		REGNUM		8
 
 //Constant valus used HCL descriptions

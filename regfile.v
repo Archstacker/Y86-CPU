@@ -13,7 +13,7 @@ module regfile(
 	output	reg[`WORD]		valB
 );
 
-reg[`WORD]	regs[0:`REGNUM-1];
+	reg[`WORD]	regs[0:`REGNUM-1];
 
 	initial regs[0] <= 32'H01234567;
 	initial regs[1] <= 32'H23456789;
