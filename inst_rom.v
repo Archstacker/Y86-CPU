@@ -1,6 +1,6 @@
 `include "defines.v"
 module inst_rom(
-	input	wire[`PCLEN]	addr,
+	input	wire[`WORD]		addr,
 	input	wire			mem_read_i,
 	input	wire			mem_write_i,
 	input	wire[`BYTE]		mem_addr_i,
@@ -15,7 +15,7 @@ module inst_rom(
 
     initial mem_data_o	<= 32'H00000000;
 	//always @ (*)begin
-	//	inst	<=	inst_mem[addr[`PCLENNUM-1:2]];
+	//	inst	<=	inst_mem[addr[`WORDNUM-1:2]];
 	//end
 	assign inst = {inst_mem[addr],inst_mem[addr+1],inst_mem[addr+2],inst_mem[addr+3],inst_mem[addr+4],inst_mem[addr+5]};
 	always @ (*) begin

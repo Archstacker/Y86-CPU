@@ -2,9 +2,9 @@
 module if_id(
 	input	wire			clk,
 	input	wire			rst,
-	input	wire[`PCLEN]	if_pc,
+	input	wire[`WORD]		if_pc,
 	input	wire[`INSTBUS]	if_inst,
-	output	reg[`PCLEN]		id_pc,
+	output	reg[`WORD]		id_pc,
 	output	reg[`INSTBUS]	id_inst
 );
 

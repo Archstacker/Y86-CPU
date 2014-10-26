@@ -2,7 +2,7 @@
 
 module id(
     input   wire			rst,
-    input   wire[`PCLEN]	pc_i,
+    input   wire[`WORD]		pc_i,
     input   wire[`INSTBUS]	inst_i,
 	input	reg[`WORD]		valA_i,
 	input	reg[`WORD]		valB_i,
@@ -18,7 +18,7 @@ module id(
 	output	reg[`WORD]		valA_o,
 	output	reg[`WORD]		valB_o,
     output	reg[`WORD]		valC_o,
-    output	reg[`PCLEN]		valP_o
+    output	reg[`WORD]		valP_o
 );
 
 	always @ (*) begin

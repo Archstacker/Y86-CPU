@@ -5,7 +5,7 @@ module y86_min_sopc(
 	input	wire			rst
 );
 
-	wire[`PCLEN]	inst_addr;
+	wire[`WORD]		inst_addr;
 	wire[`INSTBUS]	inst;
 	wire[`WORD]		mem_cpu_data;
 	wire[`WORD]		cpu_mem_data;

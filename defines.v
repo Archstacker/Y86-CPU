@@ -44,7 +44,7 @@
 
 //Size
 `define		BYTE		3:0
-`define		PCLEN		31:0
+`define		WORD		31:0
 `define		INSTBUS		47:0
 `define		ICODE		47:44
 `define		IFUN		43:40
@@ -53,7 +53,7 @@
 `define		WORD		31:0
 `define		DEST		35:4
 `define		INSTMEMNUM	131071
-`define		PCLENNUM	32
+`define		WORDNUM		32
 `define		REGNUM		8
 
 //Constant valus used HCL descriptions

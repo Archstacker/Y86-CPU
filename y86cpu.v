@@ -9,11 +9,11 @@ module y86cpu(
 	output	wire			mem_write_o,
 	output	wire[`BYTE]		mem_addr_o,
 	output	wire[`WORD]		mem_data_o,
-	output	wire[`PCLEN]	rom_addr_o
+	output	wire[`WORD]		rom_addr_o
 );
 
-	wire[`PCLEN]		pc;
-	wire[`PCLEN]		id_pc_i;
+	wire[`WORD]			pc;
+	wire[`WORD]			id_pc_i;
 	wire[`INSTBUS]		id_inst_i;
 
 	wire[`BYTE]			id_icode_o;
@@ -25,7 +25,7 @@ module y86cpu(
 	wire[`WORD]			id_valA_o;
 	wire[`WORD]			id_valB_o;
 	wire[`WORD]			id_valC_o;
-	wire[`PCLEN]		id_valP_o;
+	wire[`WORD]			id_valP_o;
 
 	wire[`BYTE]			ex_icode_i;
 	wire[`BYTE]			ex_ifun_i;
@@ -34,14 +34,14 @@ module y86cpu(
 	wire[`WORD]			ex_valA_i;
 	wire[`WORD]			ex_valB_i;
 	wire[`WORD]			ex_valC_i;
-	wire[`PCLEN]		ex_valP_i;
+	wire[`WORD]			ex_valP_i;
 	wire[`WORD]			ex_valE_o;
 
 	wire[`BYTE]			mem_icode_i;
 	wire[`BYTE]			mem_rA_i;
 	wire[`BYTE]			mem_rB_i;
 	wire[`WORD]			mem_valA_i;
-	wire[`PCLEN]		mem_valP_i;
+	wire[`WORD]			mem_valP_i;
 	wire[`WORD]			mem_valE_i;
 	wire[`WORD]			mem_valM_o;
 
