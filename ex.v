@@ -7,11 +7,14 @@ module ex(
 	input	wire[`WORD]		valA_i,
 	input	wire[`WORD]		valB_i,
 	input	wire[`WORD]		valC_i,
-	output	reg	[`WORD]		valE_o
+	input	wire[`BYTE]		dstE_i,
+	output	reg[`WORD]		valE_o,
+    output	reg[`BYTE]		dstE_o
 );
 
 	initial valE_o <= 32'H00000000;
 	always @ (*) begin
+		dstE_o		<=	dstE_i;
 		case ( icode_i )
 			`CMOVXX:	begin
 				case ( ifun_i )

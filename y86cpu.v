@@ -26,6 +26,7 @@ module y86cpu(
 	wire[`WORD]			id_valB_o;
 	wire[`WORD]			id_valC_o;
 	wire[`WORD]			id_valP_o;
+	wire[`BYTE]			id_dstE_o;
 
 	wire[`BYTE]			ex_icode_i;
 	wire[`BYTE]			ex_ifun_i;
@@ -35,7 +36,9 @@ module y86cpu(
 	wire[`WORD]			ex_valB_i;
 	wire[`WORD]			ex_valC_i;
 	wire[`WORD]			ex_valP_i;
+	wire[`BYTE]			ex_dstE_i;
 	wire[`WORD]			ex_valE_o;
+	wire[`BYTE]			ex_dstE_o;
 
 	wire[`BYTE]			mem_icode_i;
 	wire[`BYTE]			mem_rA_i;
@@ -43,6 +46,7 @@ module y86cpu(
 	wire[`WORD]			mem_valA_i;
 	wire[`WORD]			mem_valP_i;
 	wire[`WORD]			mem_valE_i;
+	wire[`BYTE]			mem_dstE_i;
 	wire[`WORD]			mem_valM_o;
 
 	wire[`WORD]			wb_valE_i;
@@ -69,7 +73,8 @@ module y86cpu(
 		.icode_o(id_icode_o),	.ifun_o(id_ifun_o),
 		.rA_o(reg_rA_addr),		.rB_o(reg_rB_addr),
 		.valA_o(id_valA_o),		.valB_o(id_valB_o),
-		.valC_o(id_valC_o),		.valP_o(id_valP_o)
+		.valC_o(id_valC_o),		.valP_o(id_valP_o),
+		.dstE_o(id_dstE_o)
 	);
 
 	regfile regfile0(
@@ -86,17 +91,20 @@ module y86cpu(
 		.id_rA(reg_rA_addr),	.id_rB(reg_rB_addr),
 		.id_valA(id_valA_o),	.id_valB(id_valB_o),
 		.id_valC(id_valC_o),	.id_valP(id_valP_o),
+		.id_dstE(id_dstE_o),
 		.ex_icode(ex_icode_i),	.ex_ifun(ex_ifun_i),
 		.ex_rA(ex_rA_i),		.ex_rB(ex_rB_i),
 		.ex_valA(ex_valA_i),	.ex_valB(ex_valB_i),
-		.ex_valC(ex_valC_i),	.ex_valP(ex_valP_i)
+		.ex_valC(ex_valC_i),	.ex_valP(ex_valP_i),
+		.ex_dstE(ex_dstE_i)
 	);
 
 	ex ex0(
 		.rst(rst),
 		.icode_i(ex_icode_i),	.ifun_i(ex_ifun_i),
 		.valA_i(ex_valA_i),		.valB_i(ex_valB_i),
-		.valC_i(ex_valC_i),		.valE_o(ex_valE_o)
+		.valC_i(ex_valC_i),		.dstE_i(ex_dstE_i),
+		.valE_o(ex_valE_o),		.dstE_o(ex_dstE_o)
 	);
 
 	ex_mem ex_mem0(
@@ -104,11 +112,11 @@ module y86cpu(
 		.ex_icode(ex_icode_i),
 		.ex_rA(ex_rA_i),		.ex_rB(ex_rB_i),
 		.ex_valA(ex_valA_i),	.ex_valP(ex_valP_i),
-		.ex_valE(ex_valE_o),
+		.ex_valE(ex_valE_o),	.ex_dstE(ex_dstE_o),
 		.mem_icode(mem_icode_i),
 		.mem_rA(mem_rA_i),		.mem_rB(mem_rB_i),
 		.mem_valA(mem_valA_i),	.mem_valP(mem_valP_i),
-		.mem_valE(mem_valE_i)
+		.mem_valE(mem_valE_i),	.mem_dstE(mem_dstE_i)
 	);
 
 	mem mem0(
@@ -127,6 +135,7 @@ module y86cpu(
 		.mem_icode(mem_icode_i),
 		.mem_rA(mem_rA_i),		.mem_rB(mem_rB_i),
 		.mem_valE(mem_valE_i),	.mem_valM(mem_valM_o),
+		.mem_dstE(mem_dstE_i),
 		.wb_valE(wb_valE_i),	.wb_valM(wb_valM_i),
 		.wb_dstE(wb_dstE_i),	.wb_dstM(wb_dstM_i)
 	);

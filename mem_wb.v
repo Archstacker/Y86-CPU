@@ -8,6 +8,7 @@ module mem_wb(
 	input	wire[`BYTE]		mem_rB,
 	input	wire[`WORD]		mem_valE,
 	input	wire[`WORD]		mem_valM,
+	input	wire[`BYTE]		mem_dstE,
 	output	reg	[`WORD]		wb_valE,
 	output	reg	[`WORD]		wb_valM,
 	output	reg	[`BYTE]		wb_dstE,
@@ -17,32 +18,13 @@ module mem_wb(
 	always @ (*) begin
 		wb_valE		<=	mem_valE;
 		wb_valM		<=	mem_valM;
-		wb_dstE		<=	4'hf;
+		wb_dstE		<=	mem_dstE;
 		wb_dstM		<=	4'hf;
 		case (mem_icode)
-			`CMOVXX:	begin
-				wb_dstE	<=	mem_rB;
-			end
-			`IRMOVL:	begin
-				wb_dstE	<=	mem_rB;
-			end
 			`MRMOVL:	begin
 				wb_dstM	<=	mem_rA;
 			end
-			`OPL:		begin
-				wb_dstE	<=	mem_rB;
-			end
-			`CALL:		begin
-				wb_dstE	<=	`RESP;
-			end
-			`RET:		begin
-				wb_dstE	<=	`RESP;
-			end
-			`PUSHL:		begin
-				wb_dstE	<=	`RESP;
-			end
 			`POPL:		begin
-				wb_dstE	<=	`RESP;
 				wb_dstM	<=	mem_rA;
 			end
 		endcase

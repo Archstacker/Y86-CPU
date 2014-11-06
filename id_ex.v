@@ -12,6 +12,7 @@ module id_ex(
 	input	wire[`WORD]		id_valB,
 	input	wire[`WORD]		id_valC,
 	input	wire[`WORD]		id_valP,
+    input	wire[`BYTE]		id_dstE,
 
 	output	reg[`BYTE]		ex_icode,
 	output	reg[`BYTE]		ex_ifun,
@@ -20,7 +21,8 @@ module id_ex(
 	output	reg[`WORD]		ex_valA,
 	output	reg[`WORD]		ex_valB,
 	output	reg[`WORD]		ex_valC,
-	output	reg[`WORD]		ex_valP
+	output	reg[`WORD]		ex_valP,
+    output	reg[`BYTE]		ex_dstE
 );
 
 	always @ (posedge clk) begin
@@ -32,5 +34,6 @@ module id_ex(
 		ex_valB		<=	id_valB;
 		ex_valC		<=	id_valC;
 		ex_valP		<=	id_valP;
+		ex_dstE		<=	id_dstE;
 	end
 endmodule
