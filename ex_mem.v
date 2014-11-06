@@ -10,6 +10,7 @@ module ex_mem(
 	input	wire[`WORD]		ex_valP,
 	input	wire[`WORD]		ex_valE,
 	input	wire[`BYTE]		ex_dstE,
+	input	wire[`BYTE]		ex_dstM,
 
 	output	reg[`BYTE]		mem_icode,
 	output	reg[`BYTE]		mem_rA,
@@ -17,7 +18,8 @@ module ex_mem(
 	output	reg[`WORD]		mem_valA,
 	output	reg[`WORD]		mem_valP,
 	output	reg[`WORD]		mem_valE,
-	output	reg[`BYTE]		mem_dstE
+	output	reg[`BYTE]		mem_dstE,
+	output	reg[`BYTE]		mem_dstM
 );
 
 	always @ (posedge clk) begin
@@ -28,6 +30,7 @@ module ex_mem(
 		mem_valP	<=	ex_valP;
 		mem_valE	<=	ex_valE;
 		mem_dstE	<=	ex_dstE;
+		mem_dstM	<=	ex_dstM;
 	end
 
 endmodule

@@ -19,7 +19,8 @@ module id(
 	output	reg[`WORD]		valB_o,
     output	reg[`WORD]		valC_o,
     output	reg[`WORD]		valP_o,
-    output	reg[`BYTE]		dstE_o
+    output	reg[`BYTE]		dstE_o,
+    output	reg[`BYTE]		dstM_o
 );
 
 	always @ (*) begin
@@ -31,6 +32,7 @@ module id(
 			valC_o	<=	32'h00000000;
 			valP_o	<=	16'h0000;
 			dstE_o	<=	4'hf;
+			dstM_o	<=	4'hf;
 		if (rst == `RSTDISABLE) begin
 			icode_o	<=	inst_i[`ICODE];
 			ifun_o	<=	inst_i[`IFUN];
@@ -65,6 +67,7 @@ module id(
 					rB_o	<=	inst_i[`RB];
 					valC_o	<=	inst_i[`WORD];
 					valP_o	<=	pc_i+4'h6;
+					dstM_o	<=	inst_i[`RA];
 				end
 				`OPL:		begin
 					rA_o	<=	inst_i[`RA];
@@ -93,6 +96,7 @@ module id(
 					rB_o	<=	inst_i[`RB];
 					valP_o	<=	pc_i+4'h2;
 					dstE_o	<=	`RESP;
+					dstM_o	<=	inst_i[`RA];
 				end
 			endcase
 		end
