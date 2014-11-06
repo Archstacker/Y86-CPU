@@ -4,8 +4,6 @@ module mem_wb(
 	input	wire			clk,
 	input	wire			rst,
 	input	wire[`BYTE]		mem_icode,
-	input	wire[`BYTE]		mem_rA,
-	input	wire[`BYTE]		mem_rB,
 	input	wire[`WORD]		mem_valE,
 	input	wire[`WORD]		mem_valM,
 	input	wire[`BYTE]		mem_dstE,

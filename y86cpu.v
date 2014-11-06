@@ -31,8 +31,6 @@ module y86cpu(
 
 	wire[`BYTE]			ex_icode_i;
 	wire[`BYTE]			ex_ifun_i;
-	wire[`BYTE]			ex_rA_i;
-	wire[`BYTE]			ex_rB_i;
 	wire[`WORD]			ex_valA_i;
 	wire[`WORD]			ex_valB_i;
 	wire[`WORD]			ex_valC_i;
@@ -44,8 +42,6 @@ module y86cpu(
 	wire[`BYTE]			ex_dstM_o;
 
 	wire[`BYTE]			mem_icode_i;
-	wire[`BYTE]			mem_rA_i;
-	wire[`BYTE]			mem_rB_i;
 	wire[`WORD]			mem_valA_i;
 	wire[`WORD]			mem_valP_i;
 	wire[`WORD]			mem_valE_i;
@@ -92,12 +88,10 @@ module y86cpu(
 	id_ex id_ex0(
 		.clk(clk),	.rst(rst),
 		.id_icode(id_icode_o),	.id_ifun(id_ifun_o),
-		.id_rA(reg_rA_addr),	.id_rB(reg_rB_addr),
 		.id_valA(id_valA_o),	.id_valB(id_valB_o),
 		.id_valC(id_valC_o),	.id_valP(id_valP_o),
 		.id_dstE(id_dstE_o),	.id_dstM(id_dstM_o),
 		.ex_icode(ex_icode_i),	.ex_ifun(ex_ifun_i),
-		.ex_rA(ex_rA_i),		.ex_rB(ex_rB_i),
 		.ex_valA(ex_valA_i),	.ex_valB(ex_valB_i),
 		.ex_valC(ex_valC_i),	.ex_valP(ex_valP_i),
 		.ex_dstE(ex_dstE_i),	.ex_dstM(ex_dstM_i)
@@ -114,12 +108,10 @@ module y86cpu(
 	ex_mem ex_mem0(
 		.clk(clk),				.rst(rst),
 		.ex_icode(ex_icode_i),
-		.ex_rA(ex_rA_i),		.ex_rB(ex_rB_i),
 		.ex_valA(ex_valA_i),	.ex_valP(ex_valP_i),
 		.ex_valE(ex_valE_o),
 		.ex_dstE(ex_dstE_o),	.ex_dstM(ex_dstM_o),
 		.mem_icode(mem_icode_i),
-		.mem_rA(mem_rA_i),		.mem_rB(mem_rB_i),
 		.mem_valA(mem_valA_i),	.mem_valP(mem_valP_i),
 		.mem_valE(mem_valE_i),
 		.mem_dstE(mem_dstE_i),	.mem_dstM(mem_dstM_i)
@@ -139,7 +131,6 @@ module y86cpu(
 	mem_wb mem_wb0(
 		.clk(clk),				.rst(rst),
 		.mem_icode(mem_icode_i),
-		.mem_rA(mem_rA_i),		.mem_rB(mem_rB_i),
 		.mem_valE(mem_valE_i),	.mem_valM(mem_valM_o),
 		.mem_dstE(mem_dstE_i),	.mem_dstM(mem_dstM_i),
 		.wb_valE(wb_valE_i),	.wb_valM(wb_valM_i),
