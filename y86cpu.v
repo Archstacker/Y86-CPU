@@ -20,9 +20,9 @@ module y86cpu(
 	wire[`BYTE]			id_ifun_o;
 	wire[`BYTE]			reg_rA_addr;
 	wire[`BYTE]			reg_rB_addr;
-	wire[`WORD]			reg_rA_data;
-	wire[`WORD]			reg_rB_data;
-	wire[`WORD]			id_valA_o;
+	wire[`WORD]			reg_valA_o;
+	wire[`WORD]			reg_valB_o;
+	//wire[`WORD]			id_valA_o;
 	wire[`WORD]			id_valB_o;
 	wire[`WORD]			id_valC_o;
 	wire[`WORD]			id_valP_o;
@@ -54,6 +54,17 @@ module y86cpu(
 	wire[`BYTE]			wb_dstE_i;
 	wire[`BYTE]			wb_dstM_i;
 
+	wire[`BYTE]			e_dstE;
+	wire[`WORD]			e_valE;
+	wire[`BYTE]			M_dstM;
+	wire[`WORD]			m_valM;
+	wire[`BYTE]			M_dstE;
+	wire[`WORD]			M_valE;
+	wire[`BYTE]			W_dstM;
+	wire[`WORD]			W_valM;
+	wire[`BYTE]			W_dstE;
+	wire[`WORD]			W_valE;
+
 	pc_reg pc_reg0(
 		.clk(clk),	.rst(rst),	.newPC(id_valP_o),
 		.pc(pc)
@@ -69,10 +80,8 @@ module y86cpu(
 
 	id id0(
 		.rst(rst),	.pc_i(id_pc_i),	.inst_i(id_inst_i),
-		.valA_i(reg_rA_data),	.valB_i(reg_rB_data),
 		.icode_o(id_icode_o),	.ifun_o(id_ifun_o),
 		.rA_o(reg_rA_addr),		.rB_o(reg_rB_addr),
-		.valA_o(id_valA_o),		.valB_o(id_valB_o),
 		.valC_o(id_valC_o),		.valP_o(id_valP_o),
 		.dstE_o(id_dstE_o),		.dstM_o(id_dstM_o)
 	);
@@ -82,13 +91,24 @@ module y86cpu(
 		.srcA(reg_rA_addr),		.srcB(reg_rB_addr),
 		.dstE(wb_dstE_i),		.dstM(wb_dstM_i),
 		.valE(wb_valE_i),		.valM(wb_valM_i),
-		.valA(reg_rA_data),		.valB(reg_rB_data)
+		.valA(reg_valA_o),		.valB(reg_valB_o)
+	);
+
+	fwd_b fwd_b0(
+		.rst(rst),
+		.d_srcB(reg_rB_addr),	.d_rvalB(reg_valB_o),
+		.e_dstE(ex_dstE_o),		.e_valE(ex_valE_o),
+		.M_dstM(mem_dstM_i),	.m_valM(mem_valM_o),
+		.M_dstE(mem_dstE_i),	.M_valE(mem_valE_i),
+		.W_dstM(wb_dstM_i),		.W_valM(wb_valM_i),
+		.W_dstE(wb_dstE_i),		.W_valE(wb_valE_i),
+		.d_valB(id_valB_o)
 	);
 
 	id_ex id_ex0(
 		.clk(clk),	.rst(rst),
 		.id_icode(id_icode_o),	.id_ifun(id_ifun_o),
-		.id_valA(id_valA_o),	.id_valB(id_valB_o),
+		.id_valA(reg_valA_o),	.id_valB(id_valB_o),
 		.id_valC(id_valC_o),	.id_valP(id_valP_o),
 		.id_dstE(id_dstE_o),	.id_dstM(id_dstM_o),
 		.ex_icode(ex_icode_i),	.ex_ifun(ex_ifun_i),

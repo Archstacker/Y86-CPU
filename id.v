@@ -4,8 +4,6 @@ module id(
     input   wire			rst,
     input   wire[`WORD]		pc_i,
     input   wire[`INSTBUS]	inst_i,
-	input	reg[`WORD]		valA_i,
-	input	reg[`WORD]		valB_i,
 
     //output  reg         instr_valid,
     //output  reg         need_regids,
@@ -15,8 +13,6 @@ module id(
     output	reg[`BYTE]		ifun_o,
     output	reg[`BYTE]		rA_o,
     output	reg[`BYTE]		rB_o,
-	output	reg[`WORD]		valA_o,
-	output	reg[`WORD]		valB_o,
     output	reg[`WORD]		valC_o,
     output	reg[`WORD]		valP_o,
     output	reg[`BYTE]		dstE_o,
@@ -100,9 +96,5 @@ module id(
 				end
 			endcase
 		end
-	end
-	always @ (*) begin
-		valA_o	<=	valA_i;
-		valB_o	<=	valB_i;
 	end
 endmodule
