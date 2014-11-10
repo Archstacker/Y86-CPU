@@ -2,38 +2,38 @@
 
 module fwd_b(
 	input	wire			rst,
-	input	wire[`BYTE]		d_srcB,
-	input	wire[`WORD]		d_rvalB,
-	input	wire[`BYTE]		e_dstE,
-	input	wire[`WORD]		e_valE,
-	input	wire[`BYTE]		M_dstM,
-	input	wire[`WORD]		m_valM,
-	input	wire[`BYTE]		M_dstE,
-	input	wire[`WORD]		M_valE,
-	input	wire[`BYTE]		W_dstM,
-	input	wire[`WORD]		W_valM,
-	input	wire[`BYTE]		W_dstE,
-	input	wire[`WORD]		W_valE,
-	output	reg[`WORD]		d_valB
+	input	wire[`BYTE]		d_srcB_i,
+	input	wire[`WORD]		d_rvalB_i,
+	input	wire[`BYTE]		e_dstE_i,
+	input	wire[`WORD]		e_valE_i,
+	input	wire[`BYTE]		M_dstM_i,
+	input	wire[`WORD]		m_valM_i,
+	input	wire[`BYTE]		M_dstE_i,
+	input	wire[`WORD]		M_valE_i,
+	input	wire[`BYTE]		W_dstM_i,
+	input	wire[`WORD]		W_valM_i,
+	input	wire[`BYTE]		W_dstE_i,
+	input	wire[`WORD]		W_valE_i,
+	output	reg[`WORD]		d_valB_o
 );
 
 	always @ (*) begin
-		d_valB	<=	d_rvalB;
-		case ( d_srcB )
-			e_dstE:		begin
-				d_valB	<=	e_valE;
+		d_valB_o	<=	d_rvalB_i;
+		case ( d_srcB_i )
+			e_dstE_i:	begin
+				d_valB_o	<=	e_valE_i;
 			end
-			M_dstM:		begin
-				d_valB	<=	m_valM;
+			M_dstM_i:	begin
+				d_valB_o	<=	m_valM_i;
 			end
-			M_dstE:		begin
-				d_valB	<=	M_valE;
+			M_dstE_i:	begin
+				d_valB_o	<=	M_valE_i;
 			end
-			W_dstM:		begin
-				d_valB	<=	W_valM;
+			W_dstM_i:	begin
+				d_valB_o	<=	W_valM_i;
 			end
-			W_dstE:		begin
-				d_valB	<=	W_valE;
+			W_dstE_i:	begin
+				d_valB_o	<=	W_valE_i;
 			end
 		endcase
 	end
