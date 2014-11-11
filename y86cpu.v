@@ -16,16 +16,16 @@ module y86cpu(
 	wire[`WORD]			id_pc_i;
 	wire[`INSTBUS]		id_inst_i;
 
-	wire[`BYTE]			id_icode_o;
-	wire[`BYTE]			id_ifun_o;
-	wire[`BYTE]			reg_rA_addr;
+	wire[`BYTE]			D_icode;
+	wire[`BYTE]			D_ifun;
+	wire[`BYTE]			d_srcA;
 	wire[`BYTE]			d_srcB;
-	wire[`WORD]			reg_valA_o;
+	wire[`WORD]			d_rvalA;
 	wire[`WORD]			d_rvalB;
-	//wire[`WORD]			id_valA_o;
+	wire[`WORD]			d_valA;
 	wire[`WORD]			d_valB;
-	wire[`WORD]			id_valC_o;
-	wire[`WORD]			id_valP_o;
+	wire[`WORD]			D_valC;
+	wire[`WORD]			D_valP;
 	wire[`BYTE]			id_dstE_o;
 	wire[`BYTE]			id_dstM_o;
 
@@ -46,8 +46,8 @@ module y86cpu(
 	wire[`WORD]			mem_valP_i;
 	wire[`WORD]			M_valE;
 	wire[`BYTE]			M_dstE;
-	wire[`BYTE]			M_dstM;
 	wire[`WORD]			m_valM;
+	wire[`BYTE]			M_dstM;
 
 	wire[`WORD]			W_valE;
 	wire[`WORD]			W_valM;
@@ -55,7 +55,7 @@ module y86cpu(
 	wire[`BYTE]			W_dstM;
 
 	pc_reg pc_reg0(
-		.clk(clk),	.rst(rst),	.newPC(id_valP_o),
+		.clk(clk),	.rst(rst),	.newPC(D_valP),
 		.pc(pc)
 	);
 
@@ -69,18 +69,18 @@ module y86cpu(
 
 	id id0(
 		.rst(rst),	.pc_i(id_pc_i),	.inst_i(id_inst_i),
-		.icode_o(id_icode_o),	.ifun_o(id_ifun_o),
-		.rA_o(reg_rA_addr),		.rB_o(d_srcB),
-		.valC_o(id_valC_o),		.valP_o(id_valP_o),
+		.icode_o(D_icode),		.ifun_o(D_ifun),
+		.rA_o(d_srcA),			.rB_o(d_srcB),
+		.valC_o(D_valC),		.valP_o(D_valP),
 		.dstE_o(id_dstE_o),		.dstM_o(id_dstM_o)
 	);
 
 	regfile regfile0(
 		.clk(clk),				.rst(rst),
-		.srcA(reg_rA_addr),		.srcB(d_srcB),
+		.srcA(d_srcA),		.srcB(d_srcB),
 		.dstE(W_dstE),			.dstM(W_dstM),
 		.valE(W_valE),			.valM(W_valM),
-		.valA(reg_valA_o),		.valB(d_rvalB)
+		.valA(d_rvalA),		.valB(d_rvalB)
 	);
 
 	fwd_b fwd_b0(
@@ -94,11 +94,23 @@ module y86cpu(
 		.d_valB_o(d_valB)
 	);
 
+	sel_fwd_a sel_fwd_a0(
+		.rst(rst),
+		.D_icode_i(D_icode),	.D_valP_i(D_valP),
+		.d_srcA_i(d_srcA),		.d_rvalA_i(d_rvalA),
+		.e_dstE_i(e_dstE),		.e_valE_i(e_valE),
+		.M_dstM_i(M_dstM),		.m_valM_i(m_valM),
+		.M_dstE_i(M_dstE),		.M_valE_i(M_valE),
+		.W_dstM_i(W_dstM),		.W_valM_i(W_valM),
+		.W_dstE_i(W_dstE),		.W_valE_i(W_valE),
+		.d_valA_o(d_valA)
+	);
+
 	id_ex id_ex0(
 		.clk(clk),	.rst(rst),
-		.id_icode(id_icode_o),	.id_ifun(id_ifun_o),
-		.id_valA(reg_valA_o),	.id_valB(d_valB),
-		.id_valC(id_valC_o),	.id_valP(id_valP_o),
+		.id_icode(D_icode),	.id_ifun(D_ifun),
+		.id_valA(d_valA),	.id_valB(d_valB),
+		.id_valC(D_valC),	.id_valP(D_valP),
 		.id_dstE(id_dstE_o),	.id_dstM(id_dstM_o),
 		.ex_icode(ex_icode_i),	.ex_ifun(ex_ifun_i),
 		.ex_valA(ex_valA_i),	.ex_valB(ex_valB_i),
