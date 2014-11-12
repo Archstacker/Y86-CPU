@@ -7,7 +7,7 @@ module y86cpu(
 	input	wire[`WORD]		mem_data_i,
 	output	wire			mem_read_o,
 	output	wire			mem_write_o,
-	output	wire[`BYTE]		mem_addr_o,
+	output	wire[`WORD]		mem_addr_o,
 	output	wire[`WORD]		mem_data_o,
 	output	wire[`WORD]		rom_addr_o
 );
@@ -77,10 +77,10 @@ module y86cpu(
 
 	regfile regfile0(
 		.clk(clk),				.rst(rst),
-		.srcA(d_srcA),		.srcB(d_srcB),
+		.srcA(d_srcA),			.srcB(d_srcB),
 		.dstE(W_dstE),			.dstM(W_dstM),
 		.valE(W_valE),			.valM(W_valM),
-		.valA(d_rvalA),		.valB(d_rvalB)
+		.valA(d_rvalA),			.valB(d_rvalB)
 	);
 
 	fwd_b fwd_b0(
@@ -108,9 +108,9 @@ module y86cpu(
 
 	id_ex id_ex0(
 		.clk(clk),	.rst(rst),
-		.id_icode(D_icode),	.id_ifun(D_ifun),
-		.id_valA(d_valA),	.id_valB(d_valB),
-		.id_valC(D_valC),	.id_valP(D_valP),
+		.id_icode(D_icode),		.id_ifun(D_ifun),
+		.id_valA(d_valA),		.id_valB(d_valB),
+		.id_valC(D_valC),		.id_valP(D_valP),
 		.id_dstE(id_dstE_o),	.id_dstM(id_dstM_o),
 		.ex_icode(ex_icode_i),	.ex_ifun(ex_ifun_i),
 		.ex_valA(ex_valA_i),	.ex_valB(ex_valB_i),

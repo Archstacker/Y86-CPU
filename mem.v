@@ -10,7 +10,7 @@ module mem(
 
 	output	reg				mem_read,
 	output	reg				mem_write,
-	output	reg[`BYTE]		mem_addr,
+	output	reg[`WORD]		mem_addr,
 	output	reg[`WORD]		mem_data,
 	output	reg[`WORD]		valM_o
 );
@@ -30,6 +30,15 @@ module mem(
 			`MRMOVL:	begin
 				mem_read	<=	`READENABLE;
 				mem_addr	<=	valE_i;
+			end
+			`PUSHL:		begin
+				mem_write	<=	`WRITEENABLE;
+				mem_addr	<=	valE_i;
+				mem_data	<=	valA_i;
+			end
+			`POPL:		begin
+				mem_read	<=	`READENABLE;
+				mem_addr	<=	valA_i;
 			end
 		endcase
 		valM_o	<=	valM_i;
