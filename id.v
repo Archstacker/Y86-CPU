@@ -84,12 +84,13 @@ module id(
 				end
 				`PUSHL:		begin
 					rA_o	<=	inst_i[`RA];
+					rB_o	<=	`RESP;
 					valP_o	<=	pc_i+4'h2;
 					dstE_o	<=	`RESP;
 				end
 				`POPL:		begin
-					rA_o	<=	inst_i[`RA];
-					rB_o	<=	inst_i[`RB];
+					rA_o	<=	`RESP;
+					rB_o	<=	`RESP;
 					valP_o	<=	pc_i+4'h2;
 					dstE_o	<=	`RESP;
 					dstM_o	<=	inst_i[`RA];

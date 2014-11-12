@@ -3,7 +3,7 @@ module inst_rom(
 	input	wire[`WORD]		addr,
 	input	wire			mem_read_i,
 	input	wire			mem_write_i,
-	input	wire[`BYTE]		mem_addr_i,
+	input	wire[`WORD]		mem_addr_i,
 	input	wire[`WORD]		mem_data_i,
 	output	reg[`WORD]		mem_data_o,
 	output	wire[`INSTBUS]	inst

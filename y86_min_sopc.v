@@ -11,7 +11,7 @@ module y86_min_sopc(
 	wire[`WORD]		cpu_mem_data;
 	wire			cpu_mem_read;
 	wire			cpu_mem_write;
-	wire[`BYTE]		cpu_mem_addr;
+	wire[`WORD]		cpu_mem_addr;
 	
 	y86cpu y86cpu0(
 		.clk(clk),		.rst(rst),

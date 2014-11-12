@@ -44,6 +44,15 @@ module ex(
 					end
 				endcase
 			end
+
+			`PUSHL:		begin
+				valE_o	<=	valB_i - 4;
+			end
+
+			`POPL:		begin
+				valE_o	<=	valB_i + 4;
+			end
+
 		endcase
 	end
 

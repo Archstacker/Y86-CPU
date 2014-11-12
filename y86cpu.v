@@ -7,7 +7,7 @@ module y86cpu(
 	input	wire[`WORD]		mem_data_i,
 	output	wire			mem_read_o,
 	output	wire			mem_write_o,
-	output	wire[`BYTE]		mem_addr_o,
+	output	wire[`WORD]		mem_addr_o,
 	output	wire[`WORD]		mem_data_o,
 	output	wire[`WORD]		rom_addr_o
 );
