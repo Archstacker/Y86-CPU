@@ -16,16 +16,28 @@ module y86cpu(
 	wire[`WORD]			id_pc_i;
 	wire[`INSTBUS]		id_inst_i;
 
-	wire[`BYTE]			D_icode;
-	wire[`BYTE]			D_ifun;
+    wire[`BYTE]			f_icode;
+    wire[`BYTE]			f_ifun;
+    wire[`BYTE]			f_rA;
+    wire[`BYTE]			f_rB;
+    wire[`WORD]			f_valC;
+    wire[`WORD]			f_valP;
+    wire[`BYTE]			f_dstE;
+    wire[`BYTE]			f_dstM;
+    wire[`BYTE]			D_icode;
+    wire[`BYTE]			D_ifun;
+    wire[`BYTE]			D_rA;
+    wire[`BYTE]			D_rB;
+    wire[`WORD]			D_valC;
+    wire[`WORD]			D_valP;
+    wire[`BYTE]			D_dstE;
+    wire[`BYTE]			D_dstM;
 	wire[`BYTE]			d_srcA;
 	wire[`BYTE]			d_srcB;
 	wire[`WORD]			d_rvalA;
 	wire[`WORD]			d_rvalB;
 	wire[`WORD]			d_valA;
 	wire[`WORD]			d_valB;
-	wire[`WORD]			D_valC;
-	wire[`WORD]			D_valP;
 	wire[`BYTE]			id_dstE_o;
 	wire[`BYTE]			id_dstM_o;
 
@@ -55,24 +67,37 @@ module y86cpu(
 	wire[`BYTE]			W_dstM;
 
 	pc_reg pc_reg0(
-		.clk(clk),	.rst(rst),	.newPC(D_valP),
-		.pc(pc)
+		.clk(clk),				.rst(rst),
+		.newPC(D_valP),			.pc(pc)
 	);
 
 	assign rom_addr_o = pc;
 
-	if_id if_id0(
-		.clk(clk),	.rst(rst),	.if_pc(pc),
-		.if_inst(rom_data_i),	.id_pc(id_pc_i),
-		.id_inst(id_inst_i)
+	f f0(
+		.rst(rst),	.pc_i(pc),	.inst_i(rom_data_i),
+		.f_icode_o(f_icode),	.f_ifun_o(f_ifun),
+		.f_rA_o(f_rA),			.f_rB_o(f_rB),
+		.f_valC_o(f_valC),		.f_valP_o(f_valP),
+		.f_dstE_o(f_dstE),		.f_dstM_o(f_dstM)
+
 	);
 
-	id id0(
-		.rst(rst),	.pc_i(id_pc_i),	.inst_i(id_inst_i),
-		.icode_o(D_icode),		.ifun_o(D_ifun),
-		.rA_o(d_srcA),			.rB_o(d_srcB),
-		.valC_o(D_valC),		.valP_o(D_valP),
-		.dstE_o(id_dstE_o),		.dstM_o(id_dstM_o)
+	D D0(
+		.clk(clk),				.rst(rst),
+		.f_icode_i(f_icode),	.f_ifun_i(f_ifun),
+		.f_rA_i(f_rA),			.f_rB_i(f_rB),
+		.f_valC_i(f_valC),		.f_valP_i(f_valP),
+		.f_dstE_i(f_dstE),		.f_dstM_i(f_dstM),
+		.D_icode_o(D_icode),	.D_ifun_o(D_ifun),
+		.D_rA_o(D_rA),			.D_rB_o(D_rB),
+		.D_valC_o(D_valC),		.D_valP_o(D_valP),
+		.D_dstE_o(D_dstE),		.D_dstM_o(D_dstM)
+	);
+
+	d d0(
+		.rst(rst),
+		.D_rA_i(D_rA),			.D_rB_i(D_rB),
+		.d_srcA_o(d_srcA),		.d_srcB_o(d_srcB)
 	);
 
 	regfile regfile0(
@@ -111,7 +136,7 @@ module y86cpu(
 		.id_icode(D_icode),		.id_ifun(D_ifun),
 		.id_valA(d_valA),		.id_valB(d_valB),
 		.id_valC(D_valC),		.id_valP(D_valP),
-		.id_dstE(id_dstE_o),	.id_dstM(id_dstM_o),
+		.id_dstE(D_dstE),		.id_dstM(D_dstM),
 		.ex_icode(ex_icode_i),	.ex_ifun(ex_ifun_i),
 		.ex_valA(ex_valA_i),	.ex_valB(ex_valB_i),
 		.ex_valC(ex_valC_i),	.ex_valP(ex_valP_i),
