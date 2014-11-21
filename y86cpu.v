@@ -12,10 +12,10 @@ module y86cpu(
 	output	wire[`WORD]		rom_addr_o
 );
 
-	wire[`WORD]			pc;
 	wire[`WORD]			id_pc_i;
 	wire[`INSTBUS]		id_inst_i;
 
+	wire[`WORD]			F_predPC;
     wire[`BYTE]			f_icode;
     wire[`BYTE]			f_ifun;
     wire[`BYTE]			f_rA;
@@ -66,15 +66,17 @@ module y86cpu(
 	wire[`BYTE]			W_dstE;
 	wire[`BYTE]			W_dstM;
 
-	pc_reg pc_reg0(
+	F F0(
 		.clk(clk),				.rst(rst),
-		.newPC(D_valP),			.pc(pc)
+		.f_icode_i(f_icode),
+		.f_valC_i(f_valC),		.f_valP_i(f_valP),
+		.F_predPC_o(F_predPC)
 	);
 
-	assign rom_addr_o = pc;
+	assign rom_addr_o = F_predPC;
 
 	f f0(
-		.rst(rst),	.pc_i(pc),	.inst_i(rom_data_i),
+		.rst(rst),	.pc_i(F_predPC),	.inst_i(rom_data_i),
 		.f_icode_o(f_icode),	.f_ifun_o(f_ifun),
 		.f_rA_o(f_rA),			.f_rB_o(f_rB),
 		.f_valC_o(f_valC),		.f_valP_o(f_valP),

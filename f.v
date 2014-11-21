@@ -20,13 +20,12 @@ module f(
 );
 
 	always @ (*) begin
-		//if (rst == `RSTENABLE) begin
 			f_icode_o	<=	4'h0;
 			f_ifun_o	<=	4'h0;
 			f_rA_o		<=	4'hf;
 			f_rB_o		<=	4'hf;
 			f_valC_o	<=	32'h00000000;
-			f_valP_o	<=	16'h0000;
+			f_valP_o	<=	32'h00000000;
 			f_dstE_o	<=	4'hf;
 			f_dstM_o	<=	4'hf;
 		if (rst == `RSTDISABLE) begin
@@ -76,8 +75,11 @@ module f(
 					f_valP_o	<=	pc_i+4'h4;
 				end
 				`CALL:		begin
+					f_rA_o		<=	`RESP;
+					f_rB_o		<=	`RESP;
 					f_valC_o	<=	inst_i[`DEST];
 					f_valP_o	<=	pc_i+4'h4;
+					f_dstE_o	<=	`RESP;
 				end
 				`RET:		begin
 					f_valP_o	<=	pc_i+4'h1;

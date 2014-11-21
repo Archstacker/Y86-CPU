@@ -50,8 +50,7 @@
 `define		IFUN		43:40
 `define		RA			39:36
 `define		RB			35:32
-`define		WORD		31:0
-`define		DEST		35:4
+`define		DEST		39:8
 `define		INSTMEMNUM	131071
 `define		WORDNUM		32
 `define		REGNUM		8

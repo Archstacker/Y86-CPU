@@ -31,6 +31,11 @@ module mem(
 				mem_read	<=	`READENABLE;
 				mem_addr	<=	valE_i;
 			end
+			`CALL:		begin
+				mem_write	<=	`WRITEENABLE;
+				mem_addr	<=	valE_i;
+				mem_data	<=	valP_i;
+			end
 			`PUSHL:		begin
 				mem_write	<=	`WRITEENABLE;
 				mem_addr	<=	valE_i;
