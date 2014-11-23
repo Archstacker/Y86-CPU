@@ -32,6 +32,14 @@ module ex(
 				valE_o	<=	valC_i;
 			end
 
+			`RMMOVL:	begin
+				valE_o	<=	valB_i + valC_i;
+			end
+
+			`MRMOVL:	begin
+				valE_o	<=	valB_i + valC_i;
+			end
+
 			`OPL:		begin
 				case ( ifun_i )
 					`ADDL:		begin

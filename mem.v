@@ -15,12 +15,9 @@ module mem(
 	output	reg[`WORD]		valM_o
 );
 
-	initial	begin
+	always @ (*) begin
 		mem_read	<=	`READDISABLE;
 		mem_write	<=	`WRITEDISABLE;
-	end
-
-	always @ (*) begin
 		case ( icode_i )
 			`RMMOVL:	begin
 				mem_write	<=	`WRITEENABLE;

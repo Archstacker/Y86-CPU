@@ -52,7 +52,6 @@ module y86cpu(
 	wire[`BYTE]			ex_dstM_i;
 	wire[`WORD]			e_valE;
 	wire[`BYTE]			e_dstE;
-	wire[`BYTE]			ex_dstM_o;
 	wire				e_Cnd;
 
 	wire[`BYTE]			M_icode;
@@ -171,7 +170,7 @@ module y86cpu(
 		.ex_icode(ex_icode_i),
 		.ex_valA(ex_valA_i),	.ex_valP(ex_valP_i),
 		.ex_valE(e_valE),
-		.ex_dstE(e_dstE),		.ex_dstM(ex_dstM_o),
+		.ex_dstE(e_dstE),		.ex_dstM(ex_dstM_i),
 		.e_Cnd_i(e_Cnd),
 		.mem_icode(M_icode),
 		.mem_valA(M_valA),		.mem_valP(M_valP),
