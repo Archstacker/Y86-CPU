@@ -12,6 +12,14 @@ module y86cpu(
 	output	wire[`WORD]		rom_addr_o
 );
 
+	wire				F_stall;
+	wire				D_stall;
+	wire				D_bubble;
+	wire				E_bubble;
+	wire				set_cc;
+	wire				M_bubble;
+	wire				W_stall;
+	
 	wire[`WORD]			id_pc_i;
 	wire[`INSTBUS]		id_inst_i;
 
@@ -42,14 +50,14 @@ module y86cpu(
 	wire[`BYTE]			id_dstE_o;
 	wire[`BYTE]			id_dstM_o;
 
-	wire[`BYTE]			ex_icode_i;
+	wire[`BYTE]			E_icode;
 	wire[`BYTE]			ex_ifun_i;
 	wire[`WORD]			ex_valA_i;
 	wire[`WORD]			ex_valB_i;
 	wire[`WORD]			ex_valC_i;
 	wire[`WORD]			ex_valP_i;
 	wire[`BYTE]			ex_dstE_i;
-	wire[`BYTE]			ex_dstM_i;
+	wire[`BYTE]			E_dstM;
 	wire[`WORD]			e_valE;
 	wire[`BYTE]			e_dstE;
 	wire				e_Cnd;
@@ -70,6 +78,7 @@ module y86cpu(
 
 	F F0(
 		.clk(clk),				.rst(rst),
+		.F_stall_i(F_stall),
 		.f_icode_i(f_icode),
 		.f_valC_i(f_valC),		.f_valP_i(f_valP),
 		.F_predPC_o(F_predPC)
@@ -97,6 +106,7 @@ module y86cpu(
 
 	D D0(
 		.clk(clk),				.rst(rst),
+		.D_stall_i(D_stall),	.D_bubble_i(D_bubble),
 		.f_icode_i(f_icode),	.f_ifun_i(f_ifun),
 		.f_rA_i(f_rA),			.f_rB_i(f_rB),
 		.f_valC_i(f_valC),		.f_valP_i(f_valP),
@@ -146,19 +156,20 @@ module y86cpu(
 
 	id_ex id_ex0(
 		.clk(clk),	.rst(rst),
+		.E_bubble_i(E_bubble),
 		.id_icode(D_icode),		.id_ifun(D_ifun),
 		.id_valA(d_valA),		.id_valB(d_valB),
 		.id_valC(D_valC),		.id_valP(D_valP),
 		.id_dstE(D_dstE),		.id_dstM(D_dstM),
-		.ex_icode(ex_icode_i),	.ex_ifun(ex_ifun_i),
+		.ex_icode(E_icode),		.ex_ifun(ex_ifun_i),
 		.ex_valA(ex_valA_i),	.ex_valB(ex_valB_i),
 		.ex_valC(ex_valC_i),	.ex_valP(ex_valP_i),
-		.ex_dstE(ex_dstE_i),	.ex_dstM(ex_dstM_i)
+		.ex_dstE(ex_dstE_i),	.ex_dstM(E_dstM)
 	);
 
 	ex ex0(
 		.rst(rst),
-		.icode_i(ex_icode_i),	.ifun_i(ex_ifun_i),
+		.icode_i(E_icode),		.ifun_i(ex_ifun_i),
 		.valA_i(ex_valA_i),		.valB_i(ex_valB_i),
 		.valC_i(ex_valC_i),		.dstE_i(ex_dstE_i),
 		.valE_o(e_valE),		.dstE_o(e_dstE),
@@ -167,10 +178,11 @@ module y86cpu(
 
 	ex_mem ex_mem0(
 		.clk(clk),				.rst(rst),
-		.ex_icode(ex_icode_i),
+		.M_bubble_i(M_bubble),
+		.ex_icode(E_icode),
 		.ex_valA(ex_valA_i),	.ex_valP(ex_valP_i),
 		.ex_valE(e_valE),
-		.ex_dstE(e_dstE),		.ex_dstM(ex_dstM_i),
+		.ex_dstE(e_dstE),		.ex_dstM(E_dstM),
 		.e_Cnd_i(e_Cnd),
 		.mem_icode(M_icode),
 		.mem_valA(M_valA),		.mem_valP(M_valP),
@@ -192,11 +204,26 @@ module y86cpu(
 
 	mem_wb mem_wb0(
 		.clk(clk),				.rst(rst),
+		.W_stall_i(W_stall),
 		.mem_icode(M_icode),
 		.mem_valE(M_valE),		.mem_valM(m_valM),
 		.mem_dstE(M_dstE),		.mem_dstM(M_dstM),
 		.wb_valE(W_valE),		.wb_valM(W_valM),
 		.wb_dstE(W_dstE),		.wb_dstM(W_dstM)
+	);
+
+	pipe_control_logic pipe_control_logic1(
+		.D_icode_i(D_icode),
+		.d_srcA_i(d_srcA),		.d_srcB_i(d_srcB),
+		.E_icode_i(E_icode),	.E_dstM_i(E_dstM),
+		.e_Cnd_i(e_Cnd),
+		.M_icode_i(M_icode),
+		.F_stall_o(F_stall),
+		.D_stall_o(D_stall),	.D_bubble_o(D_bubble),
+		.E_bubble_o(E_bubble),
+		.set_cc_o(set_cc),
+		.M_bubble_o(M_bubble),
+		.W_stall_o(M_stall)
 	);
 
 endmodule

@@ -7,6 +7,8 @@
 `define		READDISABLE		1'b0
 `define		WRITEENABLE		1'b1
 `define		WRITEDISABLE	1'b0
+`define		ENABLE			1'b1
+`define		DISABLE			1'b0
 
 //Y86 instruction set
 `define     HALT        4'H0

@@ -3,6 +3,7 @@
 module ex_mem(
 	input	wire			clk,
 	input	wire			rst,
+	input	wire			M_bubble_i,
 	input	wire[`BYTE]		ex_icode,
 	input	wire[`WORD]		ex_valA,
 	input	wire[`WORD]		ex_valP,

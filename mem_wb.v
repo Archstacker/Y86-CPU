@@ -3,6 +3,7 @@
 module mem_wb(
 	input	wire			clk,
 	input	wire			rst,
+	input	wire			W_stall_i,
 	input	wire[`BYTE]		mem_icode,
 	input	wire[`WORD]		mem_valE,
 	input	wire[`WORD]		mem_valM,

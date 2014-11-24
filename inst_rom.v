@@ -20,7 +20,7 @@ module inst_rom(
 	assign inst = {inst_mem[addr],inst_mem[addr+1],inst_mem[addr+2],inst_mem[addr+3],inst_mem[addr+4],inst_mem[addr+5]};
 	always @ (*) begin
 		if( mem_read_i == `READENABLE ) begin
-			mem_data_o	<=	inst_mem[mem_addr_i];
+			mem_data_o	<=	{inst_mem[mem_addr_i],inst_mem[mem_addr_i+1],inst_mem[mem_addr_i+2],inst_mem[mem_addr_i+3]};
 		end
 		if( mem_write_i == `WRITEENABLE ) begin
 			{inst_mem[mem_addr_i],inst_mem[mem_addr_i+1],inst_mem[mem_addr_i+2],inst_mem[mem_addr_i+3]} <= mem_data_i;
