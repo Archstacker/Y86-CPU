@@ -26,6 +26,8 @@ module D(
 		if( rst == `DISABLE && D_stall_i != `ENABLE ) begin
 			if( D_bubble_i==`ENABLE ) begin
 				D_icode_o	<=	`INOP;
+				D_dstE_o	<=	`RNONE;
+				D_dstM_o	<=	`RNONE;
 			end
 			else begin
 				D_icode_o	<=	f_icode_i;

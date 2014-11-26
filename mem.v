@@ -33,6 +33,10 @@ module mem(
 				mem_addr	<=	valE_i;
 				mem_data	<=	valP_i;
 			end
+			`RET:		begin
+				mem_read	<=	`ENABLE;
+				mem_addr	<=	valA_i;
+			end
 			`PUSHL:		begin
 				mem_write	<=	`WRITEENABLE;
 				mem_addr	<=	valE_i;

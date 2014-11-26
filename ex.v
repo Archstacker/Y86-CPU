@@ -90,6 +90,10 @@ module ex(
 				valE_o	<=	valB_i - 4;
 			end
 
+			`RET:		begin
+				valE_o	<=	valB_i + 4;
+			end
+
 			`PUSHL:		begin
 				valE_o	<=	valB_i - 4;
 			end

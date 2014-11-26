@@ -9,17 +9,19 @@ module mem_wb(
 	input	wire[`WORD]		mem_valM,
 	input	wire[`BYTE]		mem_dstE,
 	input	wire[`BYTE]		mem_dstM,
+	output	reg	[`BYTE]		W_icode_o,
 	output	reg	[`WORD]		wb_valE,
 	output	reg	[`WORD]		wb_valM,
 	output	reg	[`BYTE]		wb_dstE,
 	output	reg	[`BYTE]		wb_dstM
 );
 
-	always @ (*) begin
+	always @ (posedge clk) begin
 		wb_valE		<=	mem_valE;
 		wb_valM		<=	mem_valM;
 		wb_dstE		<=	mem_dstE;
 		wb_dstM		<=	mem_dstM;
+		W_icode_o	<=	mem_icode;
 	end
 
 endmodule

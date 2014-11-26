@@ -19,22 +19,24 @@ module fwd_b(
 
 	always @ (*) begin
 		d_valB_o	<=	d_rvalB_i;
-		case ( d_srcB_i )
-			e_dstE_i:	begin
-				d_valB_o	<=	e_valE_i;
-			end
-			M_dstM_i:	begin
-				d_valB_o	<=	m_valM_i;
-			end
-			M_dstE_i:	begin
-				d_valB_o	<=	M_valE_i;
-			end
-			W_dstM_i:	begin
-				d_valB_o	<=	W_valM_i;
-			end
-			W_dstE_i:	begin
-				d_valB_o	<=	W_valE_i;
-			end
-		endcase
+		if( d_srcB_i != `RNONE ) begin
+			case ( d_srcB_i )
+				e_dstE_i:	begin
+					d_valB_o	<=	e_valE_i;
+				end
+				M_dstM_i:	begin
+					d_valB_o	<=	m_valM_i;
+				end
+				M_dstE_i:	begin
+					d_valB_o	<=	M_valE_i;
+				end
+				W_dstM_i:	begin
+					d_valB_o	<=	W_valM_i;
+				end
+				W_dstE_i:	begin
+					d_valB_o	<=	W_valE_i;
+				end
+			endcase
+		end
 	end
 endmodule

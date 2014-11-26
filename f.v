@@ -82,7 +82,10 @@ module f(
 					f_dstE_o	<=	`RESP;
 				end
 				`RET:		begin
+					f_rA_o		<=	`RESP;
+					f_rB_o		<=	`RESP;
 					f_valP_o	<=	f_pc_i+4'h1;
+					f_dstE_o	<=	`RESP;
 				end
 				`PUSHL:		begin
 					f_rA_o		<=	inst_i[`RA];

@@ -24,7 +24,7 @@ module sel_fwd_a(
 		if( D_icode_i==`ICALL || D_icode_i==`IJXX ) begin
 			d_valA_o	<=	D_valP_i;
 		end
-		else begin
+		else if ( d_srcA_i != `RNONE ) begin
 			case ( d_srcA_i )
 				e_dstE_i:		begin
 					d_valA_o	<=	e_valE_i;

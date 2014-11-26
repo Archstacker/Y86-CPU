@@ -56,7 +56,7 @@ module y86cpu(
 	wire[`WORD]			ex_valB_i;
 	wire[`WORD]			ex_valC_i;
 	wire[`WORD]			ex_valP_i;
-	wire[`BYTE]			ex_dstE_i;
+	wire[`BYTE]			E_dstE;
 	wire[`BYTE]			E_dstM;
 	wire[`WORD]			e_valE;
 	wire[`BYTE]			e_dstE;
@@ -71,6 +71,7 @@ module y86cpu(
 	wire[`BYTE]			M_dstM;
 	wire				M_Cnd;
 
+	wire[`BYTE]			W_icode;
 	wire[`WORD]			W_valE;
 	wire[`WORD]			W_valM;
 	wire[`BYTE]			W_dstE;
@@ -84,15 +85,16 @@ module y86cpu(
 		.F_predPC_o(F_predPC)
 	);
 
-	assign rom_addr_o = F_predPC;
-
 	select_pc select_pc0(
 		.rst(rst),
 		.F_predPC_i(F_predPC),
 		.M_icode_i(M_icode),	.M_Cnd_i(M_Cnd),
 		.M_valA_i(M_valA),
+		.W_icode_i(W_icode),	.W_valM_i(W_valM),
 		.f_pc_o(f_pc)
 	);
+
+	assign rom_addr_o = f_pc;
 
 	f f0(
 		.rst(rst),
@@ -164,14 +166,14 @@ module y86cpu(
 		.ex_icode(E_icode),		.ex_ifun(ex_ifun_i),
 		.ex_valA(ex_valA_i),	.ex_valB(ex_valB_i),
 		.ex_valC(ex_valC_i),	.ex_valP(ex_valP_i),
-		.ex_dstE(ex_dstE_i),	.ex_dstM(E_dstM)
+		.ex_dstE(E_dstE),		.ex_dstM(E_dstM)
 	);
 
 	ex ex0(
 		.rst(rst),
 		.icode_i(E_icode),		.ifun_i(ex_ifun_i),
 		.valA_i(ex_valA_i),		.valB_i(ex_valB_i),
-		.valC_i(ex_valC_i),		.dstE_i(ex_dstE_i),
+		.valC_i(ex_valC_i),		.dstE_i(E_dstE),
 		.valE_o(e_valE),		.dstE_o(e_dstE),
 		.e_Cnd_o(e_Cnd)
 	);
@@ -208,6 +210,7 @@ module y86cpu(
 		.mem_icode(M_icode),
 		.mem_valE(M_valE),		.mem_valM(m_valM),
 		.mem_dstE(M_dstE),		.mem_dstM(M_dstM),
+		.W_icode_o(W_icode),
 		.wb_valE(W_valE),		.wb_valM(W_valM),
 		.wb_dstE(W_dstE),		.wb_dstM(W_dstM)
 	);
@@ -215,7 +218,8 @@ module y86cpu(
 	pipe_control_logic pipe_control_logic1(
 		.D_icode_i(D_icode),
 		.d_srcA_i(d_srcA),		.d_srcB_i(d_srcB),
-		.E_icode_i(E_icode),	.E_dstM_i(E_dstM),
+		.E_icode_i(E_icode),
+		.E_dstE_i(E_dstE),		.E_dstM_i(E_dstM),
 		.e_Cnd_i(e_Cnd),
 		.M_icode_i(M_icode),
 		.F_stall_o(F_stall),

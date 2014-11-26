@@ -5,6 +5,7 @@ module pipe_control_logic(
 	input	wire[`BYTE]		d_srcA_i,
 	input	wire[`BYTE]		d_srcB_i,
 	input	wire[`BYTE]		E_icode_i,
+	input	wire[`BYTE]		E_dstE_i,
     input	wire[`BYTE]		E_dstM_i,
     input	wire			e_Cnd_i,
 	input	wire[`BYTE]		M_icode_i,
@@ -28,20 +29,24 @@ module pipe_control_logic(
 
 	always @ (*) begin
 		F_stall_o	<=	( E_icode_i==`IMRMOVL || E_icode_i==`IPOPL )&&
-						( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i )||
+						( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||
+							E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i )||
 						( D_icode_i==`IRET || E_icode_i==`IRET || M_icode_i==`IRET );
 
 		D_stall_o	<=	( E_icode_i==`IMRMOVL || E_icode_i==`IPOPL )&&
-						( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i );
+						( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||
+							E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i );
 
 		D_bubble_o	<=	( E_icode_i==`IJXX && !e_Cnd_i )||
 						!(( E_icode_i==`IMRMOVL || E_icode_i==`IPOPL )
-							&&( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i) )
+							&&( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||
+								E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i ) )
 						&&( D_icode_i==`IRET || E_icode_i==`IRET || M_icode_i==`IRET );
 
 		E_bubble_o	<=	( E_icode_i==`IJXX && !e_Cnd_i )||
 						( E_icode_i==`IMRMOVL || E_icode_i==`IPOPL )&&
-						( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i );
+						( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||
+							E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i );
 
 		M_bubble_o	<=	0;
 		W_stall_o	<=	0;
