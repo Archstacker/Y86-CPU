@@ -2,7 +2,7 @@
 
 module mem(
 	input	wire			rst,
-	input	wire[`BYTE]		icode_i,
+	input	wire[`NIBBLE]	icode_i,
 	input	wire[`WORD]		valA_i,
 	input	wire[`WORD]		valP_i,
 	input	wire[`WORD]		valE_i,

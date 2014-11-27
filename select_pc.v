@@ -3,10 +3,10 @@
 module select_pc(
     input   wire			rst,
     input   wire[`WORD]		F_predPC_i,
-    input   wire[`BYTE]		M_icode_i,
+    input   wire[`NIBBLE]	M_icode_i,
 	input	wire			M_Cnd_i,
 	input	wire[`WORD]		M_valA_i,
-	input	wire[`BYTE]		W_icode_i,
+	input	wire[`NIBBLE]	W_icode_i,
 	input	wire[`WORD]		W_valM_i,
 
     output	reg[`WORD]		f_pc_o

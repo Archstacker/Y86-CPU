@@ -1,14 +1,14 @@
 `include "defines.v"
 
 module pipe_control_logic(
-	input	wire[`BYTE]		D_icode_i,
-	input	wire[`BYTE]		d_srcA_i,
-	input	wire[`BYTE]		d_srcB_i,
-	input	wire[`BYTE]		E_icode_i,
-	input	wire[`BYTE]		E_dstE_i,
-    input	wire[`BYTE]		E_dstM_i,
+	input	wire[`NIBBLE]	D_icode_i,
+	input	wire[`NIBBLE]	d_srcA_i,
+	input	wire[`NIBBLE]	d_srcB_i,
+	input	wire[`NIBBLE]	E_icode_i,
+	input	wire[`NIBBLE]	E_dstE_i,
+    input	wire[`NIBBLE]	E_dstM_i,
     input	wire			e_Cnd_i,
-	input	wire[`BYTE]		M_icode_i,
+	input	wire[`NIBBLE]	M_icode_i,
 	output	reg				F_stall_o,
 	output	reg				D_stall_o,
 	output	reg				D_bubble_o,

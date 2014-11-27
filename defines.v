@@ -45,7 +45,8 @@
 `define		CMOVG		4'H6
 
 //Size
-`define		BYTE		3:0
+`define		NIBBLE		3:0
+`define		BYTE		7:0
 `define		WORD		31:0
 `define		INSTBUS		47:0
 `define		ICODE		47:44

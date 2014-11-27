@@ -9,14 +9,14 @@ module f(
     //output  reg         need_regids,
     //output  reg         need_valC,
 
-    output	reg[`BYTE]		f_icode_o,
-    output	reg[`BYTE]		f_ifun_o,
-    output	reg[`BYTE]		f_rA_o,
-    output	reg[`BYTE]		f_rB_o,
+    output	reg[`NIBBLE]	f_icode_o,
+    output	reg[`NIBBLE]	f_ifun_o,
+    output	reg[`NIBBLE]	f_rA_o,
+    output	reg[`NIBBLE]	f_rB_o,
     output	reg[`WORD]		f_valC_o,
     output	reg[`WORD]		f_valP_o,
-    output	reg[`BYTE]		f_dstE_o,
-    output	reg[`BYTE]		f_dstM_o
+    output	reg[`NIBBLE]	f_dstE_o,
+    output	reg[`NIBBLE]	f_dstM_o
 );
 
 	always @ (*) begin

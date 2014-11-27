@@ -2,19 +2,19 @@
 
 module sel_fwd_a(
 	input	wire			rst,
-	input	wire[`BYTE]		D_icode_i,
+	input	wire[`NIBBLE]	D_icode_i,
 	input	wire[`WORD]		D_valP_i,
-	input	wire[`BYTE]		d_srcA_i,
+	input	wire[`NIBBLE]	d_srcA_i,
 	input	wire[`WORD]		d_rvalA_i,
-	input	wire[`BYTE]		e_dstE_i,
+	input	wire[`NIBBLE]	e_dstE_i,
 	input	wire[`WORD]		e_valE_i,
-	input	wire[`BYTE]		M_dstM_i,
+	input	wire[`NIBBLE]	M_dstM_i,
 	input	wire[`WORD]		m_valM_i,
-	input	wire[`BYTE]		M_dstE_i,
+	input	wire[`NIBBLE]	M_dstE_i,
 	input	wire[`WORD]		M_valE_i,
-	input	wire[`BYTE]		W_dstM_i,
+	input	wire[`NIBBLE]	W_dstM_i,
 	input	wire[`WORD]		W_valM_i,
-	input	wire[`BYTE]		W_dstE_i,
+	input	wire[`NIBBLE]	W_dstE_i,
 	input	wire[`WORD]		W_valE_i,
 	output	reg[`WORD]		d_valA_o
 );

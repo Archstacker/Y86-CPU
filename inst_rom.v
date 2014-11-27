@@ -9,7 +9,7 @@ module inst_rom(
 	output	wire[`INSTBUS]	inst
 );
 
-	reg [7:0]	inst_mem[0:`INSTMEMNUM-1];
+	reg [BYTE]	inst_mem[0:`INSTMEMNUM-1];
 
 	initial $readmemh ( "inst_rom.data",	inst_mem );
 

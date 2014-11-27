@@ -2,14 +2,14 @@
 
 module ex(
 	input	wire			rst,
-	input	wire[`BYTE]		icode_i,
-	input	wire[`BYTE]		ifun_i,
+	input	wire[`NIBBLE]	icode_i,
+	input	wire[`NIBBLE]	ifun_i,
 	input	wire[`WORD]		valA_i,
 	input	wire[`WORD]		valB_i,
 	input	wire[`WORD]		valC_i,
-	input	wire[`BYTE]		dstE_i,
+	input	wire[`NIBBLE]	dstE_i,
 	output reg signed[`WORD]valE_o,
-    output	reg[`BYTE]		dstE_o,
+    output	reg[`NIBBLE]	dstE_o,
 	output	reg				e_Cnd_o
 );
 

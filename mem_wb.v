@@ -4,16 +4,16 @@ module mem_wb(
 	input	wire			clk,
 	input	wire			rst,
 	input	wire			W_stall_i,
-	input	wire[`BYTE]		mem_icode,
+	input	wire[`NIBBLE]	mem_icode,
 	input	wire[`WORD]		mem_valE,
 	input	wire[`WORD]		mem_valM,
-	input	wire[`BYTE]		mem_dstE,
-	input	wire[`BYTE]		mem_dstM,
-	output	reg	[`BYTE]		W_icode_o,
+	input	wire[`NIBBLE]	mem_dstE,
+	input	wire[`NIBBLE]	mem_dstM,
+	output	reg	[`NIBBLE]	W_icode_o,
 	output	reg	[`WORD]		wb_valE,
 	output	reg	[`WORD]		wb_valM,
-	output	reg	[`BYTE]		wb_dstE,
-	output	reg	[`BYTE]		wb_dstM
+	output	reg	[`NIBBLE]	wb_dstE,
+	output	reg	[`NIBBLE]	wb_dstM
 );
 
 	always @ (posedge clk) begin

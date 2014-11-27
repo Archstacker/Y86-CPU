@@ -3,7 +3,7 @@ module F(
 	input	wire			clk,
 	input	wire			rst,
 	input	wire			F_stall_i,
-	input	wire[`BYTE]		f_icode_i,
+	input	wire[`NIBBLE]	f_icode_i,
     input	wire[`WORD]		f_valC_i,
     input	wire[`WORD]		f_valP_i,
     output	reg[`WORD]		F_predPC_o

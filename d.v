@@ -1,10 +1,10 @@
 `include "defines.v"
 module d(
 	input	wire			rst,
-    input	wire[`BYTE]		D_rA_i,
-    input	wire[`BYTE]		D_rB_i,
-    output	reg[`BYTE]		d_srcA_o,
-    output	reg[`BYTE]		d_srcB_o
+    input	wire[`NIBBLE]	D_rA_i,
+    input	wire[`NIBBLE]	D_rB_i,
+    output	reg[`NIBBLE]	d_srcA_o,
+    output	reg[`NIBBLE]	d_srcB_o
 );
 
 	always @ (*) begin

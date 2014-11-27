@@ -25,57 +25,57 @@ module y86cpu(
 
 	wire[`WORD]			F_predPC;
 	wire[`WORD]			f_pc;
-    wire[`BYTE]			f_icode;
-    wire[`BYTE]			f_ifun;
-    wire[`BYTE]			f_rA;
-    wire[`BYTE]			f_rB;
+    wire[`NIBBLE]		f_icode;
+    wire[`NIBBLE]		f_ifun;
+    wire[`NIBBLE]		f_rA;
+    wire[`NIBBLE]		f_rB;
     wire[`WORD]			f_valC;
     wire[`WORD]			f_valP;
-    wire[`BYTE]			f_dstE;
-    wire[`BYTE]			f_dstM;
-    wire[`BYTE]			D_icode;
-    wire[`BYTE]			D_ifun;
-    wire[`BYTE]			D_rA;
-    wire[`BYTE]			D_rB;
+    wire[`NIBBLE]		f_dstE;
+    wire[`NIBBLE]		f_dstM;
+    wire[`NIBBLE]		D_icode;
+    wire[`NIBBLE]		D_ifun;
+    wire[`NIBBLE]		D_rA;
+    wire[`NIBBLE]		D_rB;
     wire[`WORD]			D_valC;
     wire[`WORD]			D_valP;
-    wire[`BYTE]			D_dstE;
-    wire[`BYTE]			D_dstM;
-	wire[`BYTE]			d_srcA;
-	wire[`BYTE]			d_srcB;
+    wire[`NIBBLE]		D_dstE;
+    wire[`NIBBLE]		D_dstM;
+	wire[`NIBBLE]		d_srcA;
+	wire[`NIBBLE]		d_srcB;
 	wire[`WORD]			d_rvalA;
 	wire[`WORD]			d_rvalB;
 	wire[`WORD]			d_valA;
 	wire[`WORD]			d_valB;
-	wire[`BYTE]			id_dstE_o;
-	wire[`BYTE]			id_dstM_o;
+	wire[`NIBBLE]		id_dstE_o;
+	wire[`NIBBLE]		id_dstM_o;
 
-	wire[`BYTE]			E_icode;
-	wire[`BYTE]			ex_ifun_i;
+	wire[`NIBBLE]		E_icode;
+	wire[`NIBBLE]		ex_ifun_i;
 	wire[`WORD]			ex_valA_i;
 	wire[`WORD]			ex_valB_i;
 	wire[`WORD]			ex_valC_i;
 	wire[`WORD]			ex_valP_i;
-	wire[`BYTE]			E_dstE;
-	wire[`BYTE]			E_dstM;
+	wire[`NIBBLE]		E_dstE;
+	wire[`NIBBLE]		E_dstM;
 	wire[`WORD]			e_valE;
-	wire[`BYTE]			e_dstE;
+	wire[`NIBBLE]		e_dstE;
 	wire				e_Cnd;
 
-	wire[`BYTE]			M_icode;
+	wire[`NIBBLE]		M_icode;
 	wire[`WORD]			M_valA;
 	wire[`WORD]			M_valP;
 	wire[`WORD]			M_valE;
-	wire[`BYTE]			M_dstE;
+	wire[`NIBBLE]		M_dstE;
 	wire[`WORD]			m_valM;
-	wire[`BYTE]			M_dstM;
+	wire[`NIBBLE]		M_dstM;
 	wire				M_Cnd;
 
-	wire[`BYTE]			W_icode;
+	wire[`NIBBLE]		W_icode;
 	wire[`WORD]			W_valE;
 	wire[`WORD]			W_valM;
-	wire[`BYTE]			W_dstE;
-	wire[`BYTE]			W_dstM;
+	wire[`NIBBLE]		W_dstE;
+	wire[`NIBBLE]		W_dstM;
 
 	F F0(
 		.clk(clk),				.rst(rst),
