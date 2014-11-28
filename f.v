@@ -47,20 +47,20 @@ module f(
 				`IRMOVL:	begin
 					f_rA_o		<=	inst_i[`RA];
 					f_rB_o		<=	inst_i[`RB];
-					f_valC_o	<=	inst_i[`WORD];
+					f_valC_o	<=	{inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
 					f_valP_o	<=	f_pc_i+4'h6;
 					f_dstE_o	<=	inst_i[`RB];
 				end
 				`RMMOVL:	begin
 					f_rA_o		<=	inst_i[`RA];
 					f_rB_o		<=	inst_i[`RB];
-					f_valC_o	<=	inst_i[`WORD];
+					f_valC_o	<=	{inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
 					f_valP_o	<=	f_pc_i+4'h6;
 				end
 				`MRMOVL:	begin
 					f_rA_o		<=	inst_i[`RA];
 					f_rB_o		<=	inst_i[`RB];
-					f_valC_o	<=	inst_i[`WORD];
+					f_valC_o	<=	{inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
 					f_valP_o	<=	f_pc_i+4'h6;
 					f_dstM_o	<=	inst_i[`RA];
 				end
@@ -71,13 +71,13 @@ module f(
 					f_dstE_o	<=	inst_i[`RB];
 				end
 				`JXX:		begin
-					f_valC_o	<=	inst_i[`DEST];
+					f_valC_o	<=	{inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2],inst_i[`BYTE1]};
 					f_valP_o	<=	f_pc_i+4'h5;
 				end
 				`CALL:		begin
 					f_rA_o		<=	`RESP;
 					f_rB_o		<=	`RESP;
-					f_valC_o	<=	inst_i[`DEST];
+					f_valC_o	<=	{inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2],inst_i[`BYTE1]};
 					f_valP_o	<=	f_pc_i+4'h5;
 					f_dstE_o	<=	`RESP;
 				end

@@ -47,6 +47,12 @@
 //Size
 `define		NIBBLE		3:0
 `define		BYTE		7:0
+`define		BYTE0		47:40
+`define		BYTE1		39:32
+`define		BYTE2		31:24
+`define		BYTE3		23:16
+`define		BYTE4		15:8
+`define		BYTE5		7:0
 `define		WORD		31:0
 `define		INSTBUS		47:0
 `define		ICODE		47:44
