@@ -1,0 +1,48 @@
+                      | /* $begin code-yso */
+                      | /* $begin code-ysa */
+                      | # Execution begins at address 0 
+  0x000:              | 	.pos 0 
+  0x000: 30f400010000 | init:	irmovl Stack, %esp  	# Set up stack pointer  
+  0x006: 30f500010000 | 	irmovl Stack, %ebp  	# Set up base pointer   
+  0x00c: 8012000000   | 	call Main		# Execute main program
+  0x011: 00           | 	halt			# Terminate program 
+                      | 
+  0x012: a05f         | Main:	pushl %ebp 
+  0x014: 2045         | 	rrmovl %esp,%ebp
+  0x016: 30f0dd020000 | 	irmovl $733,%eax	
+  0x01c: a00f         | 	pushl %eax		# Push 733
+  0x01e: 30f21b010000 | 	irmovl $283,%edx
+  0x024: a02f         | 	pushl %edx      # Push 283
+  0x026: 8030000000   | 	call Mul		# Mul( 283, 733 )
+  0x02b: 2054         | 	rrmovl %ebp,%esp
+  0x02d: b05f         | 	popl %ebp
+  0x02f: 90           | 	ret 
+                      | 
+                      | /* $begin mul-ys 0 */
+                      | 	# int Mul(int num1, int num2)
+  0x030: a05f         | Mul:	pushl %ebp
+  0x032: 2045         | 	rrmovl %esp,%ebp
+  0x034: 501508000000 | 	mrmovl 8(%ebp),%ecx 	# ecx = num1
+  0x03a: 50250c000000 | 	mrmovl 12(%ebp),%edx	# edx = num2
+  0x040: 6300         | 	xorl %eax,%eax			# result = 0
+  0x042: 30f601000000 | 	irmovl $1,%esi			# bit = 1
+  0x048: 30f3ffff0000 | Loop:	irmovl $65535,%ebx		# ebx = 0xffff
+  0x04e: 2067         | 	rrmovl %esi,%edi    # 
+  0x050: 6217         | 	andl %ecx,%edi          # result & bit
+  0x052: 735b000000   | 	je Next 
+  0x057: 6020         | 	addl %edx,%eax			# result = result + num2
+  0x059: 6161         | 	subl %esi,%ecx			# num1 = num1 - bit
+  0x05b: 6066         | Next:	addl %esi,%esi      # bit *= 2
+  0x05d: 6022         | 	addl %edx,%edx			# num2 *= 2
+  0x05f: 6213         | 	andl %ecx,%ebx
+  0x061: 7448000000   | 	jne    Loop             # Stop when 0
+  0x066: 2054         | End:	rrmovl %ebp,%esp
+  0x068: b05f         | 	popl %ebp
+  0x06a: 90           | 	ret
+                      | /* $end mul-ys 0 */
+                      | 
+                      | # The stack starts here and grows to lower addresses
+  0x100:              | 	.pos 0x100		
+  0x100:              | Stack:	 
+                      | /* $end code-ysa */
+                      | /* $end code-yso */
