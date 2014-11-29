@@ -323,7 +323,7 @@ class YAssembler:
             outascName = prefixName + '.yao'
             try:
                 fout = open(outputName, 'w')
-                fbout = open(outbinName, 'wb')
+                fbout = open(outbinName, 'w')
                 if self.asciibin:
                     faout = open(outascName, 'w')
             except IOError:
@@ -336,20 +336,21 @@ class YAssembler:
                     nowaddr = yaslineno[linepos]
                     if binpos != nowaddr:
                         blank = '0' * (2  * (nowaddr - binpos))
+                        fbout.write( re.sub(r'(..)', r'\1 ', blank) + '\n' )
                         if self.asciibin:
                             faout.write(blank)
-                        fbout.write(binascii.a2b_hex(blank))
                         binpos = nowaddr
                     binpos += len(ystr) // 2
                     fout.write('  0x%.*x: %-12s | %s' % (maxaddrlen, nowaddr, ystr, line))
+                    fbout.write( re.sub(r'(..)', r'\1 ', ystr) + '\n' )
                     if self.asciibin:
                         faout.write(ystr)
-                    fbout.write(binascii.a2b_hex(ystr))
                 elif linepos in yaslineno:
                     nowaddr = yaslineno[linepos]
                     fout.write('  0x%.*x:              | %s' % (maxaddrlen, nowaddr, line))
                 else:
                     fout.write((' ' * (maxaddrlen + 19)) + '| %s' % line)
+                    fbout.write('\n')
             try:
                 if self.asciibin:
                     faout.close()
@@ -379,7 +380,7 @@ def main():
     print('Y86 Assembler %s\nCopyright (c) 2012 Linus Yang\n' % __ver__)
     largemem = True
     bigendian = False
-    second = False
+    second = True
     asciibin = False
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'lbsah', ['largemem', 'bigendian', 'second', 'asciibin', 'help'])
