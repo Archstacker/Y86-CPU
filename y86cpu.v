@@ -51,11 +51,11 @@ module y86cpu(
 	wire[`NIBBLE]		id_dstM_o;
 
 	wire[`NIBBLE]		E_icode;
-	wire[`NIBBLE]		ex_ifun_i;
-	wire[`WORD]			ex_valA_i;
-	wire[`WORD]			ex_valB_i;
-	wire[`WORD]			ex_valC_i;
-	wire[`WORD]			ex_valP_i;
+	wire[`NIBBLE]		E_ifun;
+	wire[`WORD]			E_valA;
+	wire[`WORD]			E_valB;
+	wire[`WORD]			E_valC;
+	wire[`WORD]			E_valP;
 	wire[`NIBBLE]		E_dstE;
 	wire[`NIBBLE]		E_dstM;
 	wire[`WORD]			e_valE;
@@ -156,63 +156,63 @@ module y86cpu(
 		.d_valA_o(d_valA)
 	);
 
-	id_ex id_ex0(
+	E E0(
 		.clk(clk),	.rst(rst),
 		.E_bubble_i(E_bubble),
-		.id_icode(D_icode),		.id_ifun(D_ifun),
-		.id_valA(d_valA),		.id_valB(d_valB),
-		.id_valC(D_valC),		.id_valP(D_valP),
-		.id_dstE(D_dstE),		.id_dstM(D_dstM),
-		.ex_icode(E_icode),		.ex_ifun(ex_ifun_i),
-		.ex_valA(ex_valA_i),	.ex_valB(ex_valB_i),
-		.ex_valC(ex_valC_i),	.ex_valP(ex_valP_i),
-		.ex_dstE(E_dstE),		.ex_dstM(E_dstM)
+		.D_icode_i(D_icode),		.D_ifun_i(D_ifun),
+		.d_valA_i(d_valA),		.d_valB_i(d_valB),
+		.D_valC_i(D_valC),		.D_valP_i(D_valP),
+		.D_dstE_i(D_dstE),		.D_dstM_i(D_dstM),
+		.E_icode_o(E_icode),		.E_ifun_o(E_ifun),
+		.E_valA_o(E_valA),	.E_valB_o(E_valB),
+		.E_valC_o(E_valC),	.E_valP_o(E_valP),
+		.E_dstE_o(E_dstE),		.E_dstM_o(E_dstM)
 	);
 
-	ex ex0(
+	e e0(
 		.rst(rst),
-		.icode_i(E_icode),		.ifun_i(ex_ifun_i),
-		.valA_i(ex_valA_i),		.valB_i(ex_valB_i),
-		.valC_i(ex_valC_i),		.dstE_i(E_dstE),
-		.valE_o(e_valE),		.dstE_o(e_dstE),
+		.E_icode_i(E_icode),		.E_ifun_i(E_ifun),
+		.E_valA_i(E_valA),		.E_valB_i(E_valB),
+		.E_valC_i(E_valC),		.E_dstE_i(E_dstE),
+		.e_valE_o(e_valE),		.e_dstE_o(e_dstE),
 		.e_Cnd_o(e_Cnd)
 	);
 
-	ex_mem ex_mem0(
+	M M0(
 		.clk(clk),				.rst(rst),
 		.M_bubble_i(M_bubble),
-		.ex_icode(E_icode),
-		.ex_valA(ex_valA_i),	.ex_valP(ex_valP_i),
-		.ex_valE(e_valE),
-		.ex_dstE(e_dstE),		.ex_dstM(E_dstM),
+		.E_icode_i(E_icode),
+		.E_valA_i(E_valA),	.E_valP_i(E_valP),
+		.e_valE_i(e_valE),
+		.e_dstE_i(e_dstE),		.E_dstM_i(E_dstM),
 		.e_Cnd_i(e_Cnd),
-		.mem_icode(M_icode),
-		.mem_valA(M_valA),		.mem_valP(M_valP),
-		.mem_valE(M_valE),
-		.mem_dstE(M_dstE),		.mem_dstM(M_dstM),
+		.M_icode_o(M_icode),
+		.M_valA_o(M_valA),		.M_valP_o(M_valP),
+		.M_valE_o(M_valE),
+		.M_dstE_o(M_dstE),		.M_dstM_o(M_dstM),
 		.M_Cnd_o(M_Cnd)
 	);
 
-	mem mem0(
+	m m0(
 		.rst(rst),
-		.icode_i(M_icode),
-		.valA_i(M_valA),		.valP_i(M_valP),
-		.valE_i(M_valE),
+		.M_icode_i(M_icode),
+		.M_valA_i(M_valA),		.M_valP_i(M_valP),
+		.M_valE_i(M_valE),
 		.valM_i(mem_data_i),
 		.mem_read(mem_read_o),	.mem_write(mem_write_o),
 		.mem_addr(mem_addr_o),	.mem_data(mem_data_o),
-		.valM_o(m_valM)
+		.m_valM_o(m_valM)
 	);
 
-	mem_wb mem_wb0(
+	W W0(
 		.clk(clk),				.rst(rst),
 		.W_stall_i(W_stall),
-		.mem_icode(M_icode),
-		.mem_valE(M_valE),		.mem_valM(m_valM),
-		.mem_dstE(M_dstE),		.mem_dstM(M_dstM),
+		.M_icode_i(M_icode),
+		.M_valE_i(M_valE),		.m_valM_i(m_valM),
+		.M_dstE_i(M_dstE),		.M_dstM_i(M_dstM),
 		.W_icode_o(W_icode),
-		.wb_valE(W_valE),		.wb_valM(W_valM),
-		.wb_dstE(W_dstE),		.wb_dstM(W_dstM)
+		.W_valE_o(W_valE),		.W_valM_o(W_valM),
+		.W_dstE_o(W_dstE),		.W_dstM_o(W_dstM)
 	);
 
 	pipe_control_logic pipe_control_logic1(

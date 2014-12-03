@@ -1,27 +1,27 @@
 `include "defines.v"
 
-module mem_wb(
+module W(
 	input	wire			clk,
 	input	wire			rst,
 	input	wire			W_stall_i,
-	input	wire[`NIBBLE]	mem_icode,
-	input	wire[`WORD]		mem_valE,
-	input	wire[`WORD]		mem_valM,
-	input	wire[`NIBBLE]	mem_dstE,
-	input	wire[`NIBBLE]	mem_dstM,
+	input	wire[`NIBBLE]	M_icode_i,
+	input	wire[`WORD]		M_valE_i,
+	input	wire[`WORD]		m_valM_i,
+	input	wire[`NIBBLE]	M_dstE_i,
+	input	wire[`NIBBLE]	M_dstM_i,
 	output	reg	[`NIBBLE]	W_icode_o,
-	output	reg	[`WORD]		wb_valE,
-	output	reg	[`WORD]		wb_valM,
-	output	reg	[`NIBBLE]	wb_dstE,
-	output	reg	[`NIBBLE]	wb_dstM
+	output	reg	[`WORD]		W_valE_o,
+	output	reg	[`WORD]		W_valM_o,
+	output	reg	[`NIBBLE]	W_dstE_o,
+	output	reg	[`NIBBLE]	W_dstM_o
 );
 
 	always @ (posedge clk) begin
-		wb_valE		<=	mem_valE;
-		wb_valM		<=	mem_valM;
-		wb_dstE		<=	mem_dstE;
-		wb_dstM		<=	mem_dstM;
-		W_icode_o	<=	mem_icode;
+		W_valE_o		<=	M_valE_i;
+		W_valM_o		<=	m_valM_i;
+		W_dstE_o		<=	M_dstE_i;
+		W_dstM_o		<=	M_dstM_i;
+		W_icode_o	<=	M_icode_i;
 	end
 
 endmodule

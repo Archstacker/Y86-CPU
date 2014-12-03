@@ -1,43 +1,43 @@
 `include "defines.v"
-module id_ex(
+module E(
 	input	wire			clk,
 	input	wire			rst,
 	input	wire			E_bubble_i,
 
-	input	wire[`NIBBLE]	id_icode,
-	input	wire[`NIBBLE]	id_ifun,
-	input	wire[`WORD]		id_valA,
-	input	wire[`WORD]		id_valB,
-	input	wire[`WORD]		id_valC,
-	input	wire[`WORD]		id_valP,
-    input	wire[`NIBBLE]	id_dstE,
-    input	wire[`NIBBLE]	id_dstM,
+	input	wire[`NIBBLE]	D_icode_i,
+	input	wire[`NIBBLE]	D_ifun_i,
+	input	wire[`WORD]		d_valA_i,
+	input	wire[`WORD]		d_valB_i,
+	input	wire[`WORD]		D_valC_i,
+	input	wire[`WORD]		D_valP_i,
+    input	wire[`NIBBLE]	D_dstE_i,
+    input	wire[`NIBBLE]	D_dstM_i,
 
-	output	reg[`NIBBLE]	ex_icode,
-	output	reg[`NIBBLE]	ex_ifun,
-	output	reg[`WORD]		ex_valA,
-	output	reg[`WORD]		ex_valB,
-	output	reg[`WORD]		ex_valC,
-	output	reg[`WORD]		ex_valP,
-    output	reg[`NIBBLE]	ex_dstE,
-    output	reg[`NIBBLE]	ex_dstM
+	output	reg[`NIBBLE]	E_icode_o,
+	output	reg[`NIBBLE]	E_ifun_o,
+	output	reg[`WORD]		E_valA_o,
+	output	reg[`WORD]		E_valB_o,
+	output	reg[`WORD]		E_valC_o,
+	output	reg[`WORD]		E_valP_o,
+    output	reg[`NIBBLE]	E_dstE_o,
+    output	reg[`NIBBLE]	E_dstM_o
 );
 
 	always @ (posedge clk) begin
 		if( E_bubble_i==`ENABLE ) begin
-			ex_icode	<=	`INOP;
-			ex_dstE		<=	`RNONE;
-			ex_dstM		<=	`RNONE;
+			E_icode_o	<=	`INOP;
+			E_dstE_o		<=	`RNONE;
+			E_dstM_o		<=	`RNONE;
 		end
 		else begin
-			ex_icode	<=	id_icode;
-			ex_ifun		<=	id_ifun;
-			ex_valA		<=	id_valA;
-			ex_valB		<=	id_valB;
-			ex_valC		<=	id_valC;
-			ex_valP		<=	id_valP;
-			ex_dstE		<=	id_dstE;
-			ex_dstM		<=	id_dstM;
+			E_icode_o	<=	D_icode_i;
+			E_ifun_o		<=	D_ifun_i;
+			E_valA_o		<=	d_valA_i;
+			E_valB_o		<=	d_valB_i;
+			E_valC_o		<=	D_valC_i;
+			E_valP_o		<=	D_valP_i;
+			E_dstE_o		<=	D_dstE_i;
+			E_dstM_o		<=	D_dstM_i;
 		end
 	end
 endmodule
