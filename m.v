@@ -16,34 +16,34 @@ module m(
 );
 
     always @ (*) begin
-        mem_read    <=      `READDISABLE;
-        mem_write   <=      `WRITEDISABLE;
+        mem_read    <=      `DISABLE;
+        mem_write   <=      `DISABLE;
         case ( M_icode_i )
-            `RMMOVL:    begin
-                mem_write   <=      `WRITEENABLE;
+            `IRMMOVL:   begin
+                mem_write   <=      `ENABLE;
                 mem_addr    <=      M_valE_i;
                 mem_data    <=      M_valA_i;
             end
-            `MRMOVL:    begin
-                mem_read    <=      `READENABLE;
+            `IMRMOVL:   begin
+                mem_read    <=      `ENABLE;
                 mem_addr    <=      M_valE_i;
             end
-            `CALL:      begin
-                mem_write   <=      `WRITEENABLE;
+            `ICALL:     begin
+                mem_write   <=      `ENABLE;
                 mem_addr    <=      M_valE_i;
                 mem_data    <=      M_valP_i;
             end
-            `RET:       begin
+            `IRET:      begin
                 mem_read    <=      `ENABLE;
                 mem_addr    <=      M_valA_i;
             end
-            `PUSHL:     begin
-                mem_write   <=      `WRITEENABLE;
+            `IPUSHL:    begin
+                mem_write   <=      `ENABLE;
                 mem_addr    <=      M_valE_i;
                 mem_data    <=      M_valA_i;
             end
-            `POPL:      begin
-                mem_read    <=      `READENABLE;
+            `IPOPL:     begin
+                mem_read    <=      `ENABLE;
                 mem_addr    <=      M_valA_i;
             end
         endcase

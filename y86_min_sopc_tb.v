@@ -11,8 +11,8 @@ module y86_min_sopc_tb();
         forever #10 clock_50 = ~clock_50;
     end
     initial begin
-        rst = `RSTENABLE;
-        #55 rst = `RSTDISABLE;
+        rst = `ENABLE;
+        #55 rst = `DISABLE;
         #10000 $stop;
     end
 

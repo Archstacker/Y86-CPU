@@ -19,10 +19,10 @@ module inst_rom(
 	//end
 	assign inst = {inst_mem[addr],inst_mem[addr+1],inst_mem[addr+2],inst_mem[addr+3],inst_mem[addr+4],inst_mem[addr+5]};
 	always @ (*) begin
-		if( mem_read_i == `READENABLE ) begin
+		if( mem_read_i == `ENABLE ) begin
 			mem_data_o	<=      {inst_mem[mem_addr_i+3],inst_mem[mem_addr_i+2],inst_mem[mem_addr_i+1],inst_mem[mem_addr_i]};
 		end
-		if( mem_write_i == `WRITEENABLE ) begin
+		if( mem_write_i == `ENABLE ) begin
 			{inst_mem[mem_addr_i+3],inst_mem[mem_addr_i+2],inst_mem[mem_addr_i+1],inst_mem[mem_addr_i]} <=      mem_data_i;
 		end
 	end

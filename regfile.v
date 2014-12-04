@@ -25,22 +25,22 @@ module regfile(
 	initial regs[7] <=      32'H89ABCDEF;
 
 	always @ (posedge clk) begin
-		if(dstE != `NOREG) begin
+		if(dstE != `RNONE) begin
 			regs[dstE] <=   valE;
 		end
-		if(dstM != `NOREG) begin
+		if(dstM != `RNONE) begin
 			regs[dstM] <=   valM;
 		end
 	end
 
 	always @ (*) begin
-		if(srcA != `NOREG) begin
+		if(srcA != `RNONE) begin
 			valA <=     regs[srcA];
 		end
 	end
 
 	always @ (*) begin
-		if(srcB != `NOREG) begin
+		if(srcB != `RNONE) begin
 			valB <=     regs[srcB];
 		end
 	end

@@ -11,7 +11,7 @@ module F(
 
     initial F_predPC_o <= 48'h000000000000;
     always @ (posedge clk) begin
-        if (rst == `RSTDISABLE && F_stall_i != `ENABLE) begin
+        if (rst == `DISABLE && F_stall_i != `ENABLE) begin
             if( f_icode_i == `IJXX || f_icode_i == `ICALL ) 
                 F_predPC_o  <=      f_valC_i;
             else

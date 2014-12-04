@@ -20,38 +20,38 @@ module e(
     always @ (*) begin
         e_dstE_o    <=      E_dstE_i;
         case ( E_icode_i )
-            `CMOVXX:    begin
+            `ICMOVXX:   begin
                 case ( E_ifun_i )
-                    `RRMOVL:    begin
+                    `FRRMOVL:   begin
                         e_valE_o    <=      E_valA_i;
                     end
                 endcase
             end
 
-            `IRMOVL:    begin
+            `IIRMOVL:   begin
                 e_valE_o    <=      E_valC_i;
             end
 
-            `RMMOVL:    begin
+            `IRMMOVL:   begin
                 e_valE_o    <=      E_valB_i + E_valC_i;
             end
 
-            `MRMOVL:    begin
+            `IMRMOVL:   begin
                 e_valE_o    <=      E_valB_i + E_valC_i;
             end
 
-            `OPL:       begin
+            `IOPL:      begin
                 case ( E_ifun_i )
-                    `ADDL:      begin
+                    `FADDL:     begin
                         e_valE_o    <=      E_valB_i + E_valA_i;
                     end
-                    `SUBL:      begin
+                    `FSUBL:     begin
                         e_valE_o    <=      E_valB_i - E_valA_i;
                     end
-                    `ANDL:      begin
+                    `FANDL:     begin
                         e_valE_o    <=      E_valB_i & E_valA_i;
                     end
-                    `XORL:      begin
+                    `FXORL:     begin
                         e_valE_o    <=      E_valB_i ^ E_valA_i;
                     end
                 endcase
@@ -60,45 +60,45 @@ module e(
                 of      <=      (E_valA_i<0 == E_valB_i<0) && (e_valE_o<0 != E_valA_i<0) ;
             end
 
-            `JXX:       begin
+            `IJXX:      begin
                 case ( E_ifun_i )
-                    `JMP:       begin
+                    `FJMP:      begin
                         e_Cnd_o <=      1;
                     end
-                    `JLE:       begin
+                    `FJLE:      begin
                         e_Cnd_o <=      (sf ^ of) | zf;
                     end
-                    `JL:        begin
+                    `FJL:       begin
                         e_Cnd_o <=      (sf ^ of);
                     end
-                    `JE:        begin
+                    `FJE:       begin
                         e_Cnd_o <=      zf;
                     end
-                    `JNE:       begin
+                    `FJNE:      begin
                         e_Cnd_o <=      ~zf;
                     end
-                    `JGE:       begin
+                    `FJGE:      begin
                         e_Cnd_o <=      ~(sf ^ of);
                     end
-                    `JG:        begin
+                    `FJG:       begin
                         e_Cnd_o <=      ~(sf ^ of) & ~zf;
                     end
                 endcase
             end
 
-            `CALL:      begin
+            `ICALL:     begin
                 e_valE_o    <=      E_valB_i - 4;
             end
 
-            `RET:       begin
+            `IRET:      begin
                 e_valE_o    <=      E_valB_i + 4;
             end
 
-            `PUSHL:     begin
+            `IPUSHL:    begin
                 e_valE_o    <=      E_valB_i - 4;
             end
 
-            `POPL:      begin
+            `IPOPL:     begin
                 e_valE_o    <=      E_valB_i + 4;
             end
         endcase

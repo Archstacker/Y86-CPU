@@ -28,72 +28,72 @@ module f(
             f_valP_o    <=      32'h00000000;
             f_dstE_o    <=      4'hf;
             f_dstM_o    <=      4'hf;
-        if (rst == `RSTDISABLE) begin
+        if (rst == `DISABLE) begin
             f_icode_o   <=      inst_i[`ICODE];
             f_ifun_o    <=      inst_i[`IFUN];
             case ( f_icode_o )
-                `HALT:      begin
+                `IHALT:     begin
                     f_valP_o    <=      f_pc_i+4'h1;
                 end
-                `NOP:       begin
+                `INOP:      begin
                     f_valP_o    <=      f_pc_i+4'h1;
                 end
-                `CMOVXX:    begin
+                `ICMOVXX:   begin
                     f_rA_o      <=      inst_i[`RA];
                     f_rB_o      <=      inst_i[`RB];
                     f_valP_o    <=      f_pc_i+4'h2;
                     f_dstE_o    <=      inst_i[`RB];
                 end
-                `IRMOVL:    begin
+                `IIRMOVL:   begin
                     f_rA_o      <=      inst_i[`RA];
                     f_rB_o      <=      inst_i[`RB];
                     f_valC_o    <=      {inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
                     f_valP_o    <=      f_pc_i+4'h6;
                     f_dstE_o    <=      inst_i[`RB];
                 end
-                `RMMOVL:    begin
+                `IRMMOVL:   begin
                     f_rA_o      <=      inst_i[`RA];
                     f_rB_o      <=      inst_i[`RB];
                     f_valC_o    <=      {inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
                     f_valP_o    <=      f_pc_i+4'h6;
                 end
-                `MRMOVL:    begin
+                `IMRMOVL:   begin
                     f_rA_o      <=      inst_i[`RA];
                     f_rB_o      <=      inst_i[`RB];
                     f_valC_o    <=      {inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
                     f_valP_o    <=      f_pc_i+4'h6;
                     f_dstM_o    <=      inst_i[`RA];
                 end
-                `OPL:       begin
+                `IOPL:      begin
                     f_rA_o      <=      inst_i[`RA];
                     f_rB_o      <=      inst_i[`RB];
                     f_valP_o    <=      f_pc_i+4'h2;
                     f_dstE_o    <=      inst_i[`RB];
                 end
-                `JXX:       begin
+                `IJXX:      begin
                     f_valC_o    <=      {inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2],inst_i[`BYTE1]};
                     f_valP_o    <=      f_pc_i+4'h5;
                 end
-                `CALL:      begin
+                `ICALL:     begin
                     f_rA_o      <=      `RESP;
                     f_rB_o      <=      `RESP;
                     f_valC_o    <=      {inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2],inst_i[`BYTE1]};
                     f_valP_o    <=      f_pc_i+4'h5;
                     f_dstE_o    <=      `RESP;
                 end
-                `RET:       begin
+                `IRET:      begin
                     f_rA_o      <=      `RESP;
                     f_rB_o      <=      `RESP;
                     f_valP_o    <=      f_pc_i+4'h1;
                     f_dstE_o    <=      `RESP;
                 end
-                `PUSHL:     begin
+                `IPUSHL:    begin
                     f_rA_o      <=      inst_i[`RA];
                     f_rB_o      <=      `RESP;
                     f_valP_o    <=      f_pc_i+4'h2;
                     f_dstE_o    <=      `RESP;
                 end
-                `POPL:      begin
+                `IPOPL:     begin
                     f_rA_o      <=      `RESP;
                     f_rB_o      <=      `RESP;
                     f_valP_o    <=      f_pc_i+4'h2;
