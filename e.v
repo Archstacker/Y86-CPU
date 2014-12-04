@@ -20,6 +20,10 @@ module e(
     always @ (*) begin
         e_dstE_o    <=      E_dstE_i;
         case ( E_icode_i )
+            `IHALT:     begin
+                $stop;
+            end
+
             `ICMOVXX:   begin
                 case ( E_ifun_i )
                     `FRRMOVL:   begin
