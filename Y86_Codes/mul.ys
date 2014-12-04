@@ -1,48 +1,48 @@
 /* $begin code-yso */
 /* $begin code-ysa */
-# Execution begins at address 0 
-	.pos 0 
-init:	irmovl Stack, %esp  	# Set up stack pointer  
-	irmovl Stack, %ebp  	# Set up base pointer   
-	call Main		# Execute main program
-	halt			# Terminate program 
+# Execution begins at address 0
+    .pos 0
+init:   irmovl Stack, %esp      # Set up stack pointer
+    irmovl Stack, %ebp          # Set up base pointer
+    call Main                   # Execute main program
+    halt                        # Terminate program
 
-Main:	pushl %ebp 
-	rrmovl %esp,%ebp
-	irmovl $733,%eax	
-	pushl %eax		# Push 733
-	irmovl $283,%edx
-	pushl %edx      # Push 283
-	call Mul		# Mul( 283, 733 )
-	rrmovl %ebp,%esp
-	popl %ebp
-	ret 
+Main:   pushl %ebp
+    rrmovl %esp,%ebp
+    irmovl $733,%eax
+    pushl %eax                  # Push 733
+    irmovl $283,%edx
+    pushl %edx                  # Push 283
+    call Mul                    # Mul( 283, 733 )
+    rrmovl %ebp,%esp
+    popl %ebp
+    ret
 
 /* $begin mul-ys 0 */
-	# int Mul(int num1, int num2)
-Mul:	pushl %ebp
-	rrmovl %esp,%ebp
-	mrmovl 8(%ebp),%ecx 	# ecx = num1
-	mrmovl 12(%ebp),%edx	# edx = num2
-	xorl %eax,%eax			# result = 0
-	irmovl $1,%esi			# bit = 1
-Loop:	irmovl $65535,%ebx		# ebx = 0xffff
-	rrmovl %esi,%edi    # 
-	andl %ecx,%edi          # result & bit
-	je Next 
-	addl %edx,%eax			# result = result + num2
-	subl %esi,%ecx			# num1 = num1 - bit
-Next:	addl %esi,%esi      # bit *= 2
-	addl %edx,%edx			# num2 *= 2
-	andl %ecx,%ebx
-	jne    Loop             # Stop when 0
-End:	rrmovl %ebp,%esp
-	popl %ebp
-	ret
+    # int Mul(int num1, int num2)
+Mul:    pushl %ebp
+    rrmovl %esp,%ebp
+    mrmovl 8(%ebp),%ecx         # ecx = num1
+    mrmovl 12(%ebp),%edx        # edx = num2
+    xorl %eax,%eax              # result = 0
+    irmovl $1,%esi              # bit = 1
+Loop:   irmovl $65535,%ebx      # ebx = 0xffff
+    rrmovl %esi,%edi            #
+    andl %ecx,%edi              # result & bit
+    je Next
+    addl %edx,%eax              # result = result + num2
+    subl %esi,%ecx              # num1 = num1 - bit
+Next:   addl %esi,%esi          # bit *= 2
+    addl %edx,%edx              # num2 *= 2
+    andl %ecx,%ebx
+    jne    Loop                 # Stop when 0
+End:    rrmovl %ebp,%esp
+    popl %ebp
+    ret
 /* $end mul-ys 0 */
 
 # The stack starts here and grows to lower addresses
-	.pos 0x100		
-Stack:	 
+    .pos 0x100
+Stack:
 /* $end code-ysa */
 /* $end code-yso */

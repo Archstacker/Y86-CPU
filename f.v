@@ -1,106 +1,106 @@
 `include "defines.v"
 
 module f(
-    input   wire			rst,
-    input   wire[`WORD]		f_pc_i,
-    input   wire[`INSTBUS]	inst_i,
+    input   wire                rst,
+    input   wire[`WORD]         f_pc_i,
+    input   wire[`INSTBUS]      inst_i,
 
     //output  reg         instr_valid,
     //output  reg         need_regids,
     //output  reg         need_valC,
 
-    output	reg[`NIBBLE]	f_icode_o,
-    output	reg[`NIBBLE]	f_ifun_o,
-    output	reg[`NIBBLE]	f_rA_o,
-    output	reg[`NIBBLE]	f_rB_o,
-    output	reg[`WORD]		f_valC_o,
-    output	reg[`WORD]		f_valP_o,
-    output	reg[`NIBBLE]	f_dstE_o,
-    output	reg[`NIBBLE]	f_dstM_o
+    output  reg[`NIBBLE]        f_icode_o,
+    output  reg[`NIBBLE]        f_ifun_o,
+    output  reg[`NIBBLE]        f_rA_o,
+    output  reg[`NIBBLE]        f_rB_o,
+    output  reg[`WORD]          f_valC_o,
+    output  reg[`WORD]          f_valP_o,
+    output  reg[`NIBBLE]        f_dstE_o,
+    output  reg[`NIBBLE]        f_dstM_o
 );
 
-	always @ (*) begin
-			f_icode_o	<=	4'h0;
-			f_ifun_o	<=	4'h0;
-			f_rA_o		<=	4'hf;
-			f_rB_o		<=	4'hf;
-			f_valC_o	<=	32'h00000000;
-			f_valP_o	<=	32'h00000000;
-			f_dstE_o	<=	4'hf;
-			f_dstM_o	<=	4'hf;
-		if (rst == `RSTDISABLE) begin
-			f_icode_o	<=	inst_i[`ICODE];
-			f_ifun_o	<=	inst_i[`IFUN];
-			case ( f_icode_o )
-				`HALT:		begin
-					f_valP_o	<=	f_pc_i+4'h1;
-				end
-				`NOP:		begin
-					f_valP_o	<=	f_pc_i+4'h1;
-				end
-				`CMOVXX:	begin
-					f_rA_o		<=	inst_i[`RA];
-					f_rB_o		<=	inst_i[`RB];
-					f_valP_o	<=	f_pc_i+4'h2;
-					f_dstE_o	<=	inst_i[`RB];
-				end
-				`IRMOVL:	begin
-					f_rA_o		<=	inst_i[`RA];
-					f_rB_o		<=	inst_i[`RB];
-					f_valC_o	<=	{inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
-					f_valP_o	<=	f_pc_i+4'h6;
-					f_dstE_o	<=	inst_i[`RB];
-				end
-				`RMMOVL:	begin
-					f_rA_o		<=	inst_i[`RA];
-					f_rB_o		<=	inst_i[`RB];
-					f_valC_o	<=	{inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
-					f_valP_o	<=	f_pc_i+4'h6;
-				end
-				`MRMOVL:	begin
-					f_rA_o		<=	inst_i[`RA];
-					f_rB_o		<=	inst_i[`RB];
-					f_valC_o	<=	{inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
-					f_valP_o	<=	f_pc_i+4'h6;
-					f_dstM_o	<=	inst_i[`RA];
-				end
-				`OPL:		begin
-					f_rA_o		<=	inst_i[`RA];
-					f_rB_o		<=	inst_i[`RB];
-					f_valP_o	<=	f_pc_i+4'h2;
-					f_dstE_o	<=	inst_i[`RB];
-				end
-				`JXX:		begin
-					f_valC_o	<=	{inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2],inst_i[`BYTE1]};
-					f_valP_o	<=	f_pc_i+4'h5;
-				end
-				`CALL:		begin
-					f_rA_o		<=	`RESP;
-					f_rB_o		<=	`RESP;
-					f_valC_o	<=	{inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2],inst_i[`BYTE1]};
-					f_valP_o	<=	f_pc_i+4'h5;
-					f_dstE_o	<=	`RESP;
-				end
-				`RET:		begin
-					f_rA_o		<=	`RESP;
-					f_rB_o		<=	`RESP;
-					f_valP_o	<=	f_pc_i+4'h1;
-					f_dstE_o	<=	`RESP;
-				end
-				`PUSHL:		begin
-					f_rA_o		<=	inst_i[`RA];
-					f_rB_o		<=	`RESP;
-					f_valP_o	<=	f_pc_i+4'h2;
-					f_dstE_o	<=	`RESP;
-				end
-				`POPL:		begin
-					f_rA_o		<=	`RESP;
-					f_rB_o		<=	`RESP;
-					f_valP_o	<=	f_pc_i+4'h2;
-					f_dstE_o	<=	`RESP;
-					f_dstM_o	<=	inst_i[`RA];
-				end
-			endcase
-		end
-	end
+    always @ (*) begin
+            f_icode_o   <=      4'h0;
+            f_ifun_o    <=      4'h0;
+            f_rA_o      <=      4'hf;
+            f_rB_o      <=      4'hf;
+            f_valC_o    <=      32'h00000000;
+            f_valP_o    <=      32'h00000000;
+            f_dstE_o    <=      4'hf;
+            f_dstM_o    <=      4'hf;
+        if (rst == `RSTDISABLE) begin
+            f_icode_o   <=      inst_i[`ICODE];
+            f_ifun_o    <=      inst_i[`IFUN];
+            case ( f_icode_o )
+                `HALT:      begin
+                    f_valP_o    <=      f_pc_i+4'h1;
+                end
+                `NOP:       begin
+                    f_valP_o    <=      f_pc_i+4'h1;
+                end
+                `CMOVXX:    begin
+                    f_rA_o      <=      inst_i[`RA];
+                    f_rB_o      <=      inst_i[`RB];
+                    f_valP_o    <=      f_pc_i+4'h2;
+                    f_dstE_o    <=      inst_i[`RB];
+                end
+                `IRMOVL:    begin
+                    f_rA_o      <=      inst_i[`RA];
+                    f_rB_o      <=      inst_i[`RB];
+                    f_valC_o    <=      {inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
+                    f_valP_o    <=      f_pc_i+4'h6;
+                    f_dstE_o    <=      inst_i[`RB];
+                end
+                `RMMOVL:    begin
+                    f_rA_o      <=      inst_i[`RA];
+                    f_rB_o      <=      inst_i[`RB];
+                    f_valC_o    <=      {inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
+                    f_valP_o    <=      f_pc_i+4'h6;
+                end
+                `MRMOVL:    begin
+                    f_rA_o      <=      inst_i[`RA];
+                    f_rB_o      <=      inst_i[`RB];
+                    f_valC_o    <=      {inst_i[`BYTE5],inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2]};
+                    f_valP_o    <=      f_pc_i+4'h6;
+                    f_dstM_o    <=      inst_i[`RA];
+                end
+                `OPL:       begin
+                    f_rA_o      <=      inst_i[`RA];
+                    f_rB_o      <=      inst_i[`RB];
+                    f_valP_o    <=      f_pc_i+4'h2;
+                    f_dstE_o    <=      inst_i[`RB];
+                end
+                `JXX:       begin
+                    f_valC_o    <=      {inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2],inst_i[`BYTE1]};
+                    f_valP_o    <=      f_pc_i+4'h5;
+                end
+                `CALL:      begin
+                    f_rA_o      <=      `RESP;
+                    f_rB_o      <=      `RESP;
+                    f_valC_o    <=      {inst_i[`BYTE4],inst_i[`BYTE3],inst_i[`BYTE2],inst_i[`BYTE1]};
+                    f_valP_o    <=      f_pc_i+4'h5;
+                    f_dstE_o    <=      `RESP;
+                end
+                `RET:       begin
+                    f_rA_o      <=      `RESP;
+                    f_rB_o      <=      `RESP;
+                    f_valP_o    <=      f_pc_i+4'h1;
+                    f_dstE_o    <=      `RESP;
+                end
+                `PUSHL:     begin
+                    f_rA_o      <=      inst_i[`RA];
+                    f_rB_o      <=      `RESP;
+                    f_valP_o    <=      f_pc_i+4'h2;
+                    f_dstE_o    <=      `RESP;
+                end
+                `POPL:      begin
+                    f_rA_o      <=      `RESP;
+                    f_rB_o      <=      `RESP;
+                    f_valP_o    <=      f_pc_i+4'h2;
+                    f_dstE_o    <=      `RESP;
+                    f_dstM_o    <=      inst_i[`RA];
+                end
+            endcase
+        end
+    end
 endmodule
