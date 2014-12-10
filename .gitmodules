@@ -1,0 +1,3 @@
+[submodule "Y86-Assembler"]
+	path = Y86-Assembler
+	url = https://github.com/Archstacker/python-y86
