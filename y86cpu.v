@@ -20,9 +20,6 @@ module y86cpu(
     wire                M_bubble;
     wire                W_stall;
     
-    wire[`WORD]         id_pc_i;
-    wire[`INSTBUS]      id_inst_i;
-
     wire[`WORD]         F_predPC;
     wire[`WORD]         f_pc;
     wire[`NIBBLE]       f_icode;
@@ -47,8 +44,6 @@ module y86cpu(
     wire[`WORD]         d_rvalB;
     wire[`WORD]         d_valA;
     wire[`WORD]         d_valB;
-    wire[`NIBBLE]       id_dstE_o;
-    wire[`NIBBLE]       id_dstM_o;
 
     wire[`NIBBLE]       E_icode;
     wire[`NIBBLE]       E_ifun;
@@ -227,7 +222,7 @@ module y86cpu(
         .E_bubble_o(E_bubble),
         .set_cc_o(set_cc),
         .M_bubble_o(M_bubble),
-        .W_stall_o(M_stall)
+        .W_stall_o(W_stall)
     );
 
 endmodule
