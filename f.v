@@ -20,14 +20,14 @@ module f(
 );
 
     always @ (*) begin
-            f_icode_o   <=      4'h0;
-            f_ifun_o    <=      4'h0;
-            f_rA_o      <=      4'hf;
-            f_rB_o      <=      4'hf;
-            f_valC_o    <=      32'h00000000;
-            f_valP_o    <=      32'h00000000;
-            f_dstE_o    <=      4'hf;
-            f_dstM_o    <=      4'hf;
+            f_icode_o   <=      `ZERONIBBLE;
+            f_ifun_o    <=      `ZERONIBBLE;
+            f_rA_o      <=      `RNONE;
+            f_rB_o      <=      `RNONE;
+            f_valC_o    <=      `ZEROWORD;
+            f_valP_o    <=      `ZEROWORD;
+            f_dstE_o    <=      `RNONE;
+            f_dstM_o    <=      `RNONE;
         if (rst == `DISABLE) begin
             f_icode_o   <=      inst_i[`ICODE];
             f_ifun_o    <=      inst_i[`IFUN];
@@ -38,7 +38,7 @@ module f(
                 `INOP:      begin
                     f_valP_o    <=      f_pc_i+4'h1;
                 end
-                `ICMOVXX:   begin
+                `IRRMOVL:   begin
                     f_rA_o      <=      inst_i[`RA];
                     f_rB_o      <=      inst_i[`RB];
                     f_valP_o    <=      f_pc_i+4'h2;

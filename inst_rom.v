@@ -13,7 +13,7 @@ module inst_rom(
 
 	initial $readmemh ( "inst_rom.data",	inst_mem );
 
-    initial mem_data_o	<=      32'H00000000;
+    initial mem_data_o	<=      `ZEROWORD;
 	//always @ (*)begin
 	//	inst	<=	inst_mem[addr[`WORDNUM-1:2]];
 	//end

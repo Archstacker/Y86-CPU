@@ -1,7 +1,7 @@
 //Instruction Codes
 `define     IHALT           4'H0
 `define     INOP            4'H1
-`define     ICMOVXX         4'H2
+`define     IRRMOVL         4'H2
 `define     IIRMOVL         4'H3
 `define     IRMMOVL         4'H4
 `define     IMRMOVL         4'H5
@@ -45,6 +45,7 @@
 
 //Size Codes
 `define     NIBBLE          3:0
+`define     ZERONIBBLE      4'h0
 `define     BYTE            7:0
 `define     BYTE0           47:40
 `define     BYTE1           39:32
@@ -53,6 +54,7 @@
 `define     BYTE4           15:8
 `define     BYTE5           7:0
 `define     WORD            31:0
+`define     ZEROWORD        4'h0
 `define     INSTBUS         47:0
 `define     ICODE           47:44
 `define     IFUN            43:40

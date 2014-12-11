@@ -9,7 +9,7 @@ module F(
     output  reg[`WORD]          F_predPC_o
 );
 
-    initial F_predPC_o <= 48'h000000000000;
+    initial F_predPC_o <= `ZEROWORD;
     always @ (posedge clk) begin
         if (rst == `DISABLE && F_stall_i != `ENABLE) begin
             if( f_icode_i == `IJXX || f_icode_i == `ICALL ) 

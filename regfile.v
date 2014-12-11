@@ -1,16 +1,16 @@
 `include "defines.v"
 
 module regfile(
-	input	wire			    clk,
-	input	wire			    rst,
+	input	wire                clk,
+	input	wire                rst,
 	input	wire[`NIBBLE]	    srcA,
 	input	wire[`NIBBLE]	    srcB,
 	input	wire[`NIBBLE]	    dstE,
 	input	wire[`NIBBLE]	    dstM,
-	input	wire[`WORD]		    valE,
-	input	wire[`WORD]		    valM,
-	output	reg[`WORD]		    valA,
-	output	reg[`WORD]		    valB
+        input	wire[`WORD]         valE,
+	input	wire[`WORD]         valM,
+	output	reg[`WORD]          valA,
+	output	reg[`WORD]          valB
 );
 
 	reg[`WORD]	regs[0:`REGNUM-1];
