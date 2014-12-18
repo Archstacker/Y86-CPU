@@ -27,8 +27,8 @@ CPUÖĞ¹²ÓĞ8¸ö32Î»µÄ³ÌĞò¼Ä´æÆ÷£¬Ö¸Ê¾Ö¸ÁîµÄPCµÄ³¤¶ÈÒ²Îª32Î»£¬¹Ê³ÌĞòÖ§³Ö×î´ó4GµÄÄÚ´æ
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/state.png}
-\caption{Y86 programmer-visible state}
+\includegraphics[width=5cm]{img/state.pdf}
+\caption{Y86 »ù±¾±äÁ¿}
 \end{figure}
 
 \subsubsection{Y86Ö¸Áî}\label{y86ux6307ux4ee4}
@@ -37,8 +37,8 @@ Y86¹²ÓĞ12ÀàÖ¸Áî£¬³¤¶ÈÔÚ1×Ö½Úµ½6×Ö½Ú²»µÈ¡£Ã¿ÌõÖ¸Áî¶¼ÖÁÉÙÓĞÒ»¸ö×Ô¼ºµÄ±êÖ¾Î»£¬»¹¿ÉÄ
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/isa.png}
-\caption{Y86 instruction set}
+\includegraphics[width=10cm]{img/isa.pdf}
+\caption{Y86Ö¸Áî¼¯}
 \end{figure}
 
 \subsubsection{Ö¸Áî±àÂë}\label{ux6307ux4ee4ux7f16ux7801}
@@ -47,8 +47,8 @@ Y86¹²ÓĞ12ÀàÖ¸Áî£¬³¤¶ÈÔÚ1×Ö½Úµ½6×Ö½Ú²»µÈ¡£Ã¿ÌõÖ¸Áî¶¼ÖÁÉÙÓĞÒ»¸ö×Ô¼ºµÄ±êÖ¾Î»£¬»¹¿ÉÄ
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/icodes.png}
-\caption{Function codes for Y86 instruction set}
+\includegraphics[width=10cm]{img/icodes.pdf}
+\caption{Y86Ö¸Áî¼¯¹¦ÄÜ´úÂë}
 \end{figure}
 
 ºÜ¶àÖ¸Áî¶¼»áÓĞÒ»¸ö×Ö½ÚÓÃÀ´±íÊ¾ËùÓÃµ½µÄ¼Ä´æÆ÷¡£Ã¿¸ö¼Ä´æÆ÷¶¼ÓÃÒ»¸öÊı×ÖÀ´±íÊ¾£¬Ê¹ÓÃRNONE£¨0xF£©´ú±íÃ»ÓĞÓÃµ½¼Ä´æÆ÷¡£
@@ -156,8 +156,8 @@ Computations in sequential implementation of Y86 instructions
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/seq-fetch.png}
-\caption{SEQ fetch stage}
+\includegraphics[width=8cm]{img/seq-fetch.pdf}
+\caption{È¡Ö¸½×¶Î}
 \end{figure}
 
 ÎÒÃÇ¸ù¾İPC´ÓÄÚ´æÖĞÈ¡µ½Êı¾İÖ®ºó£¬½«µÚÒ»¸ö×Ö½Ú²ğ·Ö³ÉicodeºÍifunÁ½¸ö°ë×Ö½ÚÊı£¬Í¬Ê±¸ù¾İicode¶ÔºóÃæ5¸ö×Ö½Ú½øĞĞ²ğ·Ö¡¢ÕûÀí£¬µÃµ½rA¡¢rB»òvalCµÄÖµ£¬Èç¹ûÃ»ÓĞ¶ÔÓ¦µÄÖµµÄ»°£¬½«ÆäÖµ¸³ÎªRNONE£¬Í¬Ê±¸ù¾İicode¾ö¶¨µÄ¸ÃÖ¸ÁîµÄ³¤¶ÈÈ·¶¨ÏÂÌõÖ¸ÁîÈ¡Ö¸Ê±µÄPCÖµ¡£
@@ -166,8 +166,8 @@ Computations in sequential implementation of Y86 instructions
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/seq-decode.png}
-\caption{SEQ decode and write-back stage}
+\includegraphics[width=8cm]{img/seq-decode.pdf}
+\caption{ÒëÂëºÍ»ØĞ´½×¶Î}
 \end{figure}
 
 ÕâÁ½¸ö½×¶ÎÖ÷ÒªÊÇÓë¼Ä´æÆ÷ÎÄ¼ş½øĞĞ´¦Àí£¬ÆäÖĞÒëÂë½×¶ÎÍ¨¹ısrcAºÍsrcBÈ·¶¨Òª¶ÁÈ¡µÄ¼Ä´æÆ÷£¬²¢½«¶ÁÈ¡µ½µÄÊı¾İ¸³Öµ¸øvalAºÍvalB£¬¶øĞ´»Ø½×¶ÎÍ¨¹ıdstMºÍdstEÈ·¶¨ÒªĞ´»ØµÄ¼Ä´æÆ÷£¬½«valMºÍvalEĞ´Èëµ½ÏàÓ¦µÄ¼Ä´æÆ÷¡£
@@ -176,8 +176,8 @@ Computations in sequential implementation of Y86 instructions
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/seq-execute.png}
-\caption{SEQ execute stage}
+\includegraphics[width=8cm]{img/seq-execute.pdf}
+\caption{Ö´ĞĞ½×¶Î}
 \end{figure}
 
 Ö´ĞĞ½×¶ÎÒª¸ù¾İÖ¸ÁîµÄÀàĞÍÈ·¶¨ËùÒª½øĞĞµÄ²Ù×÷£¨¼Ó¡¢¼õ¡¢Óë¡¢Òì»ò£©ÒÔ¼°ÊÇ·ñÒªÉèÖÃ±êÖ¾Î»£¬¶ÔÁ½¸öÊäÈëµÄÖµÀ´½øĞĞÔËËã£¬²¢¸ù¾İ¼ÆËãÇé¿öµÃµ½±êÖ¾Î»CCºÍ¾ö¶¨ÊÇ·ñĞèÒªÌø×ªµÄCnd¡£
@@ -188,8 +188,8 @@ Computations in sequential implementation of Y86 instructions
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/seq-memory.png}
-\caption{SEQ memory stage}
+\includegraphics[width=8cm]{img/seq-memory.pdf}
+\caption{·Ã´æ½×¶Î}
 \end{figure}
 
 ·Ã´æ½×¶ÎÖ÷ÒªÊÇ¸ù¾İÖ¸ÁîÀàĞÍ¾ö¶¨ÊÇÒª´ÓÄÚ´æÖĞ¶ÁÊı¾İ»¹ÊÇÏòÄÚ´æÖĞĞ´Êı¾İ¡£Èç¹ûÒª´ÓÄÚ´æÖĞ¶ÁÊı¾İµÄ»°£¬ÔòÓĞmem\_read=1£¬´Ómem\_addrÕâ¸öÄÚ´æµØÖ·¶ÁÈ¡4×Ö½ÚµÄÊı¾İ¸³¸øvalM£¬Èç¹ûÒªÏòÄÚ´æÖĞĞ´³ÌĞòµÄ»°£¬Ôò½«mem\_dataµÄÖµĞ´Èë´Ómem\_addrµØÖ·¿ªÊ¼µÄ4×Ö½ÚµÄÎ»ÖÃ¡£
@@ -236,8 +236,8 @@ Computations in sequential implementation of Y86 instructions
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/pipe-full.png}
-\caption{Hardware structure of PIPE}
+\includegraphics[width=10cm]{img/pipe-full.pdf}
+\caption{Ó²¼ş½á¹¹}
 \end{figure}
 
 ÆäÖĞ£¬±êºÅÎªF¡¢D¡¢E¡¢M¡¢WÎå¸ö½×¶ÎÎªÊ±ĞòÂß¼­µçÂ·²¿·Ö£¬ÓÃÀ´¶ÔÉÏÒ»²ãµÃµ½µÄ½á¹ûÔÚÏÂÒ»¸öÊ±ÖÓÖÜÆÚµ½À´Ê±´«µİ¸øÏÂÒ»²ã¡£ÕâÎå¸ö½×¶ÎÖ®¼ä¼ĞµÄÊÇÈ¡Ö¸¡¢ÒëÂë¡¢Ö´ĞĞ¡¢·Ã´æËÄ¸ö×éºÏÂß¼­µçÂ·£¬·Ö²¼¼ÆÎªf¡¢d¡¢e¡¢m£¬ÕâÊÇCPU¾ßÌå²Ù×÷µÄ²¿·Ö¡£
@@ -261,8 +261,8 @@ Computations in sequential implementation of Y86 instructions
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/prog4-uncontrol.png}
-\caption{Pipelined execution of prog4 without special pipeline control}
+\includegraphics[width=10cm]{img/prog4-uncontrol.pdf}
+\caption{¡°¶ÁºóĞ´¡±Êı¾İÃ°ÏÕ}
 \end{figure}
 
 ¶ÔÓÚÕâÖÖÇé¿ö£¬ÎÒÃÇ¿ÉÒÔÍ¨¹ıÔÚaddlÇ°Ãæ¼ÓÈëÈı¸öÆøÅİ£¬Ò²¼´µÈµ½Ç°ÃæÁ½ÌõÌõÖ¸Áî¶¼Ğ´»Ø½×¶Î¸üĞÂ¼Ä´æÆ÷µÄÖµÖ®ºóÔÙ½øĞĞÒëÂë£¬È¡µÃÕıÈ·µÄ¼Ä´æÆ÷µÄÖµ¡£
@@ -273,8 +273,8 @@ Computations in sequential implementation of Y86 instructions
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/pipe-decode.png}
-\caption{PIPE decode and write-back stage logic}
+\includegraphics[width=10cm]{img/pipe-decode.pdf}
+\caption{Êı¾İÇ°ÍÆÊµÏÖ}
 \end{figure}
 
 \paragraph{·ÖÖ§Ô¤²â}\label{ux5206ux652fux9884ux6d4b}
@@ -314,8 +314,8 @@ CPUĞèÒª¸ù¾İPCÖµ»ñÈ¡ÒªÖ´ĞĞÖ¸ÁîÔÚÄÚ´æÖĞµÄµØÖ·£¬»ñÈ¡Ö¸ÁîÖ®ºó²ÅÄÜ½øĞĞÒëÂë¡¢Ö´ĞĞ¡¢·Ã´
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/eg-pipe-reg-full.png}
-\caption{Additional pipeline register operations}
+\includegraphics[width=10cm]{img/eg-pipe-reg-full.pdf}
+\caption{²»Í¬×´Ì¬}
 \end{figure}
 
 \subparagraph{´¦ÀíretÖ¸Áî}\label{ux5904ux7406retux6307ux4ee4}
@@ -326,8 +326,8 @@ CPUĞèÒª¸ù¾İPCÖµ»ñÈ¡ÒªÖ´ĞĞÖ¸ÁîÔÚÄÚ´æÖĞµÄµØÖ·£¬»ñÈ¡Ö¸ÁîÖ®ºó²ÅÄÜ½øĞĞÒëÂë¡¢Ö´ĞĞ¡¢·Ã´
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/prog7.png}
-\caption{Actual processing of the ret instruction}
+\includegraphics[width=10cm]{img/prog7.pdf}
+\caption{retÖ¸ÁîµÄÊµ¼Ê´¦ÀíÇé¿ö}
 \end{figure}
 
 \subparagraph{Êı¾İÃ°ÏÕ}\label{ux6570ux636eux5192ux9669-1}
@@ -338,8 +338,8 @@ CPUĞèÒª¸ù¾İPCÖµ»ñÈ¡ÒªÖ´ĞĞÖ¸ÁîÔÚÄÚ´æÖĞµÄµØÖ·£¬»ñÈ¡Ö¸ÁîÖ®ºó²ÅÄÜ½øĞĞÒëÂë¡¢Ö´ĞĞ¡¢·Ã´
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/prog5-stall.png}
-\caption{Handling a load/use hazard by stalling}
+\includegraphics[width=10cm]{img/prog5-stall.pdf}
+\caption{Í¨¹ıÇ°ÍÆ´¦ÀíÊı¾İÃ°ÏÕ}
 \end{figure}
 
 \subparagraph{´íÎóµÄ·ÖÖ§Ô¤²â}\label{ux9519ux8befux7684ux5206ux652fux9884ux6d4b}
@@ -361,7 +361,13 @@ CPUĞèÒª¸ù¾İPCÖµ»ñÈ¡ÒªÖ´ĞĞÖ¸ÁîÔÚÄÚ´æÖĞµÄµØÖ·£¬»ñÈ¡Ö¸ÁîÖ®ºó²ÅÄÜ½øĞĞÒëÂë¡¢Ö´ĞĞ¡¢·Ã´
 
 ËùÓĞÔªËØÖ®ºÍ¡£
 
-ÕâÀïÖ»¸ø³ö³ÌĞòÔËĞĞµÄ×îÖÕ½á¹û£º \includegraphics{img/sim0.png}
+ÕâÀïÖ»¸ø³ö³ÌĞòÔËĞĞµÄ×îÖÕ½á¹û£º 
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=10cm]{img/sim0.png}
+\caption{sum³ÌĞòÔËĞĞ½á¹û}
+\end{figure}
 
 Í¬Ê±£¬ÎÒ»¹±àĞ´ÁËÒÔÏÂ¼ÆËãÁ½¸ö¼Ä´æÆ÷ÖĞÎŞ·ûºÅµÄ16Î»µÄÖµµÄ³Ë·¨²¢½«½á¹û¸³¸øÒ»¸ö¼Ä´æÆ÷µÄY86»ã±à´úÂë£¬Ê¹ÓÃµÄ³Ë·¨Ëã·¨Îª×î¼òµ¥µÄ¶¨µãÔ­ÂëÒ»Î»³Ë·¨¡£³ÌĞòÈçÏÂ£º
 
@@ -455,40 +461,40 @@ CPUĞèÒª¸ù¾İPCÖµ»ñÈ¡ÒªÖ´ĞĞÖ¸ÁîÔÚÄÚ´æÖĞµÄµØÖ·£¬»ñÈ¡Ö¸ÁîÖ®ºó²ÅÄÜ½øĞĞÒëÂë¡¢Ö´ĞĞ¡¢·Ã´
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/sim1.png}
-\caption{sim1}
+\includegraphics[width=10cm]{img/sim1.png}
+\caption{eaxµÚÒ»´Î¸Ä±ä}
 \end{figure}
 
 ·¢ÉúÔÚ620000ps´¦¡£Ê×ÏÈÅĞ¶ÏÒ»ÏÂecxµÄ×îµÍÎ»£¬·¢ÏÖÎª1£¬ÔòÔÚ»ÆÏß´¦½«edx£¬Ò²¼´num2µÄÖµ¼Óµ½eaxÖĞ¡£ÔÚÊó±ê´¦¿ÉÒÔ¿´µ½£¬ecx½«×îµÍÎ»ÖÃÁã£¬ÆäÖµ´Ó0x11b±äÎª0x11a¡£ÔÚÍ¼ÖĞµÄ×îºó£¬edx±äÎªÔ­À´µÄ¶ş±¶£¬¼´ÆäÖµ´Ó¿ªÊ¼µÄ0x2dd±äÎª0x5ba¡£
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/sim2.png}
-\caption{sim2}
+\includegraphics[width=10cm]{img/sim2.png}
+\caption{eaxµÚ¶ş´Î¸Ä±ä}
 \end{figure}
 
 ¾àÉÏ´ÎÅĞ¶Ï0x240000ps´¦£¬µÚ¶ş´ÎÅĞ¶ÏecxµÄµ¹ÊıµÚ¶şÎ»£¬·¢ÏÖ»¹ÊÇÒ»£¬ÓÚÊÇÇé¿öºÍÉÏÃæÏàÍ¬£¬»ÆÏß´¦eax±äÎª0x2dd+0x5ba=0x897£¬ÔÚÊó±ê´¦ecx´Ó0x11a±äÎª0x118£¬edx´Ó0x5ba±äÎª0xb74¡£
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/sim3.png}
-\caption{sim3}
+\includegraphics[width=10cm]{img/sim3.png}
+\caption{eaxµÚÈı´Î¸Ä±ä}
 \end{figure}
 
 µÚÈı´ÎÅĞ¶Ïµ½ecxµÄµ±Ç°Î»²»Îª1£¬eax²»¸Ä±ä¡£µÚËÄ´ÎÅĞ¶Ïµ½ecxµÄµ±Ç°Î»Îª1£¬´ËÊ±µÄedxÒÑ²»ÊÇÉÏÃæÍ¼ÖĞµÄ0xb74£¬¶ø±ä³ÉµÄÆä¶ş±¶0x16e8¡£¹ÊeaxÔÚ»ÆÏß´¦±äÎª0x897+0x16e8=0x1f7f¡£ecx´Ó0x118±äÎª0x110£¬edx´Ó0x16e8±äÎª0x2dd0¡£
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/sim4.png}
-\caption{sim4}
+\includegraphics[width=10cm]{img/sim4.png}
+\caption{eaxµÚËÄ´Î¸Ä±ä}
 \end{figure}
 
 µÚËÄ´ÎÅĞ¶ÏÓëÉÏÃæ¼¸´ÎÀàËÆ£¬eax±äÎª0x4d4f£¬ecx±äÎª0x100,edx±äÎª0x5ba00¡£
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/sim5.png}
-\caption{sim5}
+\includegraphics[width=10cm]{img/sim5.png}
+\caption{eaxµÚÎå´Î¸Ä±ä}
 \end{figure}
 
 ÒòÎª½ÓÏÂÀ´¼¸´Îecx¶¼²»Îª1£¬ËùÒÔÁ÷Ë®ÏßÒ»Ö±×ßÁËºÜ³¤Ê±¼ä¡£Ö±µ½³ÌĞò¿ìÒª½áÊø£¬ÖÕÓÚ·¢ÏÖecx¸ÃÎ»Îª0£¬´ËÊ±edxÒÑ±äÎª0x2dd00¡£eax±äÎª0x4d4f+0x2dd00=0x32a4f£¬ecxÇå³ıµ±Ç°Î»ºó±ä³É0£¬ËµÃ÷¸ÃÑ­»·½áÊø¡£½ô½Ó×Å£¬CPU½«»áÌø³ö×Ó³ÌĞò£¬½ø¶øÔÚÖ÷º¯ÊıÖĞÊµÏÖÍ£»úÖ¸Áî¡£
@@ -505,81 +511,14 @@ CPUĞèÒª¸ù¾İPCÖµ»ñÈ¡ÒªÖ´ĞĞÖ¸ÁîÔÚÄÚ´æÖĞµÄµØÖ·£¬»ñÈ¡Ö¸ÁîÖ®ºó²ÅÄÜ½øĞĞÒëÂë¡¢Ö´ĞĞ¡¢·Ã´
 
 \subsubsection{°æ±¾¿ØÖÆ}\label{ux7248ux672cux63a7ux5236}
 
-±¾´ÎÊµÑéÖĞ£¬ÎÒµÚÒ»´Î³¢ÊÔÁËÊ¹ÓÃgitÀ´¹ÜÀí´úÂë£¬½øĞĞ°æ±¾¿ØÖÆ¡£±¾´ÎÊµÑé³ÖĞøÊ±¼ä³¤£¬´úÂëÇ°ºó¸Ä¶¯·Ç³£´ó£¬Ê¹ÓÃgit¹ÜÀíÄÜÈÃÎÒºÜÇå³şµÄÖªµÀÉÏ´Î¶¼ĞŞ¸ÄÁËÊ²Ã´£¬´íÎó¶¼ÊÇÔÚÄÄ³öµÄ£¬ÎÒ¶¼×ö³öÀ´Ê²Ã´¸Ä½ø£¬Í¬Ê±£¬ÔÚÕâ¸ö¹ı³ÌÖĞ£¬ÎÒÒ²¸ù¾İÊµ¼ÊÇé¿ö³¢ÊÔÁËºÜ¶àgitµÄ¹¦ÄÜ¡£ÏÖÔÚËãÆğÀ´£¬Ò²ÓĞ60¶à¸öcommitÁË£¬ÓĞµÄĞŞ¸Ä½Ï¶à£¬ÓĞµÄĞŞ¸Ä½ÏÉÙ£¬ÏÖÔÚ¿´ÆğÀ´»¹ÊÇÂùÓĞ³É¾Í¸ĞµÄ¡£ÕâÀïÎÒ°ÑcommitÌù³öÀ´£¬×÷ÎªÕâ¶ÎÊ±¼äµÄ¼ÇÂ¼°É£¡
-
-\begin{verbatim}
-* 3d98478 - (HEAD, master) Change some defines. Implement the conditional move instructions. (4 days ago) <ArchStacker>                                                 
-* 576a7ba - (origin/master, origin/HEAD) Add some pictures to prepare for my paper (7 days ago) <ArchStacker>                                                           
-* 69ccf7a - Change the import methods of Y86_Assembler from subtree to submodule.Change the name of directories. (7 days ago) <ArchStacker>                             
-* 97cc2b7 - Remove the unused variable. (7 days ago) <ArchStacker>                                                                                                      
-* a0aaa63 - Add the simple support for halt (13 days ago) <ArchStacker>                                                                                                 
-* 73a88fc - Rearrange the defines (2 weeks ago) <ArchStacker>                                                                                                           
-* dd36d73 - Convert tab to 4 spaces (2 weeks ago) <ArchStacker>                                                                                                         
-* c1b9456 - Change the names of files which were modified in the previous commit except for y86cpu.v (2 weeks ago) <ArchStacker>                                        
-* 1ee884b - Change names of variables from id_ex.v to mem_wb.v and y86cpu.v according to Figure 4.52 in the CSAPP (2 weeks ago) <ArchStacker>                           
-* 0eca099 - Delete the old test data.Change the README.md (2 weeks ago) <ArchStacker>                                                                                   
-* 0c3a247 - Add a Y86 assembly code program to compute the result of multiplication with two numbers (3 weeks ago) <ArchStacker>                                        
-* 0738499 - Change the yas.py to generate the data that can be readed (3 weeks ago) <ArchStacker>                                                                       
-* c68ca39 - Add examples of Y86 assembly code programs used in Chapter 4 of CS:APP2e (3 weeks ago) <ArchStacker>                                                        
-*   52a05d3 - Merge commit '8b94ac244c01df21f21b61d216880c8ee96564bc' as 'Y86_Assembler' (3 weeks ago) <ArchStacker>                                                    
-|\                                                                                                                                                                      
-| * 8b94ac2 - Squashed 'Y86_Assembler/' content from commit 0c9e81c (3 weeks ago) <ArchStacker>                                                                         
-* befd02a - Change the endianness from big endian to little endian (3 weeks ago) <ArchStacker>                                                                          
-* 7f7a74b - Change the 4-bit size define from BYTE to NIBBLE.Now a BYTE contains 8 bits (3 weeks ago) <ArchStacker>                                                     
-* c67133a - Add the support for ret. Fix many bugs to run the full fugure 4.8 code while the data is in big endian. (3 weeks ago) <ArchStacker>                         
-* bd87124 - Add pipe_control_logic.v. Now the load/use hazards can be solved (3 weeks ago) <ArchStacker>                                                                
-* 56f6c54 - Fix the bugs when completed rmmovl and mrmovl (4 weeks ago) <ArchStacker>                                                                                   
-* b84b8b5 - Add the select_pc.v. Add the support for jmp (4 weeks ago) <ArchStacker>                                                                                    
-* 180763c - Replace the pc_reg.v with F.v. Add the support for call (4 weeks ago) <ArchStacker>                                                                         
-* 792d7da - Move id.v to f.v, if_id.v to D.v (4 weeks ago) <ArchStacker>                                                                                                
-* 8c7932c - Add d.v, change names of variables in d.v id.v if_id.v according to Figure 4.52 in the CSAPP (4 weeks ago) <ArchStacker>                                    
-*   1ccdefb - conflict fixed (5 weeks ago) <ArchStacker>                                                                                                                
-|\  
-| * d1bfb3f - Add the support for pushl and popl (5 weeks ago) <ArchStacker>
-| * 7aad7c4 - Add the sel_fwd_a.v to avoiding valA hazard by forwarding.Now most pipeline hazards can be solved (5 weeks ago) <ArchStacker>
-* | 5cd6d9f - Add the sel_fwd_a.v to avoiding valA hazard by forwarding.Now most pipeline hazards can be solved (5 weeks ago) <ArchStacker>
-|/  
-* 6587c6b - Change some variables' name (5 weeks ago) <ArchStacker>
-* fe35efd - Add the fwd_b.v to avoiding valB hazard by forwarding (5 weeks ago) <ArchStacker>
-* 1939904 - Remove the rA and rB port after id.v (6 weeks ago) <ArchStacker>
-* 33264cc - Get the dstM value in id.v (6 weeks ago) <ArchStacker>
-* a300dd1 - Get the dstE value in id.v (6 weeks ago) <ArchStacker>
-* 8a05959 - Replace PCLEN with WORD (6 weeks ago) <ArchStacker>
-* 3ac653c - Add the support for rmmovl and mrmovl (8 weeks ago) <ArchStacker>
-* 2da51ca - Judge the dstE and dstM value in mem_wb.v. Now the rrmovl irmovl and opl instructions can work (8 weeks ago) <ArchStacker>
-* b938797 - Add the icode,rA,rB ports,remove the dstE,dstM ports (8 weeks ago) <ArchStacker>
-* 6e093ee - Remove the useless port in ex.v (8 weeks ago) <ArchStacker>
-* 9758641 - Add the support for rrmovl (8 weeks ago) <ArchStacker>
-* c308e15 - Add the support for the irmovl (8 weeks ago) <ArchStacker>
-* 736fc11 - Changed the dstW port to dstE and dstM port.Add the mem_wb.v.Now the OPl can work (9 weeks ago) <ArchStacker>
-* 4e180b6 - Add the mem.v (10 weeks ago) <ArchStacker>
-* ec7f322 - Add dstW port (10 weeks ago) <ArchStacker>
-* 358ecdc - Add the ex_mem module (2 months ago) <ArchStacker>
-* 606250c - Add the ex module (2 months ago) <ArchStacker>
-* 1065604 - Add the id_ex module (3 months ago) <ArchStacker>
-* e706db8 - Add the regfile (3 months ago) <ArchStacker>
-* 152dcb7 - Now the PC can be updated and the instruction can be fetched. (3 months ago) <ArchStacker>
-* 32c4e25 - PC can be changed according to the valP (3 months ago) <ArchStacker>
-* 6f91efa - Add the valC in the id.v (3 months ago) <ArchStacker>
-* 39bd88f - Add the do script to automatic simulate the cpu (3 months ago) <ArchStacker>
-* b9ab451 - Read six bytes from rom one time (3 months ago) <ArchStacker>
-* 25b1e2d - Correct some errors to make it can be simulated (3 months ago) <ArchStacker>
-* 8ff1a0b - Add the sopc (3 months ago) <ArchStacker>
-* 59c5eb2 - Add the rom (3 months ago) <ArchStacker>
-* 0ddcdc3 - Y86 CPU which only can fetch (3 months ago) <ArchStacker>
-* cb63c3b - Add the id.v (3 months ago) <ArchStacker>
-* c194a10 - Add the constant values used in HCL descriptions (3 months ago) <ArchStacker>
-* aadffaf - Add the gitignore (3 months ago) <ArchStacker>
-* 2d3f186 - First commit (3 months ago) <ArchStacker>
-* a26bc09 - Initial commit (3 months ago) <ArchStacker>
-\end{verbatim}
+±¾´ÎÊµÑéÖĞ£¬ÎÒµÚÒ»´Î³¢ÊÔÁËÊ¹ÓÃgitÀ´¹ÜÀí´úÂë£¬½øĞĞ°æ±¾¿ØÖÆ¡£±¾´ÎÊµÑé³ÖĞøÊ±¼ä³¤£¬´úÂëÇ°ºó¸Ä¶¯·Ç³£´ó£¬Ê¹ÓÃgit¹ÜÀíÄÜÈÃÎÒºÜÇå³şµÄÖªµÀÉÏ´Î¶¼ĞŞ¸ÄÁËÊ²Ã´£¬´íÎó¶¼ÊÇÔÚÄÄ³öµÄ£¬ÎÒ¶¼×ö³öÀ´Ê²Ã´¸Ä½ø£¬Í¬Ê±£¬ÔÚÕâ¸ö¹ı³ÌÖĞ£¬ÎÒÒ²¸ù¾İÊµ¼ÊÇé¿ö³¢ÊÔÁËºÜ¶àgitµÄ¹¦ÄÜ¡£ÏÖÔÚËãÆğÀ´£¬Ò²ÓĞ60¶à¸öcommitÁË£¬ÓĞµÄĞŞ¸Ä½Ï¶à£¬ÓĞµÄĞŞ¸Ä½ÏÉÙ£¬ÏÖÔÚ¿´ÆğÀ´»¹ÊÇÂùÓĞ³É¾Í¸ĞµÄ¡£
 
 ¼ÈÈ»Ìáµ½ÁËgit£¬¾Í²»µÃ²»ÌáGitHubÁË¡£µ±Ê±¸Õ¿ªÊ¼×öÕâ¸öÊµÑéµÄÊ±ºòÎÒ¾ÍËÑÁËÒ»ÏÂ£¬GitHubÉÏËäÈ»ÓĞºÜ¶àY86µÄÊµÑé£¬µ«ÕæÕıÊÇÓÃVerilogĞ´µÄ¾ÍÃ»¼¸¸öÁË£¬¶àÊÇÓÃpython»òC++Ğ´µÄ¡£ÎÒ»¹ÊÇ±È½ÏÆæ¹Ö£¬ÓÃÕâĞ©ÓïÑÔÊÇÈçºÎÊµÏÖCPUµÄ£¬ÒÔºóÓĞ»ú»áÑĞ¾¿Ò»ÏÂ¡£±¾´ÎÊµÑéµÄÈ«²¿ÄÚÈİÎÒ¶¼·Åµ½ÁËGitHubÉÏ£¬²»ÖªÄÜ²»ÄÜ¸ø±ğÈËÌá¹©°ïÖú£¬Ò²Ï£ÍûÄÜÊÕµ½±ğÈË£¬ÓÈÆäÊÇ¶ÔµçÂ·±È½ÏÊìµÄÈËµÄPull
 Request¡£
 
 \begin{figure}[htbp]
 \centering
-\includegraphics{img/GitHub.png}
+\includegraphics[width=10cm]{img/GitHub.png}
 \caption{GitHub}
 \end{figure}
 
