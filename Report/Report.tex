@@ -310,6 +310,15 @@ CPUÐèÒª¸ù¾ÝPCÖµ»ñÈ¡ÒªÖ´ÐÐÖ¸ÁîÔÚÄÚ´æÖÐµÄµØÖ·£¬»ñÈ¡Ö¸ÁîÖ®ºó²ÅÄÜ½øÐÐÒëÂë¡¢Ö´ÐÐ¡¢·Ã´
   ÉÏÃæÊ¹ÓÃÁË·ÖÖ§Ô¤²âµÄ¼¼Êõ£¬ÒªÄÜ±£Ö¤µÃµ½Ô¤²â´íÎóµÄ½á¹ûºóÔ¤²âÖ´ÐÐµÄÄÇÐ©Óï¾äÄÜ±»´ÓÁ÷Ë®ÏßÖÐÇå³ý£¬²»»á¶Ô³ÌÐò²úÉúÓ°Ïì¡£
 \end{itemize}
 
+ÕâÐ©ÌØÊâÇé¿öµÄ´¥·¢Ìõ¼þ·Ö±ðÎª£º
+
+\begin{verbatim}
+Çé¿ö            | ´¥·¢Ìõ¼þ
+´¦ÀíretÖ¸Áî     | IRET ¡Ê {D_icode, E_icode, M_icode}
+Êý¾ÝÃ°ÏÕ        | E_icode ¡Ê {IMRMOVL, IPOPL} && E_dstM ¡Ê {d_srcA, d_srcB}
+Ô¤²â´íÎóµÄ·ÖÖ§  | E_icode = IJXX && !e_Cnd
+\end{verbatim}
+
 ½â¾öÌØÊâÖ¸ÁîµÄ·½·¨ÊÇÔÚÁ÷Ë®ÏßÖÐ¼ÓÈëÔÝÍ£»òÕßÆøÅÝ¡£ÆäÖÐ£¬ÔÝÍ£ÒâÎ¶×Å¸Ã½×¶ÎµÄÊä³öÓë¸Ã½×¶ÎµÄÊäÈëÏàÍ¬£¬ÆøÅÝÒâÎ¶×Å¸Ã½×¶ÎÊä³ö¿ÕÖ¸Áî¡£ÈçÍ¼ËùÊ¾£º
 
 \begin{figure}[htbp]
@@ -347,6 +356,30 @@ CPUÐèÒª¸ù¾ÝPCÖµ»ñÈ¡ÒªÖ´ÐÐÖ¸ÁîÔÚÄÚ´æÖÐµÄµØÖ·£¬»ñÈ¡Ö¸ÁîÖ®ºó²ÅÄÜ½øÐÐÒëÂë¡¢Ö´ÐÐ¡¢·Ã´
 ÔÚÇ°ÃæÌáµ½ÁË£¬ÎªÁËÌá¸ßÁ÷Ë®ÏßÐ§ÂÊ£¬¶Ô²»È·¶¨ÊÇ·ñÐèÒªÌø×ªµÄ·ÖÖ§½øÐÐÁËÔ¤²â£¬Ô¤²âÕâÌõÌø×ªÖ¸Áî»áÖ´ÐÐ£¬½ø¶øÖ´ÐÐÌø×ªºóµØÖ·µÄÖ¸Áî¡£µ«Èç¹ûÔÚÖ´ÐÐ½×¶Î·¢ÏÖ±¾²»Ó¦¸ÃÌø×ª£¬¾ÍÓ¦¸Ã½«Á÷Ë®ÏßÖÐ´íÎóÌø×ªµÄÓï¾ä³ýÈ¥£¬»»³ÉÐÂµÄµØÖ·¶ÔÓ¦µÄ´úÂë¡£
 
 ·Ç³£ÁîÈË¸ßÐËµÄÊÇ£¬ÓÉÓÚÎÒÃÇ¶ÔÖ¸Áî½øÐÐÁË·Ö¶Î£¬¶øÔÚÇ°Á½¸ö½×¶Î£¨È¡Ö¸ºÍÒëÂë£©½×¶Î²»»áÐÞ¸ÄÈ«¾Ö±äÁ¿µÄÖµ£¬ÔÚÖ´ÐÐ½×¶Î¾Í¿ÉÒÔÈ·¶¨Ìø×ªÖ¸ÁîÊÇ·ñÕýÈ·Ö´ÐÐ¡£Òò´Ë£¬Ö»ÐèÒªÔÚ·¢ÏÖ·ÖÖ§Ô¤²â´íÎóÖ®ºó½«Ç°ÃæÁ½¸ö½×¶Î±äÎªÆøÅÝ¾Í¿ÉÒÔÁË¡£
+
+¸ù¾ÝÒÔÉÏ·ÖÎö£¬¿ÉÒÔµÃµ½ÒÔÏÂ´úÂë£º
+
+\begin{verbatim}
+F_stall_o   <=      ( E_icode_i==`IMRMOVL || E_icode_i==`IPOPL )&&
+                    ( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||
+                        E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i )||
+                    ( D_icode_i==`IRET || E_icode_i==`IRET || M_icode_i==`IRET );
+
+D_stall_o   <=      ( E_icode_i==`IMRMOVL || E_icode_i==`IPOPL )&&
+                    ( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||
+                        E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i );
+
+D_bubble_o  <=      ( E_icode_i==`IJXX && !e_Cnd_i )||
+                    !(( E_icode_i==`IMRMOVL || E_icode_i==`IPOPL )
+                        &&( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||
+                            E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i ) )
+                    &&( D_icode_i==`IRET || E_icode_i==`IRET || M_icode_i==`IRET );
+
+E_bubble_o  <=      ( E_icode_i==`IJXX && !e_Cnd_i )||
+                    ( E_icode_i==`IMRMOVL || E_icode_i==`IPOPL )&&
+                    ( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||
+                        E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i );
+\end{verbatim}
 
 \subsection{CPU³ÌÐòÑéÖ¤}\label{cpuux7a0bux5e8fux9a8cux8bc1}
 
