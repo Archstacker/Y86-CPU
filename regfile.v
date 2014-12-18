@@ -15,14 +15,14 @@ module regfile(
 
 	reg[`WORD]	regs[0:`REGNUM-1];
 
-	initial regs[0] <=      32'H01234567;
-	initial regs[1] <=      32'H23456789;
-	initial regs[2] <=      32'H3456789A;
-	initial regs[3] <=      32'H456789AB;
-	initial regs[4] <=      32'H56789ABC;
-	initial regs[5] <=      32'H6789ABCD;
-	initial regs[6] <=      32'H789ABCDE;
-	initial regs[7] <=      32'H89ABCDEF;
+	initial regs[0] <=      32'H00000000;
+	initial regs[1] <=      32'H00000000;
+	initial regs[2] <=      32'H00000000;
+	initial regs[3] <=      32'H00000000;
+	initial regs[4] <=      32'H00000000;
+	initial regs[5] <=      32'H00000000;
+	initial regs[6] <=      32'H00000000;
+	initial regs[7] <=      32'H00000000;
 
 	always @ (posedge clk) begin
 		if(dstE != `RNONE) begin
