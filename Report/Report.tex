@@ -1,4 +1,4 @@
-\section{支持Y86指令集CPU的设计与实现}\label{ux652fux6301y86ux6307ux4ee4ux96c6cpuux7684ux8bbeux8ba1ux4e0eux5b9eux73b0}
+支持Y86指令集CPU的设计与实现
 
 \begin{itemize}
 \item
@@ -13,9 +13,9 @@
   实验制作的CPU为五级流水线，能够读取Y86汇编对应的十六进制数并得出相应的结果。CPU采用冯·诺依曼结构，程序指令存储器和数据存储器合并在一起。
 \end{itemize}
 
-\subsection{Y86指令集架构}\label{y86ux6307ux4ee4ux96c6ux67b6ux6784}
+\section{Y86指令集架构}\label{y86ux6307ux4ee4ux96c6ux67b6ux6784}
 
-\subsubsection{基本变量}\label{ux57faux672cux53d8ux91cf}
+\subsection{基本变量}\label{ux57faux672cux53d8ux91cf}
 
 CPU中共有8个32位的程序寄存器，指示指令的PC的长度也为32位，故程序支持最大4G的内存。CPU还有三个标志位，分别是零标志zf、符号标志sf、溢出标志of，这三个标志位统称为CC。
 
@@ -25,7 +25,7 @@ CPU中共有8个32位的程序寄存器，指示指令的PC的长度也为32位�
 \caption{Y86 programmer-visible state}
 \end{figure}
 
-\subsubsection{Y86指令}\label{y86ux6307ux4ee4}
+\subsection{Y86指令}\label{y86ux6307ux4ee4}
 
 Y86共有12类指令，长度在1字节到6字节不等。每条指令都至少有一个自己的标志位，还可能有1个字节指示使用的寄存器，4个字节来代表立即数。
 
@@ -35,7 +35,7 @@ Y86共有12类指令，长度在1字节到6字节不等。每条指令都至少�
 \caption{Y86 instruction set}
 \end{figure}
 
-\subsubsection{指令编码}\label{ux6307ux4ee4ux7f16ux7801}
+\subsection{指令编码}\label{ux6307ux4ee4ux7f16ux7801}
 
 每条指令的第一个字节的前半部分为code字段，其值从0到B共12个，标记该指令的类型，后半部分是function字段，一般的指令改字段为0，但在操作、分支、移动指令中，该字段用来区分这条指令的具体功能。
 
@@ -55,7 +55,7 @@ Y86共有12类指令，长度在1字节到6字节不等。每条指令都至少�
 
 有些指令会有四个字节的立即数，立即数在指令中以小端模式存储。
 
-\subsubsection{Y86汇编}\label{y86ux6c47ux7f16}
+\subsection{Y86汇编}\label{y86ux6c47ux7f16}
 
 直接写Y86的机器代码，不仅很麻烦，而且容易出错。对日常使用的那些汇编指令集，可以先写汇编代码，然后由汇编器转成机器代码。
 
@@ -121,11 +121,11 @@ Y86共有12类指令，长度在1字节到6字节不等。每条指令都至少�
 
 其中，冒号左边是汇编指令的地址偏移，冒号与竖线之间是CPU所能读取的机器指令，竖线右边的是原始的Y86汇编代码。
 
-\subsection{指令分段及相应硬件结构}\label{ux6307ux4ee4ux5206ux6bb5ux53caux76f8ux5e94ux786cux4ef6ux7ed3ux6784}
+\section{指令分段及相应硬件结构}\label{ux6307ux4ee4ux5206ux6bb5ux53caux76f8ux5e94ux786cux4ef6ux7ed3ux6784}
 
 为了充分利用CPU资源，便于CPU流水作业，我们需要将指令进行分段，对每一段有相应的硬件进行操作。
 
-\subsubsection{指令分段}\label{ux6307ux4ee4ux5206ux6bb5}
+\subsection{指令分段}\label{ux6307ux4ee4ux5206ux6bb5}
 
 \begin{itemize}
 \item
@@ -150,9 +150,9 @@ Computations in sequential implementation of Y86 instructions
 
 通过上面对指令执行过程中阶段的划分及各指令具体执行情况，可以确定各阶段的硬件结构。
 
-\subsubsection{硬件结构}\label{ux786cux4ef6ux7ed3ux6784}
+\subsection{硬件结构}\label{ux786cux4ef6ux7ed3ux6784}
 
-\paragraph{取指阶段}\label{ux53d6ux6307ux9636ux6bb5}
+\subsubsection{取指阶段}\label{ux53d6ux6307ux9636ux6bb5}
 
 \begin{figure}[htbp]
 \centering
@@ -162,7 +162,7 @@ Computations in sequential implementation of Y86 instructions
 
 我们根据PC从内存中取到数据之后，将第一个字节拆分成icode和ifun两个半字节数，同时根据icode对后面5个字节进行拆分、整理，得到rA、rB或valC的值，如果没有对应的值的话，将其值赋为RNONE，同时根据icode决定的该指令的长度确定下条指令取指时的PC值。
 
-\paragraph{译码和写回阶段}\label{ux8bd1ux7801ux548cux5199ux56deux9636ux6bb5}
+\subsubsection{译码和写回阶段}\label{ux8bd1ux7801ux548cux5199ux56deux9636ux6bb5}
 
 \begin{figure}[htbp]
 \centering
@@ -172,7 +172,7 @@ Computations in sequential implementation of Y86 instructions
 
 这两个阶段主要是与寄存器文件进行处理，其中译码阶段通过srcA和srcB确定要读取的寄存器，并将读取到的数据赋值给valA和valB，而写回阶段通过dstM和dstE确定要写回的寄存器，将valM和valE写入到相应的寄存器。
 
-\paragraph{执行阶段}\label{ux6267ux884cux9636ux6bb5}
+\subsubsection{执行阶段}\label{ux6267ux884cux9636ux6bb5}
 
 \begin{figure}[htbp]
 \centering
@@ -184,7 +184,7 @@ Computations in sequential implementation of Y86 instructions
 
 由之前指令分段的具体情况可以看出，除了OPl指令意外，其他的指令所需要的运算都可以归结为加法操作。并且在我们的CPU设计中，只有OPl的操作会改变CC的值，故当指令为OPl时se令t\_cc=1，以便ALU根据情况设置CC的值。
 
-\paragraph{访存阶段}\label{ux8bbfux5b58ux9636ux6bb5}
+\subsubsection{访存阶段}\label{ux8bbfux5b58ux9636ux6bb5}
 
 \begin{figure}[htbp]
 \centering
@@ -194,13 +194,13 @@ Computations in sequential implementation of Y86 instructions
 
 访存阶段主要是根据指令类型决定是要从内存中读数据还是向内存中写数据。如果要从内存中读数据的话，则有mem\_read=1，从mem\_addr这个内存地址读取4字节的数据赋给valM，如果要向内存中写程序的话，则将mem\_data的值写入从mem\_addr地址开始的4字节的位置。
 
-\subsection{流水线的实现}\label{ux6d41ux6c34ux7ebfux7684ux5b9eux73b0}
+\section{流水线的实现}\label{ux6d41ux6c34ux7ebfux7684ux5b9eux73b0}
 
-\subsubsection{要解决的问题}\label{ux8981ux89e3ux51b3ux7684ux95eeux9898}
+\subsection{要解决的问题}\label{ux8981ux89e3ux51b3ux7684ux95eeux9898}
 
 实现流水线，面临的比较大的三个问题是数据冒险、控制冒险、结构冒险。
 
-\paragraph{数据冒险}\label{ux6570ux636eux5192ux9669}
+\subsubsection{数据冒险}\label{ux6570ux636eux5192ux9669}
 
 指令按照流水线执行时，可能会发生读取数据与写入数据之间的时序与空间的相关性，成为数据冒险。如果不加以处理，可能会出现错误。如果指令乱序执行时，有3种可能的数据冒险：
 
@@ -218,19 +218,19 @@ Computations in sequential implementation of Y86 instructions
 
 对于这种情况，主要通过数据前推来实现。对于一些通过数据前推无法解决的，再通过加入气泡来实现。
 
-\paragraph{控制冒险}\label{ux63a7ux5236ux5192ux9669}
+\subsubsection{控制冒险}\label{ux63a7ux5236ux5192ux9669}
 
 指令流水时，处理器遇到分支指令，不能在流水开始阶段就判断出分支结果。
 
 对于这种情况，通过分支预测来解决，其中也会用到数据前推。
 
-\paragraph{结构冒险}\label{ux7ed3ux6784ux5192ux9669}
+\subsubsection{结构冒险}\label{ux7ed3ux6784ux5192ux9669}
 
 主要是一个存储单元被一条指令取操作数同时另一条指令要写入结果。
 
 对于这种情况，本身很难去解决。但是如果在编程的时候能够划分为代码段和数据段，保证程序本身不会修改代码，便不会出现这种问题。
 
-\subsubsection{硬件结构}\label{ux786cux4ef6ux7ed3ux6784-1}
+\subsection{硬件结构}\label{ux786cux4ef6ux7ed3ux6784-1}
 
 为了实现数据前推、分支预测、插入气泡，就必须让硬件结构与之相适应，加强个模块之间的联系。最终的硬件结构如下：
 
@@ -244,9 +244,9 @@ Computations in sequential implementation of Y86 instructions
 
 寄存器文件用来存储寄存器的值，数据寄存器用来存储指令、数据。图中还有数据前推模块和分支预测模块，这将在接下来具体说明。
 
-\subsubsection{具体实现}\label{ux5177ux4f53ux5b9eux73b0}
+\subsection{具体实现}\label{ux5177ux4f53ux5b9eux73b0}
 
-\paragraph{数据前推}\label{ux6570ux636eux524dux63a8}
+\subsubsection{数据前推}\label{ux6570ux636eux524dux63a8}
 
 考虑如下指令：
 
@@ -277,7 +277,7 @@ Computations in sequential implementation of Y86 instructions
 \caption{PIPE decode and write-back stage logic}
 \end{figure}
 
-\paragraph{分支预测}\label{ux5206ux652fux9884ux6d4b}
+\subsubsection{分支预测}\label{ux5206ux652fux9884ux6d4b}
 
 CPU需要根据PC值获取要执行指令在内存中的地址，获取指令之后才能进行译码、执行、访存、写回等操作。如果不需要实现流水线，CPU可以在实现一条指令之后再计算下个PC值。但为了实现流水线，就必须在读取一条指令之后便得到下一条指令的PC值，也就要求将更新PC阶段从回写之后调至取指之前。
 
@@ -291,7 +291,7 @@ CPU需要根据PC值获取要执行指令在内存中的地址，获取指令之
 
 为了能在得知预测结果不正确之后第一时间将PC值更新，需要使用与数据前推类似的方式将当前访存状态代表是否跳转的Cnd值传至选择PC处，根据判断进行PC值的更新。
 
-\paragraph{特殊情况处理}\label{ux7279ux6b8aux60c5ux51b5ux5904ux7406}
+\subsubsection{特殊情况处理}\label{ux7279ux6b8aux60c5ux51b5ux5904ux7406}
 
 上面所说的数据前推以及分支预测可以解决一些流水线中的问题，但是有些特殊情况仅用这两种方法是不能处理的。
 
@@ -332,7 +332,7 @@ d\_srcB\}\tabularnewline
 \caption{Additional pipeline register operations}
 \end{figure}
 
-\subparagraph{处理ret指令}\label{ux5904ux7406retux6307ux4ee4}
+\paragraph{处理ret指令}\label{ux5904ux7406retux6307ux4ee4}
 
 当从译码阶段开始检测到ret指令在之后，要保持ret之后的指令都在寄存器里面暂停，直到访存阶段获取到ret要修改PC的值后，更新指令。
 
@@ -344,7 +344,7 @@ d\_srcB\}\tabularnewline
 \caption{Actual processing of the ret instruction}
 \end{figure}
 
-\subparagraph{数据冒险}\label{ux6570ux636eux5192ux9669-1}
+\paragraph{数据冒险}\label{ux6570ux636eux5192ux9669-1}
 
 指令mrmovl和popl只有在访存阶段才能确定最终的寄存器的值，而如果接下来的一条指令就需要在译码阶段获取该寄存器的值的话，单单通过数据前推是无法实现的，必须暂停流水线,直至寄存器要修改的值从内存中取出。
 
@@ -356,7 +356,7 @@ d\_srcB\}\tabularnewline
 \caption{Handling a load/use hazard by stalling}
 \end{figure}
 
-\subparagraph{错误的分支预测}\label{ux9519ux8befux7684ux5206ux652fux9884ux6d4b}
+\paragraph{错误的分支预测}\label{ux9519ux8befux7684ux5206ux652fux9884ux6d4b}
 
 在前面提到了，为了提高流水线效率，对不确定是否需要跳转的分支进行了预测，预测这条跳转指令会执行，进而执行跳转后地址的指令。但如果在执行阶段发现本不应该跳转，就应该将流水线中错误跳转的语句除去，换成新的地址对应的代码。
 
@@ -388,7 +388,7 @@ d\_srcB\}\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{CPU程序验证}\label{cpuux7a0bux5e8fux9a8cux8bc1}
+\section{CPU程序验证}\label{cpuux7a0bux5e8fux9a8cux8bc1}
 
 首先是上面的求和程序，主要就是通过循环算出数组
 
@@ -533,9 +533,9 @@ d\_srcB\}\tabularnewline
 
 因为接下来几次ecx都不为1，所以流水线一直走了很长时间。直到程序快要结束，终于发现ecx该位为0，此时edx已变为0x2dd00。eax变为0x4d4f+0x2dd00=0x32a4f，ecx清除当前位后变成0，说明该循环结束。紧接着，CPU将会跳出子程序，进而在主函数中实现停机指令。
 
-\subsection{实验感想}\label{ux5b9eux9a8cux611fux60f3}
+\section{实验感想}\label{ux5b9eux9a8cux611fux60f3}
 
-\subsubsection{主要背景}\label{ux4e3bux8981ux80ccux666f}
+\subsection{主要背景}\label{ux4e3bux8981ux80ccux666f}
 
 以前仅仅大概了解了一下Verilog，这次就直接做CPU，确实跨度有点大。但多谢《自己动手写CPU》这本书，通过这本书我知道了应该如何下手。不过到现在还是我还是有些基本的与的电路相关东西不是很了解。
 
@@ -543,7 +543,7 @@ d\_srcB\}\tabularnewline
 
 如果跟CSAPP书上的内容相比，我感觉本次做CPU并没有多少创新之处。但是我感觉自己瞎想实现一个简单的模型和通过深入的学习系统了解方式方法相比，了解比实现更能提高一个人。这也是通过开源的魅力所在吧：如果你仅仅是自己写代码，你可能永远不会有太大突破。仅有你仔细阅读其他人的代码，才能在巨人的肩膀上更进一步。
 
-\subsubsection{版本控制}\label{ux7248ux672cux63a7ux5236}
+\subsection{版本控制}\label{ux7248ux672cux63a7ux5236}
 
 本次实验中，我第一次尝试了使用git来管理代码，进行版本控制。本次实验持续时间长，代码前后改动非常大，使用git管理能让我很清楚的知道上次都修改了什么，错误都是在哪出的，我都做出来什么改进，同时，在这个过程中，我也根据实际情况尝试了很多git的功能。现在算起来，也有60多个commit了，有的修改较多，有的修改较少，现在看起来还是蛮有成就感的。这里我把commit贴出来，作为这段时间的记录吧！
 
@@ -623,7 +623,7 @@ Request。
 \caption{GitHub}
 \end{figure}
 
-\subsubsection{下步期望}\label{ux4e0bux6b65ux671fux671b}
+\subsection{下步期望}\label{ux4e0bux6b65ux671fux671b}
 
 我在选择Y86指令集不仅是因为神书CSAPP介绍了它，更重要的是CSAPP提供了一些仿真的程序，比如比较吸引我的Y86汇编器，这样如果我做好CPU之后，我就能直接写汇编指令让机器帮我转成十六进制。同时，官方好像还有一些测试的脚本和代码，以便对我的CPU进行测试。
 
