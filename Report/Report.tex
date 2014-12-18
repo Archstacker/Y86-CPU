@@ -53,12 +53,6 @@ Y86¹²ÓÐ12ÀàÖ¸Áî£¬³¤¶ÈÔÚ1×Ö½Úµ½6×Ö½Ú²»µÈ¡£Ã¿ÌõÖ¸Áî¶¼ÖÁÉÙÓÐÒ»¸ö×Ô¼ºµÄ±êÖ¾Î»£¬»¹¿ÉÄ
 
 ºÜ¶àÖ¸Áî¶¼»áÓÐÒ»¸ö×Ö½ÚÓÃÀ´±íÊ¾ËùÓÃµ½µÄ¼Ä´æÆ÷¡£Ã¿¸ö¼Ä´æÆ÷¶¼ÓÃÒ»¸öÊý×ÖÀ´±íÊ¾£¬Ê¹ÓÃRNONE£¨0xF£©´ú±íÃ»ÓÐÓÃµ½¼Ä´æÆ÷¡£
 
-\begin{figure}[htbp]
-\centering
-\includegraphics{img/?}
-\caption{Y86 program register identifiers}
-\end{figure}
-
 ÓÐÐ©Ö¸Áî»áÓÐËÄ¸ö×Ö½ÚµÄÁ¢¼´Êý£¬Á¢¼´ÊýÔÚÖ¸ÁîÖÐÒÔÐ¡¶ËÄ£Ê½´æ´¢¡£
 
 \subsubsection{Y86»ã±à}\label{y86ux6c47ux7f16}
@@ -316,20 +310,6 @@ CPUÐèÒª¸ù¾ÝPCÖµ»ñÈ¡ÒªÖ´ÐÐÖ¸ÁîÔÚÄÚ´æÖÐµÄµØÖ·£¬»ñÈ¡Ö¸ÁîÖ®ºó²ÅÄÜ½øÐÐÒëÂë¡¢Ö´ÐÐ¡¢·Ã´
   ÉÏÃæÊ¹ÓÃÁË·ÖÖ§Ô¤²âµÄ¼¼Êõ£¬ÒªÄÜ±£Ö¤µÃµ½Ô¤²â´íÎóµÄ½á¹ûºóÔ¤²âÖ´ÐÐµÄÄÇÐ©Óï¾äÄÜ±»´ÓÁ÷Ë®ÏßÖÐÇå³ý£¬²»»á¶Ô³ÌÐò²úÉúÓ°Ïì¡£
 \end{itemize}
 
-ÕâÐ©ÌØÊâÇé¿öµÄ´¥·¢Ìõ¼þ·Ö±ðÎª£º
-
-\begin{longtable}[c]{@{}ll@{}}
-\toprule
-Çé¿ö & ´¥·¢Ìõ¼þ\tabularnewline
-\midrule
-\endhead
-´¦ÀíretÖ¸Áî & IRET ¡Ê \{D\_icode, E\_icode, M\_icode\}\tabularnewline
-Êý¾ÝÃ°ÏÕ & E\_icode ¡Ê \{IMRMOVL, IPOPL\} \&\& E\_dstM ¡Ê \{d\_srcA,
-d\_srcB\}\tabularnewline
-Ô¤²â´íÎóµÄ·ÖÖ§ & E\_icode = IJXX \&\& !e\_Cnd\tabularnewline
-\bottomrule
-\end{longtable}
-
 ½â¾öÌØÊâÖ¸ÁîµÄ·½·¨ÊÇÔÚÁ÷Ë®ÏßÖÐ¼ÓÈëÔÝÍ£»òÕßÆøÅÝ¡£ÆäÖÐ£¬ÔÝÍ£ÒâÎ¶×Å¸Ã½×¶ÎµÄÊä³öÓë¸Ã½×¶ÎµÄÊäÈëÏàÍ¬£¬ÆøÅÝÒâÎ¶×Å¸Ã½×¶ÎÊä³ö¿ÕÖ¸Áî¡£ÈçÍ¼ËùÊ¾£º
 
 \begin{figure}[htbp]
@@ -367,32 +347,6 @@ d\_srcB\}\tabularnewline
 ÔÚÇ°ÃæÌáµ½ÁË£¬ÎªÁËÌá¸ßÁ÷Ë®ÏßÐ§ÂÊ£¬¶Ô²»È·¶¨ÊÇ·ñÐèÒªÌø×ªµÄ·ÖÖ§½øÐÐÁËÔ¤²â£¬Ô¤²âÕâÌõÌø×ªÖ¸Áî»áÖ´ÐÐ£¬½ø¶øÖ´ÐÐÌø×ªºóµØÖ·µÄÖ¸Áî¡£µ«Èç¹ûÔÚÖ´ÐÐ½×¶Î·¢ÏÖ±¾²»Ó¦¸ÃÌø×ª£¬¾ÍÓ¦¸Ã½«Á÷Ë®ÏßÖÐ´íÎóÌø×ªµÄÓï¾ä³ýÈ¥£¬»»³ÉÐÂµÄµØÖ·¶ÔÓ¦µÄ´úÂë¡£
 
 ·Ç³£ÁîÈË¸ßÐËµÄÊÇ£¬ÓÉÓÚÎÒÃÇ¶ÔÖ¸Áî½øÐÐÁË·Ö¶Î£¬¶øÔÚÇ°Á½¸ö½×¶Î£¨È¡Ö¸ºÍÒëÂë£©½×¶Î²»»áÐÞ¸ÄÈ«¾Ö±äÁ¿µÄÖµ£¬ÔÚÖ´ÐÐ½×¶Î¾Í¿ÉÒÔÈ·¶¨Ìø×ªÖ¸ÁîÊÇ·ñÕýÈ·Ö´ÐÐ¡£Òò´Ë£¬Ö»ÐèÒªÔÚ·¢ÏÖ·ÖÖ§Ô¤²â´íÎóÖ®ºó½«Ç°ÃæÁ½¸ö½×¶Î±äÎªÆøÅÝ¾Í¿ÉÒÔÁË¡£
-
-¸ù¾ÝÒÔÉÏ·ÖÎö£¬¿ÉÒÔµÃµ½ÒÔÏÂ´úÂë£º
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{F_stall_o   <=      ( E_icode_i==}\OtherTok{`IMRMOVL} \NormalTok{|| E_icode_i==}\OtherTok{`IPOPL} \NormalTok{)&&}
-                    \NormalTok{( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||}
-                        \NormalTok{E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i )||}
-                    \NormalTok{( D_icode_i==}\OtherTok{`IRET} \NormalTok{|| E_icode_i==}\OtherTok{`IRET} \NormalTok{|| M_icode_i==}\OtherTok{`IRET} \NormalTok{);}
-
-\NormalTok{D_stall_o   <=      ( E_icode_i==}\OtherTok{`IMRMOVL} \NormalTok{|| E_icode_i==}\OtherTok{`IPOPL} \NormalTok{)&&}
-                    \NormalTok{( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||}
-                        \NormalTok{E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i );}
-
-\NormalTok{D_bubble_o  <=      ( E_icode_i==}\OtherTok{`IJXX} \NormalTok{&& !e_Cnd_i )||}
-                    \NormalTok{!(( E_icode_i==}\OtherTok{`IMRMOVL} \NormalTok{|| E_icode_i==}\OtherTok{`IPOPL} \NormalTok{)}
-                        \NormalTok{&&( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||}
-                            \NormalTok{E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i ) )}
-                    \NormalTok{&&( D_icode_i==}\OtherTok{`IRET} \NormalTok{|| E_icode_i==}\OtherTok{`IRET} \NormalTok{|| M_icode_i==}\OtherTok{`IRET} \NormalTok{);}
-
-\NormalTok{E_bubble_o  <=      ( E_icode_i==}\OtherTok{`IJXX} \NormalTok{&& !e_Cnd_i )||}
-                    \NormalTok{( E_icode_i==}\OtherTok{`IMRMOVL} \NormalTok{|| E_icode_i==}\OtherTok{`IPOPL} \NormalTok{)&&}
-                    \NormalTok{( E_dstM_i==d_srcA_i || E_dstM_i==d_srcB_i ||}
-                        \NormalTok{E_dstE_i==d_srcA_i || E_dstE_i==d_srcB_i );}
-\end{Highlighting}
-\end{Shaded}
 
 \subsection{CPU³ÌÐòÑéÖ¤}\label{cpuux7a0bux5e8fux9a8cux8bc1}
 
