@@ -4,26 +4,26 @@
 \begin{document}
 \begin{CJK*}{GB}{gbsn}
 
-\section{支持Y86指令集CPU的设计与实现}\label{ux652fux6301y86ux6307ux4ee4ux96c6cpuux7684ux8bbeux8ba1ux4e0eux5b9eux73b0}
+\section{֧��Y86ָ�CPU�������ʵ��}\label{ux652fux6301y86ux6307ux4ee4ux96c6cpuux7684ux8bbeux8ba1ux4e0eux5b9eux73b0}
 
 \begin{itemize}
 \item
-  \textbf{编程语言：} Verilog
+  \textbf{������ԣ�} Verilog
 \item
-  \textbf{实验环境：} Modelsim
+  \textbf{ʵ�黷����} Modelsim
 \item
-  \textbf{参考书籍：} 《自己动手写CPU》 《Computer Systems A
-  Programmer's Perspective(Second Edition)》
+  \textbf{�ο��鼮��} ���Լ�����дCPU�� ��Computer Systems A
+  Programmer's Perspective(Second Edition)��
 \item
-  \textbf{CPU基本情况}
-  实验制作的CPU为五级流水线，能够读取Y86汇编对应的十六进制数并得出相应的结果。CPU采用冯·诺依曼结构，程序指令存储器和数据存储器合并在一起。
+  \textbf{CPU�������}
+  ʵ��������CPUΪ�弶��ˮ�ߣ��ܹ���ȡY86����Ӧ��ʮ�����������ó���Ӧ�Ľ����CPU���÷롤ŵ�����ṹ������ָ��洢�������ݴ洢���ϲ���һ��
 \end{itemize}
 
-\subsection{Y86指令集架构}\label{y86ux6307ux4ee4ux96c6ux67b6ux6784}
+\subsection{Y86ָ��ܹ�}\label{y86ux6307ux4ee4ux96c6ux67b6ux6784}
 
-\subsubsection{基本变量}\label{ux57faux672cux53d8ux91cf}
+\subsubsection{��������}\label{ux57faux672cux53d8ux91cf}
 
-CPU中共有8个32位的程序寄存器，指示指令的PC的长度也为32位，故程序支持最大4G的内存。CPU还有三个标志位，分别是零标志zf、符号标志sf、溢出标志of，这三个标志位统称为CC。
+CPU�й���8��32λ�ĳ���Ĵ�����ָʾָ���PC�ĳ���ҲΪ32λ���ʳ���֧�����4G���ڴ档CPU����������־λ���ֱ������־zf�����ű�־sf�������־of����������־λͳ��ΪCC��
 
 \begin{figure}[htbp]
 \centering
@@ -31,9 +31,9 @@ CPU中共有8个32位的程序寄存器，指示指令的PC的长度也为32位�
 \caption{Y86 programmer-visible state}
 \end{figure}
 
-\subsubsection{Y86指令}\label{y86ux6307ux4ee4}
+\subsubsection{Y86ָ��}\label{y86ux6307ux4ee4}
 
-Y86共有12类指令，长度在1字节到6字节不等。每条指令都至少有一个自己的标志位，还可能有1个字节指示使用的寄存器，4个字节来代表立即数。
+Y86����12��ָ�������1�ֽڵ�6�ֽڲ��ȡ�ÿ��ָ�������һ���Լ��ı�־λ����������1���ֽ�ָʾʹ�õļĴ�����4���ֽ���������������
 
 \begin{figure}[htbp]
 \centering
@@ -41,9 +41,9 @@ Y86共有12类指令，长度在1字节到6字节不等。每条指令都至少�
 \caption{Y86 instruction set}
 \end{figure}
 
-\subsubsection{指令编码}\label{ux6307ux4ee4ux7f16ux7801}
+\subsubsection{ָ�����}\label{ux6307ux4ee4ux7f16ux7801}
 
-每条指令的第一个字节的前半部分为code字段，其值从0到B共12个，标记该指令的类型，后半部分是function字段，一般的指令改字段为0，但在操作、分支、移动指令中，该字段用来区分这条指令的具体功能。
+ÿ��ָ��ĵ�һ���ֽڵ�ǰ�벿��Ϊcode�ֶΣ���ֵ��0��B��12������Ǹ�ָ������ͣ���벿����function�ֶΣ�һ���ָ����ֶ�Ϊ0�����ڲ�������֧���ƶ�ָ���У����ֶ�������������ָ��ľ��幦�ܡ�
 
 \begin{figure}[htbp]
 \centering
@@ -51,7 +51,7 @@ Y86共有12类指令，长度在1字节到6字节不等。每条指令都至少�
 \caption{Function codes for Y86 instruction set}
 \end{figure}
 
-很多指令都会有一个字节用来表示所用到的寄存器。每个寄存器都用一个数字来表示，使用RNONE（0xF）代表没有用到寄存器。
+�ܶ�ָ�����һ���ֽ�������ʾ���õ��ļĴ�����ÿ���Ĵ�������һ����������ʾ��ʹ��RNONE��0xF������û���õ��Ĵ�����
 
 \begin{figure}[htbp]
 \centering
@@ -59,15 +59,15 @@ Y86共有12类指令，长度在1字节到6字节不等。每条指令都至少�
 \caption{Y86 program register identifiers}
 \end{figure}
 
-有些指令会有四个字节的立即数，立即数在指令中以小端模式存储。
+��Щָ������ĸ��ֽڵ�����������������ָ������С��ģʽ�洢��
 
-\subsubsection{Y86汇编}\label{y86ux6c47ux7f16}
+\subsubsection{Y86���}\label{y86ux6c47ux7f16}
 
-直接写Y86的机器代码，不仅很麻烦，而且容易出错。对日常使用的那些汇编指令集，可以先写汇编代码，然后由汇编器转成机器代码。
+ֱ��дY86�Ļ������룬�������鷳���������׳��������ճ�ʹ�õ���Щ���ָ���������д�����룬Ȼ���ɻ����ת�ɻ������롣
 
-对于X86汇编语言来说，有nasm、masm等汇编器，而对于这里用到的Y86汇编语言，也有相应的汇编器yas。通过yas，可以将Y86汇编转成机器代码。
+����X86���������˵����nasm��masm�Ȼ�����������������õ���Y86������ԣ�Ҳ����Ӧ�Ļ����yas��ͨ��yas�����Խ�Y86���ת�ɻ������롣
 
-下面是一个Y86转成机器代码的实例：
+������һ��Y86ת�ɻ��������ʵ����
 
 \begin{verbatim}
                       | /* $begin code-yso */
@@ -125,40 +125,40 @@ Y86共有12类指令，长度在1字节到6字节不等。每条指令都至少�
                       | /* $end code-yso */
 \end{verbatim}
 
-其中，冒号左边是汇编指令的地址偏移，冒号与竖线之间是CPU所能读取的机器指令，竖线右边的是原始的Y86汇编代码。
+���У�ð������ǻ��ָ��ĵ�ַƫ�ƣ�ð��������֮����CPU���ܶ�ȡ�Ļ���ָ������ұߵ���ԭʼ��Y86�����롣
 
-\subsection{指令分段及相应硬件结构}\label{ux6307ux4ee4ux5206ux6bb5ux53caux76f8ux5e94ux786cux4ef6ux7ed3ux6784}
+\subsection{ָ��ֶμ���ӦӲ���ṹ}\label{ux6307ux4ee4ux5206ux6bb5ux53caux76f8ux5e94ux786cux4ef6ux7ed3ux6784}
 
-为了充分利用CPU资源，便于CPU流水作业，我们需要将指令进行分段，对每一段有相应的硬件进行操作。
+Ϊ�˳������CPU��Դ������CPU��ˮ��ҵ��������Ҫ��ָ����зֶΣ���ÿһ������Ӧ��Ӳ�����в�����
 
-\subsubsection{指令分段}\label{ux6307ux4ee4ux5206ux6bb5}
+\subsubsection{ָ��ֶ�}\label{ux6307ux4ee4ux5206ux6bb5}
 
 \begin{itemize}
 \item
-  \textbf{取指（fetch）}
-  从存储器中，从PC值所指示的位置开始读取6字节的数据。根据第一个字节中的icode（指令代码）决定该命令各字节代表的意义，并依情况读取所要操作的寄存器操作数或立即数，同时根据指令决定下一次取指时的PC值，确定回写时要操作的寄存器。
+  \textbf{ȡָ��fetch��}
+  �Ӵ洢���У���PCֵ��ָʾ��λ�ÿ�ʼ��ȡ6�ֽڵ����ݡ����ݵ�һ���ֽ��е�icode��ָ����룩������������ֽڴ��������壬���������ȡ��Ҫ�����ļĴ�������������������ͬʱ����ָ�������һ��ȡָʱ��PCֵ��ȷ����дʱҪ�����ļĴ�����
 \item
-  \textbf{译码（decode）}
-  主要是向寄存器发信号，读取rA、rB对应的寄存器的值，赋到valA与valB中。
+  \textbf{���루decode��}
+  ��Ҫ����Ĵ������źţ���ȡrA��rB��Ӧ�ļĴ�����ֵ������valA��valB�С�
 \item
-  \textbf{执行（execute）}
-  对数据进行运算，同时确定标志位CC的值及决定是否需要跳转的Cnd位。
+  \textbf{ִ�У�execute��}
+  �����ݽ������㣬ͬʱȷ����־λCC��ֵ�������Ƿ���Ҫ��ת��Cndλ��
 \item
-  \textbf{访存（memory）}
-  与存储器进行操作，从存储器中读取数据或向存储器中写入数据。
+  \textbf{�ô棨memory��}
+  ��洢�����в������Ӵ洢���ж�ȡ���ݻ���洢����д�����ݡ�
 \item
-  \textbf{写回（write back）} 将操作结果写入最多两个到寄存器。
+  \textbf{д�أ�write back��} ���������д������������Ĵ�����
 \end{itemize}
 
-按上面的标准对每条指令进行细分的话可以得到以下几个表
+������ı�׼��ÿ��ָ�����ϸ�ֵĻ����Եõ����¼�����
 
 Computations in sequential implementation of Y86 instructions
 
-通过上面对指令执行过程中阶段的划分及各指令具体执行情况，可以确定各阶段的硬件结构。
+ͨ�������ָ��ִ�й����н׶εĻ��ּ���ָ�����ִ�����������ȷ�����׶ε�Ӳ���ṹ��
 
-\subsubsection{硬件结构}\label{ux786cux4ef6ux7ed3ux6784}
+\subsubsection{Ӳ���ṹ}\label{ux786cux4ef6ux7ed3ux6784}
 
-\paragraph{取指阶段}\label{ux53d6ux6307ux9636ux6bb5}
+\paragraph{ȡָ�׶�}\label{ux53d6ux6307ux9636ux6bb5}
 
 \begin{figure}[htbp]
 \centering
@@ -166,9 +166,9 @@ Computations in sequential implementation of Y86 instructions
 \caption{SEQ fetch stage}
 \end{figure}
 
-我们根据PC从内存中取到数据之后，将第一个字节拆分成icode和ifun两个半字节数，同时根据icode对后面5个字节进行拆分、整理，得到rA、rB或valC的值，如果没有对应的值的话，将其值赋为RNONE，同时根据icode决定的该指令的长度确定下条指令取指时的PC值。
+���Ǹ���PC���ڴ���ȡ������֮�󣬽���һ���ֽڲ�ֳ�icode��ifun�������ֽ�����ͬʱ����icode�Ժ���5���ֽڽ��в�֡��������õ�rA��rB��valC��ֵ�����û�ж�Ӧ��ֵ�Ļ�������ֵ��ΪRNONE��ͬʱ����icode�����ĸ�ָ��ĳ���ȷ������ָ��ȡָʱ��PCֵ��
 
-\paragraph{译码和写回阶段}\label{ux8bd1ux7801ux548cux5199ux56deux9636ux6bb5}
+\paragraph{�����д�ؽ׶�}\label{ux8bd1ux7801ux548cux5199ux56deux9636ux6bb5}
 
 \begin{figure}[htbp]
 \centering
@@ -176,9 +176,9 @@ Computations in sequential implementation of Y86 instructions
 \caption{SEQ decode and write-back stage}
 \end{figure}
 
-这两个阶段主要是与寄存器文件进行处理，其中译码阶段通过srcA和srcB确定要读取的寄存器，并将读取到的数据赋值给valA和valB，而写回阶段通过dstM和dstE确定要写回的寄存器，将valM和valE写入到相应的寄存器。
+�������׶���Ҫ����Ĵ����ļ����д�������������׶�ͨ��srcA��srcBȷ��Ҫ��ȡ�ļĴ�����������ȡ�������ݸ�ֵ��valA��valB����д�ؽ׶�ͨ��dstM��dstEȷ��Ҫд�صļĴ�������valM��valEд�뵽��Ӧ�ļĴ�����
 
-\paragraph{执行阶段}\label{ux6267ux884cux9636ux6bb5}
+\paragraph{ִ�н׶�}\label{ux6267ux884cux9636ux6bb5}
 
 \begin{figure}[htbp]
 \centering
@@ -186,11 +186,11 @@ Computations in sequential implementation of Y86 instructions
 \caption{SEQ execute stage}
 \end{figure}
 
-执行阶段要根据指令的类型确定所要进行的操作（加、减、与、异或）以及是否要设置标志位，对两个输入的值来进行运算，并根据计算情况得到标志位CC和决定是否需要跳转的Cnd。
+ִ�н׶�Ҫ����ָ�������ȷ����Ҫ���еĲ������ӡ������롢����Լ��Ƿ�Ҫ���ñ�־λ�������������ֵ���������㣬�����ݼ�������õ���־λCC�;����Ƿ���Ҫ��ת��Cnd��
 
-由之前指令分段的具体情况可以看出，除了OPl指令意外，其他的指令所需要的运算都可以归结为加法操作。并且在我们的CPU设计中，只有OPl的操作会改变CC的值，故当指令为OPl时se令t\_cc=1，以便ALU根据情况设置CC的值。
+��֮ǰָ��ֶεľ���������Կ���������OPlָ�����⣬������ָ������Ҫ�����㶼���Թ��Ϊ�ӷ����������������ǵ�CPU����У�ֻ��OPl�Ĳ�����ı�CC��ֵ���ʵ�ָ��ΪOPlʱse��t\_cc=1���Ա�ALU�����������CC��ֵ��
 
-\paragraph{访存阶段}\label{ux8bbfux5b58ux9636ux6bb5}
+\paragraph{�ô�׶�}\label{ux8bbfux5b58ux9636ux6bb5}
 
 \begin{figure}[htbp]
 \centering
@@ -198,47 +198,47 @@ Computations in sequential implementation of Y86 instructions
 \caption{SEQ memory stage}
 \end{figure}
 
-访存阶段主要是根据指令类型决定是要从内存中读数据还是向内存中写数据。如果要从内存中读数据的话，则有mem\_read=1，从mem\_addr这个内存地址读取4字节的数据赋给valM，如果要向内存中写程序的话，则将mem\_data的值写入从mem\_addr地址开始的4字节的位置。
+�ô�׶���Ҫ�Ǹ���ָ�����;�����Ҫ���ڴ��ж����ݻ������ڴ���д���ݡ����Ҫ���ڴ��ж����ݵĻ�������mem\_read=1����mem\_addr����ڴ��ַ��ȡ4�ֽڵ����ݸ���valM�����Ҫ���ڴ���д����Ļ�����mem\_data��ֵд���mem\_addr��ַ��ʼ��4�ֽڵ�λ�á�
 
-\subsection{流水线的实现}\label{ux6d41ux6c34ux7ebfux7684ux5b9eux73b0}
+\subsection{��ˮ�ߵ�ʵ��}\label{ux6d41ux6c34ux7ebfux7684ux5b9eux73b0}
 
-\subsubsection{要解决的问题}\label{ux8981ux89e3ux51b3ux7684ux95eeux9898}
+\subsubsection{Ҫ���������}\label{ux8981ux89e3ux51b3ux7684ux95eeux9898}
 
-实现流水线，面临的比较大的三个问题是数据冒险、控制冒险、结构冒险。
+ʵ����ˮ�ߣ����ٵıȽϴ����������������ð�ա�����ð�ա��ṹð�ա�
 
-\paragraph{数据冒险}\label{ux6570ux636eux5192ux9669}
+\paragraph{����ð��}\label{ux6570ux636eux5192ux9669}
 
-指令按照流水线执行时，可能会发生读取数据与写入数据之间的时序与空间的相关性，成为数据冒险。如果不加以处理，可能会出现错误。如果指令乱序执行时，有3种可能的数据冒险：
+ָ�����ˮ��ִ��ʱ�����ܻᷢ����ȡ������д������֮���ʱ����ռ������ԣ���Ϊ����ð�ա���������Դ��������ܻ���ִ������ָ������ִ��ʱ����3�ֿ��ܵ�����ð�գ�
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
 \item
-  写后读（RAW）
+  д�����RAW��
 \item
-  读后写（WAR）
+  ����д��WAR��
 \item
-  写后写（WAW）
+  д��д��WAW��
 \end{itemize}
 
-但在本CPU中，已经将各指令进行了分段，读取寄存器只会发生在译码阶段，修改寄存器只会发生写回阶段，读取和修改内存只会在访存阶段且不会在一条指令中，故后一条指令对寄存器或内存的写操作一定在前一条指令的对相应结构读操作或写操作后面，故读后写和写后写两种冲突不可能出现。故着重需要解决的是写后读这种数据冒险。
+���ڱ�CPU�У��Ѿ�����ָ������˷ֶΣ���ȡ�Ĵ���ֻ�ᷢ��������׶Σ��޸ļĴ���ֻ�ᷢ��д�ؽ׶Σ���ȡ���޸��ڴ�ֻ���ڷô�׶��Ҳ�����һ��ָ���У��ʺ�һ��ָ��ԼĴ������ڴ��д����һ����ǰһ��ָ��Ķ���Ӧ�ṹ��������д�������棬�ʶ���д��д��д���ֳ�ͻ�����ܳ��֡���������Ҫ�������д�����������ð�ա�
 
-对于这种情况，主要通过数据前推来实现。对于一些通过数据前推无法解决的，再通过加入气泡来实现。
+���������������Ҫͨ������ǰ����ʵ�֡�����һЩͨ������ǰ���޷�����ģ���ͨ������������ʵ�֡�
 
-\paragraph{控制冒险}\label{ux63a7ux5236ux5192ux9669}
+\paragraph{����ð��}\label{ux63a7ux5236ux5192ux9669}
 
-指令流水时，处理器遇到分支指令，不能在流水开始阶段就判断出分支结果。
+ָ����ˮʱ��������������ָ֧���������ˮ��ʼ�׶ξ��жϳ���֧�����
 
-对于这种情况，通过分支预测来解决，其中也会用到数据前推。
+�������������ͨ����֧Ԥ�������������Ҳ���õ�����ǰ�ơ�
 
-\paragraph{结构冒险}\label{ux7ed3ux6784ux5192ux9669}
+\paragraph{�ṹð��}\label{ux7ed3ux6784ux5192ux9669}
 
-主要是一个存储单元被一条指令取操作数同时另一条指令要写入结果。
+��Ҫ��һ���洢��Ԫ��һ��ָ��ȡ������ͬʱ��һ��ָ��Ҫд������
 
-对于这种情况，本身很难去解决。但是如果在编程的时候能够划分为代码段和数据段，保证程序本身不会修改代码，便不会出现这种问题。
+���������������������ȥ�������������ڱ�̵�ʱ���ܹ�����Ϊ����κ����ݶΣ���֤�����������޸Ĵ��룬�㲻������������⡣
 
-\subsubsection{硬件结构}\label{ux786cux4ef6ux7ed3ux6784-1}
+\subsubsection{Ӳ���ṹ}\label{ux786cux4ef6ux7ed3ux6784-1}
 
-为了实现数据前推、分支预测、插入气泡，就必须让硬件结构与之相适应，加强个模块之间的联系。最终的硬件结构如下：
+Ϊ��ʵ������ǰ�ơ���֧Ԥ�⡢�������ݣ��ͱ�����Ӳ���ṹ��֮����Ӧ����ǿ��ģ��֮�����ϵ�����յ�Ӳ���ṹ���£�
 
 \begin{figure}[htbp]
 \centering
@@ -246,15 +246,15 @@ Computations in sequential implementation of Y86 instructions
 \caption{Hardware structure of PIPE}
 \end{figure}
 
-其中，标号为F、D、E、M、W五个阶段为时序逻辑电路部分，用来对上一层得到的结果在下一个时钟周期到来时传递给下一层。这五个阶段之间夹的是取指、译码、执行、访存四个组合逻辑电路，分布计为f、d、e、m，这是CPU具体操作的部分。
+���У����ΪF��D��E��M��W����׶�Ϊʱ���߼���·���֣���������һ��õ��Ľ������һ��ʱ�����ڵ���ʱ���ݸ���һ�㡣������׶�֮��е���ȡָ�����롢ִ�С��ô��ĸ�����߼���·���ֲ���Ϊf��d��e��m������CPU��������Ĳ��֡�
 
-寄存器文件用来存储寄存器的值，数据寄存器用来存储指令、数据。图中还有数据前推模块和分支预测模块，这将在接下来具体说明。
+�Ĵ����ļ������洢�Ĵ�����ֵ�����ݼĴ��������洢ָ����ݡ�ͼ�л�������ǰ��ģ��ͷ�֧Ԥ��ģ�飬�⽫�ڽ���������˵����
 
-\subsubsection{具体实现}\label{ux5177ux4f53ux5b9eux73b0}
+\subsubsection{����ʵ��}\label{ux5177ux4f53ux5b9eux73b0}
 
-\paragraph{数据前推}\label{ux6570ux636eux524dux63a8}
+\paragraph{����ǰ��}\label{ux6570ux636eux524dux63a8}
 
-考虑如下指令：
+��������ָ�
 
 \begin{verbatim}
 0x000:irmovl $10,%ebx
@@ -263,7 +263,7 @@ Computations in sequential implementation of Y86 instructions
 0x00e:halt
 \end{verbatim}
 
-当addl命令在译码阶段，需要从寄存器文件中取到寄存器ebx和eax的值来进行下一步的操作。而此时第一条指令才到访存阶段，第二条指令才到执行阶段，还没有更新寄存器文件，引起addl取不到正确的寄存器值，也即上面说的``写后读''数据冒险。
+��addl����������׶Σ���Ҫ�ӼĴ����ļ���ȡ���Ĵ���ebx��eax��ֵ��������һ���Ĳ���������ʱ��һ��ָ��ŵ��ô�׶Σ��ڶ���ָ��ŵ�ִ�н׶Σ���û�и��¼Ĵ����ļ�������addlȡ������ȷ�ļĴ���ֵ��Ҳ������˵��``д���''����ð�ա�
 
 \begin{figure}[htbp]
 \centering
@@ -271,11 +271,11 @@ Computations in sequential implementation of Y86 instructions
 \caption{Pipelined execution of prog4 without special pipeline control}
 \end{figure}
 
-对于这种情况，我们可以通过在addl前面加入三个气泡，也即等到前面两条条指令都写回阶段更新寄存器的值之后再进行译码，取得正确的寄存器的值。
+����������������ǿ���ͨ����addlǰ������������ݣ�Ҳ���ȵ�ǰ��������ָ�д�ؽ׶θ��¼Ĵ�����ֵ֮���ٽ������룬ȡ����ȷ�ļĴ�����ֵ��
 
-但有趣的是，指令irmovl最终要修改的寄存器的值在执行阶段就已经可以确定，只不过需要再过几个时钟周期的传递才能送入寄存器文件。也就是说，在第三条指令进行译码的时候，在时间上它所需要的两个操作数的值已经生成了。因此我们可以通过数据前推的方式，在译码阶段查看目前处于执行、访存、写回阶段最终要写人到的寄存器及其值，如果有需要的值的话就直接取过来。
+����Ȥ���ǣ�ָ��irmovl����Ҫ�޸ĵļĴ�����ֵ��ִ�н׶ξ��Ѿ�����ȷ����ֻ������Ҫ�ٹ�����ʱ�����ڵĴ��ݲ�������Ĵ����ļ���Ҳ����˵���ڵ�����ָ����������ʱ����ʱ����������Ҫ��������������ֵ�Ѿ������ˡ�������ǿ���ͨ������ǰ�Ƶķ�ʽ��������׶β鿴Ŀǰ����ִ�С��ô桢д�ؽ׶�����Ҫд�˵��ļĴ�������ֵ���������Ҫ��ֵ�Ļ���ֱ��ȡ������
 
-最终写回到寄存器的值主要由两个途径生成。一是在执行阶段计算出结果的valE值，最终写入dstE指示的寄存器，二是在访存阶段获取的valM值，最终写人dstM指示的寄存器。因此我们需要前推的是执行、访存、写回阶段的valE、dstE与访存、写回阶段的valM、dstM。结合CPU的硬件结构，为了实现数据前推实现为：
+����д�ص��Ĵ�����ֵ��Ҫ������;�����ɡ�һ����ִ�н׶μ���������valEֵ������д��dstEָʾ�ļĴ����������ڷô�׶λ�ȡ��valMֵ������д��dstMָʾ�ļĴ��������������Ҫǰ�Ƶ���ִ�С��ô桢д�ؽ׶ε�valE��dstE��ô桢д�ؽ׶ε�valM��dstM�����CPU��Ӳ���ṹ��Ϊ��ʵ������ǰ��ʵ��Ϊ��
 
 \begin{figure}[htbp]
 \centering
@@ -283,54 +283,54 @@ Computations in sequential implementation of Y86 instructions
 \caption{PIPE decode and write-back stage logic}
 \end{figure}
 
-\paragraph{分支预测}\label{ux5206ux652fux9884ux6d4b}
+\paragraph{��֧Ԥ��}\label{ux5206ux652fux9884ux6d4b}
 
-CPU需要根据PC值获取要执行指令在内存中的地址，获取指令之后才能进行译码、执行、访存、写回等操作。如果不需要实现流水线，CPU可以在实现一条指令之后再计算下个PC值。但为了实现流水线，就必须在读取一条指令之后便得到下一条指令的PC值，也就要求将更新PC阶段从回写之后调至取指之前。
+CPU��Ҫ����PCֵ��ȡҪִ��ָ�����ڴ��еĵ�ַ����ȡָ��֮����ܽ������롢ִ�С��ô桢д�صȲ������������Ҫʵ����ˮ�ߣ�CPU������ʵ��һ��ָ��֮���ټ����¸�PCֵ����Ϊ��ʵ����ˮ�ߣ��ͱ����ڶ�ȡһ��ָ��֮���õ���һ��ָ���PCֵ��Ҳ��Ҫ�󽫸���PC�׶δӻ�д֮�����ȡָ֮ǰ��
 
-对于指令不改变PC值，这点还是很容易完成的，只需要通过指令类型得到指令的长度进而由当前PC值得到下次的PC值。
+����ָ��ı�PCֵ����㻹�Ǻ�������ɵģ�ֻ��Ҫͨ��ָ�����͵õ�ָ��ĳ��Ƚ����ɵ�ǰPCֵ�õ��´ε�PCֵ��
 
-但是三个控制跳转的指令，jXX、call和ret是有可能会改变程序的PC值实现程序跳转的。其中，jmp、call、ret指令如果能执行到一定会跳转，jXX中除jmp之外的指令是否跳转是根据CC标志位来的，有可能跳转也有可能不跳转。
+��������������ת��ָ�jXX��call��ret���п��ܻ�ı�����PCֵʵ�ֳ�����ת�ġ����У�jmp��call��retָ�������ִ�е�һ������ת��jXX�г�jmp֮���ָ���Ƿ���ת�Ǹ���CC��־λ���ģ��п�����תҲ�п��ܲ���ת��
 
-对于那些有可能跳转也有可能不跳转的，我们固然可以通过加入气泡的方法等待确定是否确定跳转后再更新PC值获取下一条指令，但这样会白白浪费几个周期。我们可以预测跳转是否会执行，根据预测执行接下来的命令。当能决定是否要跳转时，如果发现之前预测错误再退回从新的位置开始，如果之前预测对了，就白赚了几个周期。预测的方式主要有总是预测会执行（AT），从来不预测会执行（NT），向后跳转的指令预测会执行、向前跳转的指令预测不会执行（BTFNT）几种，经过统计分析发现这几种预测的正确率分别约为60\%、40\%、65\%。这里我们是采用的总是预测会执行的策略。
+������Щ�п�����תҲ�п��ܲ���ת�ģ����ǹ�Ȼ����ͨ���������ݵķ����ȴ�ȷ���Ƿ�ȷ����ת���ٸ���PCֵ��ȡ��һ��ָ���������װ��˷Ѽ������ڡ����ǿ���Ԥ����ת�Ƿ��ִ�У�����Ԥ��ִ�н�������������ܾ����Ƿ�Ҫ��תʱ���������֮ǰԤ��������˻ش��µ�λ�ÿ�ʼ�����֮ǰԤ����ˣ��Ͱ�׬�˼������ڡ�Ԥ��ķ�ʽ��Ҫ������Ԥ���ִ�У�AT����������Ԥ���ִ�У�NT���������ת��ָ��Ԥ���ִ�С���ǰ��ת��ָ��Ԥ�ⲻ��ִ�У�BTFNT�����֣�����ͳ�Ʒ��������⼸��Ԥ�����ȷ�ʷֱ�ԼΪ60\%��40\%��65\%�����������ǲ��õ�����Ԥ���ִ�еĲ��ԡ�
 
-因为call一定会跳转，按照预测jXX也一定会跳转，因此在更新PC的时候，对正常的指令都是通过在取指阶段通过当前PC值加上指令的长度获得下条指令的PC值valP，而对call和jXX两类指令来说更新的PC值的地址即为改指令中的立即数代表的地址。
+��Ϊcallһ������ת������Ԥ��jXXҲһ������ת������ڸ���PC��ʱ�򣬶�������ָ���ͨ����ȡָ�׶�ͨ����ǰPCֵ����ָ��ĳ��Ȼ������ָ���PCֵvalP������call��jXX����ָ����˵���µ�PCֵ�ĵ�ַ��Ϊ��ָ���е������������ĵ�ַ��
 
-为了能在得知预测结果不正确之后第一时间将PC值更新，需要使用与数据前推类似的方式将当前访存状态代表是否跳转的Cnd值传至选择PC处，根据判断进行PC值的更新。
+Ϊ�����ڵ�֪Ԥ��������ȷ֮���һʱ�佫PCֵ���£���Ҫʹ��������ǰ�����Ƶķ�ʽ����ǰ�ô�״̬�����Ƿ���ת��Cndֵ����ѡ��PC���������жϽ���PCֵ�ĸ��¡�
 
-\paragraph{特殊情况处理}\label{ux7279ux6b8aux60c5ux51b5ux5904ux7406}
+\paragraph{�����������}\label{ux7279ux6b8aux60c5ux51b5ux5904ux7406}
 
-上面所说的数据前推以及分支预测可以解决一些流水线中的问题，但是有些特殊情况仅用这两种方法是不能处理的。
+������˵������ǰ���Լ���֧Ԥ����Խ��һЩ��ˮ���е����⣬������Щ����������������ַ����ǲ��ܴ����ġ�
 
-特殊情况有：
+��������У�
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
 \item
-  \textbf{处理ret指令}
-  ret指令一定会改变PC的值，但是要改变成的值要在访存阶段才能确定。而jXX和call要改变PC的值在取指阶段就能确定，这就是ret命令很难处理的地方。同时，由于ret指令肯定会跳转，因此后面紧跟着的指令就不需要执行了。
+  \textbf{����retָ��}
+  retָ��һ����ı�PC��ֵ������Ҫ�ı�ɵ�ֵҪ�ڷô�׶β���ȷ������jXX��callҪ�ı�PC��ֵ��ȡָ�׶ξ���ȷ���������ret������Ѵ����ĵط���ͬʱ������retָ��϶�����ת����˺�������ŵ�ָ��Ͳ���Ҫִ���ˡ�
 \item
-  \textbf{数据冒险}
-  虽然通过数据前推的方式可以解决一些写后读的问题，但是还是有些情况无法解决。
+  \textbf{����ð��}
+  ��Ȼͨ������ǰ�Ƶķ�ʽ���Խ��һЩд��������⣬���ǻ�����Щ����޷������
 \item
-  \textbf{预测错误的分支}
-  上面使用了分支预测的技术，要能保证得到预测错误的结果后预测执行的那些语句能被从流水线中清除，不会对程序产生影响。
+  \textbf{Ԥ�����ķ�֧}
+  ����ʹ���˷�֧Ԥ��ļ�����Ҫ�ܱ�֤�õ�Ԥ�����Ľ����Ԥ��ִ�е���Щ����ܱ�����ˮ�������������Գ������Ӱ�졣
 \end{itemize}
 
-这些特殊情况的触发条件分别为：
+��Щ��������Ĵ��������ֱ�Ϊ��
 
 \begin{longtable}[c]{@{}ll@{}}
 \toprule
-情况 & 触发条件\tabularnewline
+��� & ��������\tabularnewline
 \midrule
 \endhead
-处理ret指令 & IRET ∈ \{D\_icode, E\_icode, M\_icode\}\tabularnewline
-数据冒险 & E\_icode ∈ \{IMRMOVL, IPOPL\} \&\& E\_dstM ∈ \{d\_srcA,
+����retָ�� & IRET �� \{D\_icode, E\_icode, M\_icode\}\tabularnewline
+����ð�� & E\_icode �� \{IMRMOVL, IPOPL\} \&\& E\_dstM �� \{d\_srcA,
 d\_srcB\}\tabularnewline
-预测错误的分支 & E\_icode = IJXX \&\& !e\_Cnd\tabularnewline
+Ԥ�����ķ�֧ & E\_icode = IJXX \&\& !e\_Cnd\tabularnewline
 \bottomrule
 \end{longtable}
 
-解决特殊指令的方法是在流水线中加入暂停或者气泡。其中，暂停意味着该阶段的输出与该阶段的输入相同，气泡意味着该阶段输出空指令。如图所示：
+�������ָ��ķ���������ˮ���м�����ͣ�������ݡ����У���ͣ��ζ�Ÿý׶ε������ý׶ε�������ͬ��������ζ�Ÿý׶������ָ���ͼ��ʾ��
 
 \begin{figure}[htbp]
 \centering
@@ -338,11 +338,11 @@ d\_srcB\}\tabularnewline
 \caption{Additional pipeline register operations}
 \end{figure}
 
-\subparagraph{处理ret指令}\label{ux5904ux7406retux6307ux4ee4}
+\subparagraph{����retָ��}\label{ux5904ux7406retux6307ux4ee4}
 
-当从译码阶段开始检测到ret指令在之后，要保持ret之后的指令都在寄存器里面暂停，直到访存阶段获取到ret要修改PC的值后，更新指令。
+��������׶ο�ʼ��⵽retָ����֮��Ҫ����ret֮���ָ��ڼĴ���������ͣ��ֱ���ô�׶λ�ȡ��retҪ�޸�PC��ֵ�󣬸���ָ�
 
-在流水线中的表示如下图：
+����ˮ���еı�ʾ����ͼ��
 
 \begin{figure}[htbp]
 \centering
@@ -350,11 +350,11 @@ d\_srcB\}\tabularnewline
 \caption{Actual processing of the ret instruction}
 \end{figure}
 
-\subparagraph{数据冒险}\label{ux6570ux636eux5192ux9669-1}
+\subparagraph{����ð��}\label{ux6570ux636eux5192ux9669-1}
 
-指令mrmovl和popl只有在访存阶段才能确定最终的寄存器的值，而如果接下来的一条指令就需要在译码阶段获取该寄存器的值的话，单单通过数据前推是无法实现的，必须暂停流水线,直至寄存器要修改的值从内存中取出。
+ָ��mrmovl��poplֻ���ڷô�׶β���ȷ�����յļĴ�����ֵ���������������һ��ָ�����Ҫ������׶λ�ȡ�üĴ�����ֵ�Ļ�������ͨ������ǰ�����޷�ʵ�ֵģ�������ͣ��ˮ��,ֱ���Ĵ���Ҫ�޸ĵ�ֵ���ڴ���ȡ����
 
-在流水线中的表示如下图：
+����ˮ���еı�ʾ����ͼ��
 
 \begin{figure}[htbp]
 \centering
@@ -362,13 +362,13 @@ d\_srcB\}\tabularnewline
 \caption{Handling a load/use hazard by stalling}
 \end{figure}
 
-\subparagraph{错误的分支预测}\label{ux9519ux8befux7684ux5206ux652fux9884ux6d4b}
+\subparagraph{����ķ�֧Ԥ��}\label{ux9519ux8befux7684ux5206ux652fux9884ux6d4b}
 
-在前面提到了，为了提高流水线效率，对不确定是否需要跳转的分支进行了预测，预测这条跳转指令会执行，进而执行跳转后地址的指令。但如果在执行阶段发现本不应该跳转，就应该将流水线中错误跳转的语句除去，换成新的地址对应的代码。
+��ǰ���ᵽ�ˣ�Ϊ�������ˮ��Ч�ʣ��Բ�ȷ���Ƿ���Ҫ��ת�ķ�֧������Ԥ�⣬Ԥ��������תָ���ִ�У�����ִ����ת���ַ��ָ��������ִ�н׶η��ֱ���Ӧ����ת����Ӧ�ý���ˮ���д�����ת������ȥ�������µĵ�ַ��Ӧ�Ĵ��롣
 
-非常令人高兴的是，由于我们对指令进行了分段，而在前两个阶段（取指和译码）阶段不会修改全局变量的值，在执行阶段就可以确定跳转指令是否正确执行。因此，只需要在发现分支预测错误之后将前面两个阶段变为气泡就可以了。
+�ǳ����˸��˵��ǣ��������Ƕ�ָ������˷ֶΣ�����ǰ�����׶Σ�ȡָ�����룩�׶β����޸�ȫ�ֱ�����ֵ����ִ�н׶ξͿ���ȷ����תָ���Ƿ���ȷִ�С���ˣ�ֻ��Ҫ�ڷ��ַ�֧Ԥ�����֮��ǰ�������׶α�Ϊ���ݾͿ����ˡ�
 
-根据以上分析，可以得到以下代码：
+�������Ϸ��������Եõ����´��룺
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -394,9 +394,9 @@ d\_srcB\}\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{CPU程序验证}\label{cpuux7a0bux5e8fux9a8cux8bc1}
+\subsection{CPU������֤}\label{cpuux7a0bux5e8fux9a8cux8bc1}
 
-首先是上面的求和程序，主要就是通过循环算出数组
+�������������ͳ�����Ҫ����ͨ��ѭ���������
 
 \begin{verbatim}
   0x014: 0d000000     | array:  .long 0xd
@@ -405,11 +405,11 @@ d\_srcB\}\tabularnewline
   0x020: 00a00000     |     .long 0xa000    
 \end{verbatim}
 
-所有元素之和。
+����Ԫ��֮�͡�
 
-这里只给出程序运行的最终结果： \includegraphics{img/sim0.png}
+����ֻ�����������е����ս���� \includegraphics{img/sim0.png}
 
-同时，我还编写了以下计算两个寄存器中无符号的16位的值的乘法并将结果赋给一个寄存器的Y86汇编代码，使用的乘法算法为最简单的定点原码一位乘法。程序如下：
+ͬʱ���һ���д�����¼��������Ĵ������޷��ŵ�16λ��ֵ�ĳ˷������������һ���Ĵ�����Y86�����룬ʹ�õĳ˷��㷨Ϊ��򵥵Ķ���ԭ��һλ�˷����������£�
 
 \begin{verbatim}
                       | /* $begin code-yso */
@@ -462,7 +462,7 @@ d\_srcB\}\tabularnewline
                       | /* $end code-yso */
 \end{verbatim}
 
-下面我结合modelsim的仿真情况，对程序执行中实现上面算式过程的乘法核心代码：
+�����ҽ��modelsim�ķ���������Գ���ִ����ʵ��������ʽ���̵ĳ˷����Ĵ��룺
 
 \begin{verbatim}
   0x057: 6020         |     addl %edx,%eax              # result = result + num2
@@ -472,32 +472,32 @@ d\_srcB\}\tabularnewline
   0x05f: 6213         |     andl %ecx,%ebx
 \end{verbatim}
 
-过程中寄存器变化情况进行说明。
+�����мĴ����仯�������˵����
 
-开始时，eax为0，存放到目前为止的结果，ecx为num1，edx为num2。从ecx按位从后往前判断，如果该位为1，则eax加上ecx的值，同时ecx该位置零以便进行是否还需要运算的判断。每判断ecx的一位，edx变为原来的而被，作为如果ecx该位为0其乘num2的结果。
+��ʼʱ��eaxΪ0����ŵ�ĿǰΪֹ�Ľ����ecxΪnum1��edxΪnum2����ecx��λ�Ӻ���ǰ�жϣ������λΪ1����eax����ecx��ֵ��ͬʱecx��λ�����Ա�����Ƿ���Ҫ������жϡ�ÿ�ж�ecx��һλ��edx��Ϊԭ���Ķ�������Ϊ���ecx��λΪ0���num2�Ľ����
 
-在本程序中，两个操作数分布为733和283，转为十六进制为0x2dd和0x11b，转为二进制数为1011011101和100011011，乘法的实现过程如下：
+�ڱ������У������������ֲ�Ϊ733��283��תΪʮ������Ϊ0x2dd��0x11b��תΪ��������Ϊ1011011101��100011011���˷���ʵ�ֹ������£�
 
 \begin{verbatim}
           1011011101 =   0x2dd
-         ×0100011011 =   0x11b
- ———————————————————
+         ��0100011011 =   0x11b
+ ��������������������������������������
           1011011101 =   0x2dd
         +1011011101  =   0x5ba
- ———————————————————
+ ��������������������������������������
         100010010111 =   0x897
       +1011011101    =  0x16e8
- ———————————————————
+ ��������������������������������������
        1111101111111 =  0x1f7f
      +1011011101     =  0x2dd0
- ———————————————————
+ ��������������������������������������
      100110101001111 =  0x4d4f
  +1011011101         = 0x2dd00
- ———————————————————
+ ��������������������������������������
   110010101001001111 = 0x32a4f
 \end{verbatim}
 
-通过跟踪eax的变化过程我们可以得到这个过程的实现过程如下：
+ͨ������eax�ı仯�������ǿ��Եõ�������̵�ʵ�ֹ������£�
 
 \begin{figure}[htbp]
 \centering
@@ -505,7 +505,7 @@ d\_srcB\}\tabularnewline
 \caption{sim1}
 \end{figure}
 
-发生在620000ps处。首先判断一下ecx的最低位，发现为1，则在黄线处将edx，也即num2的值加到eax中。在鼠标处可以看到，ecx将最低位置零，其值从0x11b变为0x11a。在图中的最后，edx变为原来的二倍，即其值从开始的0x2dd变为0x5ba。
+������620000ps���������ж�һ��ecx�����λ������Ϊ1�����ڻ��ߴ���edx��Ҳ��num2��ֵ�ӵ�eax�С�����괦���Կ�����ecx�����λ���㣬��ֵ��0x11b��Ϊ0x11a����ͼ�е����edx��Ϊԭ���Ķ���������ֵ�ӿ�ʼ��0x2dd��Ϊ0x5ba��
 
 \begin{figure}[htbp]
 \centering
@@ -513,7 +513,7 @@ d\_srcB\}\tabularnewline
 \caption{sim2}
 \end{figure}
 
-距上次判断0x240000ps处，第二次判断ecx的倒数第二位，发现还是一，于是情况和上面相同，黄线处eax变为0x2dd+0x5ba=0x897，在鼠标处ecx从0x11a变为0x118，edx从0x5ba变为0xb74。
+���ϴ��ж�0x240000ps�����ڶ����ж�ecx�ĵ����ڶ�λ�����ֻ���һ�����������������ͬ�����ߴ�eax��Ϊ0x2dd+0x5ba=0x897������괦ecx��0x11a��Ϊ0x118��edx��0x5ba��Ϊ0xb74��
 
 \begin{figure}[htbp]
 \centering
@@ -521,7 +521,7 @@ d\_srcB\}\tabularnewline
 \caption{sim3}
 \end{figure}
 
-第三次判断到ecx的当前位不为1，eax不改变。第四次判断到ecx的当前位为1，此时的edx已不是上面图中的0xb74，而变成的其二倍0x16e8。故eax在黄线处变为0x897+0x16e8=0x1f7f。ecx从0x118变为0x110，edx从0x16e8变为0x2dd0。
+�������жϵ�ecx�ĵ�ǰλ��Ϊ1��eax���ı䡣���Ĵ��жϵ�ecx�ĵ�ǰλΪ1����ʱ��edx�Ѳ�������ͼ�е�0xb74������ɵ������0x16e8����eax�ڻ��ߴ���Ϊ0x897+0x16e8=0x1f7f��ecx��0x118��Ϊ0x110��edx��0x16e8��Ϊ0x2dd0��
 
 \begin{figure}[htbp]
 \centering
@@ -529,7 +529,7 @@ d\_srcB\}\tabularnewline
 \caption{sim4}
 \end{figure}
 
-第四次判断与上面几次类似，eax变为0x4d4f，ecx变为0x100,edx变为0x5ba00。
+���Ĵ��ж������漸�����ƣ�eax��Ϊ0x4d4f��ecx��Ϊ0x100,edx��Ϊ0x5ba00��
 
 \begin{figure}[htbp]
 \centering
@@ -537,21 +537,21 @@ d\_srcB\}\tabularnewline
 \caption{sim5}
 \end{figure}
 
-因为接下来几次ecx都不为1，所以流水线一直走了很长时间。直到程序快要结束，终于发现ecx该位为0，此时edx已变为0x2dd00。eax变为0x4d4f+0x2dd00=0x32a4f，ecx清除当前位后变成0，说明该循环结束。紧接着，CPU将会跳出子程序，进而在主函数中实现停机指令。
+��Ϊ����������ecx����Ϊ1��������ˮ��һֱ���˺ܳ�ʱ�䡣ֱ�������Ҫ���������ڷ���ecx��λΪ0����ʱedx�ѱ�Ϊ0x2dd00��eax��Ϊ0x4d4f+0x2dd00=0x32a4f��ecx�����ǰλ����0��˵����ѭ�������������ţ�CPU���������ӳ��򣬽�������������ʵ��ͣ��ָ�
 
-\subsection{实验感想}\label{ux5b9eux9a8cux611fux60f3}
+\subsection{ʵ�����}\label{ux5b9eux9a8cux611fux60f3}
 
-\subsubsection{主要背景}\label{ux4e3bux8981ux80ccux666f}
+\subsubsection{��Ҫ����}\label{ux4e3bux8981ux80ccux666f}
 
-以前仅仅大概了解了一下Verilog，这次就直接做CPU，确实跨度有点大。但多谢《自己动手写CPU》这本书，通过这本书我知道了应该如何下手。不过到现在还是我还是有些基本的与的电路相关东西不是很了解。
+��ǰ��������˽���һ��Verilog����ξ�ֱ����CPU��ȷʵ����е�󡣵���л���Լ�����дCPU���Ȿ�飬ͨ���Ȿ����֪����Ӧ��������֡����������ڻ����һ�����Щ��������ĵ�·��ض������Ǻ��˽⡣
 
-我这次做的CPU是参照CSAPP2e的第四章来的，尽可能用Verilog还原书中的CPU，变量名及系统结构都尽量跟书上保持一致。不得不说，看到CSAPP这本神书真的是让我相见恨晚。当时看第四章的时候感觉书上写的太虚，远没有书的前几章浅显易懂。不过，当我真正跟着书上所说的去做CPU的时候，才发现书上所讲的全都是踏踏实实的，基本都能用得到。虽然书上没有任何Verilog代码实现，但是对我写程序帮助极大，也正是这本书让我能够一点一点实现五级流水线的CPU。
+���������CPU�ǲ���CSAPP2e�ĵ��������ģ���������Verilog��ԭ���е�CPU����������ϵͳ�ṹ�����������ϱ���һ�¡����ò�˵������CSAPP�Ȿ������������������������ʱ�������µ�ʱ��о�����д��̫�飬Զû�����ǰ����ǳ���׶���������������������������˵��ȥ��CPU��ʱ�򣬲ŷ�������������ȫ����̤̤ʵʵ�ģ����������õõ�����Ȼ����û���κ�Verilog����ʵ�֣����Ƕ���д�����������Ҳ�����Ȿ�������ܹ�һ��һ��ʵ���弶��ˮ�ߵ�CPU��
 
-如果跟CSAPP书上的内容相比，我感觉本次做CPU并没有多少创新之处。但是我感觉自己瞎想实现一个简单的模型和通过深入的学习系统了解方式方法相比，了解比实现更能提高一个人。这也是通过开源的魅力所在吧：如果你仅仅是自己写代码，你可能永远不会有太大突破。仅有你仔细阅读其他人的代码，才能在巨人的肩膀上更进一步。
+�����CSAPP���ϵ�������ȣ��Ҹо�������CPU��û�ж��ٴ���֮���������Ҹо��Լ�Ϲ��ʵ��һ���򵥵�ģ�ͺ�ͨ�������ѧϰϵͳ�˽ⷽʽ������ȣ��˽��ʵ�ָ������һ���ˡ���Ҳ��ͨ����Դ���������ڰɣ������������Լ�д���룬�������Զ������̫��ͻ�ơ���������ϸ�Ķ������˵Ĵ��룬�����ھ��˵ļ���ϸ���һ����
 
-\subsubsection{版本控制}\label{ux7248ux672cux63a7ux5236}
+\subsubsection{�汾����}\label{ux7248ux672cux63a7ux5236}
 
-本次实验中，我第一次尝试了使用git来管理代码，进行版本控制。本次实验持续时间长，代码前后改动非常大，使用git管理能让我很清楚的知道上次都修改了什么，错误都是在哪出的，我都做出来什么改进，同时，在这个过程中，我也根据实际情况尝试了很多git的功能。现在算起来，也有60多个commit了，有的修改较多，有的修改较少，现在看起来还是蛮有成就感的。这里我把commit贴出来，作为这段时间的记录吧！
+����ʵ���У��ҵ�һ�γ�����ʹ��git���������룬���а汾���ơ�����ʵ�����ʱ�䳤������ǰ��Ķ��ǳ���ʹ��git���������Һ������֪���ϴζ��޸���ʲô�����������ĳ��ģ��Ҷ�������ʲô�Ľ���ͬʱ������������У���Ҳ����ʵ����������˺ܶ�git�Ĺ��ܡ�������������Ҳ��60���commit�ˣ��е��޸Ľ϶࣬�е��޸Ľ��٣����ڿ������������гɾ͸еġ������Ұ�commit����������Ϊ���ʱ��ļ�¼�ɣ�
 
 \begin{verbatim}
 * 3d98478 - (HEAD, master) Change some defines. Implement the conditional move instructions. (4 days ago) <ArchStacker>                                                 
@@ -620,8 +620,8 @@ d\_srcB\}\tabularnewline
 * a26bc09 - Initial commit (3 months ago) <ArchStacker>
 \end{verbatim}
 
-既然提到了git，就不得不提GitHub了。当时刚开始做这个实验的时候我就搜了一下，GitHub上虽然有很多Y86的实验，但真正是用Verilog写的就没几个了，多是用python或C++写的。我还是比较奇怪，用这些语言是如何实现CPU的，以后有机会研究一下。本次实验的全部内容我都放到了GitHub上，不知能不能给别人提供帮助，也希望能收到别人，尤其是对电路比较熟的人的Pull
-Request。
+��Ȼ�ᵽ��git���Ͳ��ò���GitHub�ˡ���ʱ�տ�ʼ�����ʵ���ʱ���Ҿ�����һ�£�GitHub����Ȼ�кܶ�Y86��ʵ�飬����������Verilogд�ľ�û�����ˣ�������python��C++д�ġ��һ��ǱȽ���֣�����Щ���������ʵ��CPU�ģ��Ժ��л����о�һ�¡�����ʵ���ȫ�������Ҷ��ŵ���GitHub�ϣ���֪�ܲ��ܸ������ṩ������Ҳϣ�����յ����ˣ������ǶԵ�·�Ƚ�����˵�Pull
+Request��
 
 \begin{figure}[htbp]
 \centering
@@ -629,18 +629,18 @@ Request。
 \caption{GitHub}
 \end{figure}
 
-\subsubsection{下步期望}\label{ux4e0bux6b65ux671fux671b}
+\subsubsection{�²�����}\label{ux4e0bux6b65ux671fux671b}
 
-我在选择Y86指令集不仅是因为神书CSAPP介绍了它，更重要的是CSAPP提供了一些仿真的程序，比如比较吸引我的Y86汇编器，这样如果我做好CPU之后，我就能直接写汇编指令让机器帮我转成十六进制。同时，官方好像还有一些测试的脚本和代码，以便对我的CPU进行测试。
+����ѡ��Y86ָ���������Ϊ����CSAPP��������������Ҫ����CSAPP�ṩ��һЩ����ĳ��򣬱���Ƚ������ҵ�Y86��������������������CPU֮���Ҿ���ֱ��д���ָ���û�������ת��ʮ�����ơ�ͬʱ���ٷ�������һЩ���ԵĽű��ʹ��룬�Ա���ҵ�CPU���в��ԡ�
 
-可惜，后来我又看了一下官方提供的文件，发现其中做CPU使用书中讲述的HCL语言做的，而我到现在也没明白这个语言是怎么表示CPU的时序关系的。同时，官方的测试脚本也是针对与HCL语言写的CPU来的，我也就没法使用。官方写的汇编器yas好复杂啊，好像还用了编译原理的一些东西，而为了汇编出我的Verilog能够读取的十六进制文件，我去将用python写的yas（linusyang/python-y86
-）fork了一下。
+��ϧ���������ֿ���һ�¹ٷ��ṩ���ļ�������������CPUʹ�����н�����HCL�������ģ����ҵ�����Ҳû���������������ô��ʾCPU��ʱ���ϵ�ġ�ͬʱ���ٷ��Ĳ��Խű�Ҳ�������HCL����д��CPU���ģ���Ҳ��û��ʹ�á��ٷ�д�Ļ����yas�ø��Ӱ����������˱���ԭ����һЩ��������Ϊ�˻����ҵ�Verilog�ܹ���ȡ��ʮ�������ļ�����ȥ����pythonд��yas��linusyang/python-y86
+��fork��һ�¡�
 
-虽然没能使用官方提供的工具，但是这次写本报告因为时间比较紧，图片多是对书中的进行修改，组织结构也参考书上的来。这也算是意料之中的福利吧！
+��Ȼû��ʹ�ùٷ��ṩ�Ĺ��ߣ��������д��������Ϊʱ��ȽϽ���ͼƬ���Ƕ����еĽ����޸ģ���֯�ṹҲ�ο����ϵ�������Ҳ��������֮�еĸ����ɣ�
 
-不过，我还是希望如果有时间的话我能弄明白官方那些HCL文件的工作原理是什么，希望看懂官方C写的yas是如何实现的，如何修改它，尤其是在学过编译原理之后。同时，不知道在学过编译原理之后，能不能做一个高级语言到Y86汇编的编译器。
+�������һ���ϣ�������ʱ��Ļ�����Ū���׹ٷ���ЩHCL�ļ��Ĺ���ԭ����ʲô��ϣ�������ٷ�Cд��yas�����ʵ�ֵģ�����޸�������������ѧ������ԭ��֮��ͬʱ����֪����ѧ������ԭ��֮���ܲ�����һ���߼����Ե�Y86���ı�������
 
-同时，在做CPU的过程中，我也遇到了很多问题。有些问题已经解决了，但有些问题还没得到解决，我都写到了README.md里面。其中，我能解决的，我希望能抽出来一点时间再去做做，毕竟作为我的Github上的第一个repository，虽然它对我以后的帮助不是很大，但我还是有动力使它变得更好的。对那些我解决不了的问题，就寄托与今后看到我这个repository并有兴趣有能力的人吧！
+ͬʱ������CPU�Ĺ����У���Ҳ�����˺ܶ����⡣��Щ�����Ѿ�����ˣ�����Щ���⻹û�õ�������Ҷ�д����README.md���档���У����ܽ���ģ���ϣ���ܳ����һ��ʱ����ȥ�������Ͼ���Ϊ�ҵ�Github�ϵĵ�һ��repository����Ȼ�������Ժ�İ������Ǻܴ󣬵��һ����ж���ʹ����ø��õġ�����Щ�ҽ�����˵����⣬�ͼ������󿴵������repository������Ȥ���������˰ɣ�
 
 \end{CJK*}
 \end{document}
